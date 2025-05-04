@@ -34,7 +34,6 @@ async-stream = "0.3.6"
 clap = { version = "4.5.37", features = ["color", "derive"] }
 dirs = "6.0.0"
 git2 = "0.20.1"
-globwalk = "0.9.1"
 log = { version = "0.4.27", features = ["kv_unstable", "kv_unstable_serde"] }
 pbjson = "0.7.0"
 pbjson-types = "0.7.0"
