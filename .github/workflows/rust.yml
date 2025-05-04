@@ -27,17 +27,15 @@ jobs:
       - name: cargo-machete
         run: cargo install cargo-machete && cargo machete
 
-  build:
+  test:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' }}
     steps:
       - uses: actions/checkout@v3
       - name: rustup
         run: rustup default $RUST_VERSION
-      - name: build
-        run: make
       - name: test
-        run: rustup component add clippy && make check
+        run: cargo test --all-features
 
   publish:
     runs-on: ubuntu-latest
