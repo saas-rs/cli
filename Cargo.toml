@@ -11,14 +11,6 @@ edition = "2021"
 name = "saas-rs"
 path = "src/main.rs"
 
-[package.metadata.deb]
-maintainer-scripts = "debian/"
-systemd-units = { enable = false }
-section = "admin"
-assets = [
-    ["target/release/saas-rs", "/usr/bin/", "755"],
-]
-
 [package.metadata.cargo-machete]
 ignored = []
 
