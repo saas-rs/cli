@@ -18,12 +18,10 @@ fmt:
 
 .PHONY: clean
 clean:
-	-rm -r protocol/src/generated/*
 	cargo clean
 
 
 .PHONY: outdated
 outdated:
 	cargo install --locked cargo-outdated
-	cargo outdated > /dev/null
 	cargo outdated -R

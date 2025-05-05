@@ -60,6 +60,9 @@ async fn main() -> anyhow::Result<(), Box<dyn std::error::Error>> {
         cmd::Subcommand::Logout(cmd::logout::Opts {}) => {
             cmd::logout::run().await?;
         }
+        cmd::Subcommand::Version(cmd::version::Opts {}) => {
+            cmd::version::run().await?;
+        }
     }
     Ok(())
 }
