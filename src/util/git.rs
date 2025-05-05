@@ -47,7 +47,6 @@ pub async fn find_or_create_default_project_id() -> Result<String, Box<dyn std::
     Ok(project_id)
 }
 
-#[allow(unused)]
 pub fn require_clean_repo(repo: &Repository) -> Result<(), Box<dyn std::error::Error>> {
     const MSG: &str = "Cannot perform work in a dirty git repo";
     if repo.state() != RepositoryState::Clean {

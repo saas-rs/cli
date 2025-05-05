@@ -8,6 +8,7 @@ pub(super) mod initialize;
 pub(super) mod list;
 pub(super) mod login;
 pub(super) mod logout;
+pub(super) mod version;
 
 #[derive(Debug, Parser)]
 pub enum Subcommand {
@@ -42,4 +43,8 @@ pub enum Subcommand {
     /// Remove your access token (session) from the config file in your home dir
     #[command(name = "logout")]
     Logout(logout::Opts),
+
+    /// Display the build version
+    #[command(name = "version")]
+    Version(version::Opts),
 }
