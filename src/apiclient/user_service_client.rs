@@ -45,12 +45,12 @@ pub fn get_api_url(ignore_config: bool) -> Result<String, Box<dyn Error>> {
         Some(api_url) => api_url,
         None => {
             if ignore_config {
-                consts::DEFAULT_URL.to_string()
+                consts::API_URL.to_string()
             } else {
                 let cfg = config::load()?;
                 match cfg.api_url {
                     Some(api_url) => api_url,
-                    None => consts::DEFAULT_URL.to_string(),
+                    None => consts::API_URL.to_string(),
                 }
             }
         }

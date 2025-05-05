@@ -1,5 +1,5 @@
 use crate::protocol::saas_rs::user::v1::FindAccountRequest;
-use crate::{apiclient, config};
+use crate::{apiclient, config, consts};
 use actix_cors::Cors;
 use actix_web::web::Data;
 use actix_web::{post, web, App, HttpServer, Responder};
@@ -10,9 +10,6 @@ use std::error::Error;
 use std::net::TcpListener;
 use std::sync::mpsc;
 use std::sync::mpsc::{Receiver, Sender};
-
-const API_URL: &str = "https://api.saas-rs.com";
-const CONSOLE_URL: &str = "https://console.saas-rs.com";
 
 #[derive(Debug, Parser)]
 pub struct Opts {}
@@ -33,7 +30,7 @@ async fn callback_handler(app_state: Data<AppState>, data: web::Json<JsonContent
     // Save the new token as an api key
     let mut conf = config::load().unwrap();
     conf.api_key = Some(data.token.to_string());
-    conf.api_url = Some(API_URL.to_string());
+    conf.api_url = Some(consts::API_URL.to_string());
     config::save(&conf).unwrap();
 
     // Test it
@@ -63,7 +60,8 @@ pub async fn run() -> Result<(), Box<dyn Error>> {
     let bind_addr = format!("127.0.0.1:{port}");
 
     // Launch browser to login form
-    let url = format!("{CONSOLE_URL}/login?callback=http://{bind_addr}/callback");
+    let console_url = consts::CONSOLE_URL;
+    let url = format!("{console_url}/login?callback=http://{bind_addr}/callback");
     webbrowser::open(&url)?;
 
     // Start an embedded http server
