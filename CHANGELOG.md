@@ -1,6 +1,6 @@
 # SaaS RS :: CLI Changelog
 
-## [Unreleased]
+## [0.1.4] - 2025-05-10
 ### Added
 - [#4](https://github.com/saas-rs/cli/issues/4) Provide a version subcommand
 - [#3](https://github.com/saas-rs/cli/issues/3) Document installation
