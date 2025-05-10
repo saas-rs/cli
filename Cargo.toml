@@ -4,6 +4,7 @@ description = "The SaaS RS CLI"
 version = "0.1.4"
 authors = ["David Rauschenbach <david@megalithic.llc>"]
 homepage = "https://saas-rs.com"
+repository = "https://github.com/saas-rs/cli.git"
 license = "MIT"
 edition = "2021"
 

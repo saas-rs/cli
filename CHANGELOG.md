@@ -1,5 +1,9 @@
 # SaaS RS :: CLI Changelog
 
+## [Unreleased]
+### Fixed
+- [#9](https://github.com/saas-rs/cli/issues/9) Crate fails to hyperlink to this Git repo
+
 ## [0.1.4] - 2025-05-10
 ### Added
 - [#4](https://github.com/saas-rs/cli/issues/4) Provide a version subcommand
