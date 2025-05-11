@@ -1,6 +1,9 @@
 # SaaS RS :: CLI Changelog
 
 ## [Unreleased]
+### Added
+- [#11](https://github.com/saas-rs/cli/issues/11) When logging in, support Console URL and API URL overrides
+
 ### Fixed
 - [#12](https://github.com/saas-rs/cli/issues/12) Services list ps format references non-existent displayName field and fails to reference description
 - [#9](https://github.com/saas-rs/cli/issues/9) Crate fails to hyperlink to this Git repo
