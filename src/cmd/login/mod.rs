@@ -12,7 +12,11 @@ use std::sync::mpsc;
 use std::sync::mpsc::{Receiver, Sender};
 
 #[derive(Debug, Parser)]
-pub struct Opts {}
+pub struct Opts {
+    /// Override the default console url
+    #[arg(long = "console-url", alias = "consoleUrl")]
+    pub console_url: Option<String>,
+}
 
 #[derive(Clone, Debug, Deserialize)]
 struct JsonContents {
@@ -53,14 +57,14 @@ async fn callback_handler(app_state: Data<AppState>, data: web::Json<JsonContent
     }
 }
 
-pub async fn run() -> Result<(), Box<dyn Error>> {
+pub async fn run(console_url: Option<String>) -> Result<(), Box<dyn Error>> {
     // Bind to a dynmamic port
     let tcp = TcpListener::bind("127.0.0.1:0")?;
     let port = tcp.local_addr().unwrap().port();
     let bind_addr = format!("127.0.0.1:{port}");
 
     // Launch browser to login form
-    let console_url = consts::CONSOLE_URL;
+    let console_url = console_url.unwrap_or(consts::CONSOLE_URL.to_string());
     let url = format!("{console_url}/login?callback=http://{bind_addr}/callback");
     webbrowser::open(&url)?;
 
