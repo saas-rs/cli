@@ -10,12 +10,17 @@ use std::error::Error;
 use std::net::TcpListener;
 use std::sync::mpsc;
 use std::sync::mpsc::{Receiver, Sender};
+use webbrowser::Browser;
 
 #[derive(Debug, Parser)]
 pub struct Opts {
     /// Override the default api url
     #[arg(long = "api-url", alias = "apiUrl")]
     pub api_url: Option<String>,
+
+    /// Override the default browser
+    #[arg(long = "browser")]
+    pub browser: Option<Browser>,
 
     /// Override the default console url
     #[arg(long = "console-url", alias = "consoleUrl")]
@@ -32,7 +37,11 @@ struct AppState {
     tx: Sender<String>,
 }
 
-pub async fn run(api_url: Option<String>, console_url: Option<String>) -> Result<(), Box<dyn Error>> {
+pub async fn run(
+    api_url: Option<String>,
+    console_url: Option<String>,
+    browser: Option<Browser>,
+) -> Result<(), Box<dyn Error>> {
     // Bind to a dynmamic port
     let tcp = TcpListener::bind("127.0.0.1:0")?;
     let port = tcp.local_addr().unwrap().port();
@@ -41,7 +50,8 @@ pub async fn run(api_url: Option<String>, console_url: Option<String>) -> Result
     // Launch browser to login form
     let console_url = console_url.unwrap_or(consts::CONSOLE_URL.to_string());
     let url = format!("{console_url}/login?callback=http://{bind_addr}/callback");
-    webbrowser::open(&url)?;
+    let browser = browser.unwrap_or(Browser::Default);
+    webbrowser::open_browser(browser, &url)?;
 
     // Start an embedded http server
     let api_url = api_url.unwrap_or(consts::API_URL.to_string());

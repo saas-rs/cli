@@ -54,8 +54,12 @@ async fn main() -> anyhow::Result<(), Box<dyn std::error::Error>> {
         cmd::Subcommand::List(cmd::list::Opts { subcommand }) => {
             cmd::list::run(subcommand).await?;
         }
-        cmd::Subcommand::Login(cmd::login::Opts { api_url, console_url }) => {
-            cmd::login::run(api_url, console_url).await?;
+        cmd::Subcommand::Login(cmd::login::Opts {
+            api_url,
+            console_url,
+            browser,
+        }) => {
+            cmd::login::run(api_url, console_url, browser).await?;
         }
         cmd::Subcommand::Logout(cmd::logout::Opts {}) => {
             cmd::logout::run().await?;

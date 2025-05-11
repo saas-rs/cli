@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Added
+- [#15](https://github.com/saas-rs/cli/issues/15) When logging in, support requesting a specific browser
 - [#11](https://github.com/saas-rs/cli/issues/11) When logging in, support Console URL and API URL overrides
 
 ### Fixed
