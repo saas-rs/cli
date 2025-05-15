@@ -5,6 +5,9 @@
 - [#15](https://github.com/saas-rs/cli/issues/15) When logging in, support requesting a specific browser
 - [#11](https://github.com/saas-rs/cli/issues/11) When logging in, support Console URL and API URL overrides
 
+### Changed
+- [#17](https://github.com/saas-rs/cli/issues/17) Upgrade 8 crates
+
 ### Fixed
 - [#12](https://github.com/saas-rs/cli/issues/12) Services list ps format references non-existent displayName field and fails to reference description
 - [#9](https://github.com/saas-rs/cli/issues/9) Crate fails to hyperlink to this Git repo
