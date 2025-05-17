@@ -1032,9 +1032,11 @@ pub struct Issue {
     pub state: i32,
     #[prost(string, optional, tag = "5")]
     pub description: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(string, repeated, tag = "6")]
-    pub file_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, optional, tag = "6")]
+    pub project_id: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(string, repeated, tag = "7")]
+    pub file_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, repeated, tag = "8")]
     pub issue_comment_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(message, optional, tag = "100")]
     pub created_at: ::core::option::Option<::pbjson_types::Timestamp>,
@@ -1103,9 +1105,8 @@ pub mod issue {
     #[repr(i32)]
     pub enum Type {
         Bug = 0,
-        Question = 1,
-        Suggestion = 2,
-        FeatureRequest = 3,
+        Suggestion = 1,
+        FeatureRequest = 2,
     }
     impl Type {
         /// String value of the enum field names used in the ProtoBuf definition.
@@ -1115,7 +1116,6 @@ pub mod issue {
         pub fn as_str_name(&self) -> &'static str {
             match self {
                 Self::Bug => "Bug",
-                Self::Question => "Question",
                 Self::Suggestion => "Suggestion",
                 Self::FeatureRequest => "FeatureRequest",
             }
@@ -1124,7 +1124,6 @@ pub mod issue {
         pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
             match value {
                 "Bug" => Some(Self::Bug),
-                "Question" => Some(Self::Question),
                 "Suggestion" => Some(Self::Suggestion),
                 "FeatureRequest" => Some(Self::FeatureRequest),
                 _ => None,

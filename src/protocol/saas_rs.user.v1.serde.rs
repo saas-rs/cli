@@ -14889,6 +14889,9 @@ impl serde::Serialize for Issue {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         if self.owner.is_some() {
             len += 1;
         }
@@ -14911,6 +14914,9 @@ impl serde::Serialize for Issue {
         }
         if let Some(v) = self.description.as_ref() {
             struct_ser.serialize_field("description", v)?;
+        }
+        if let Some(v) = self.project_id.as_ref() {
+            struct_ser.serialize_field("projectId", v)?;
         }
         if true {
             struct_ser.serialize_field("fileIds", &self.file_ids)?;
@@ -14958,6 +14964,8 @@ impl<'de> serde::Deserialize<'de> for Issue {
             "type",
             "state",
             "description",
+            "project_id",
+            "projectId",
             "file_ids",
             "fileIds",
             "issue_comment_ids",
@@ -14985,6 +14993,7 @@ impl<'de> serde::Deserialize<'de> for Issue {
             Type,
             State,
             Description,
+            ProjectId,
             FileIds,
             IssueCommentIds,
             CreatedAt,
@@ -15021,6 +15030,7 @@ impl<'de> serde::Deserialize<'de> for Issue {
                             "type" => Ok(GeneratedField::Type),
                             "state" => Ok(GeneratedField::State),
                             "description" => Ok(GeneratedField::Description),
+                            "projectId" | "project_id" => Ok(GeneratedField::ProjectId),
                             "fileIds" | "file_ids" => Ok(GeneratedField::FileIds),
                             "issueCommentIds" | "issue_comment_ids" => Ok(GeneratedField::IssueCommentIds),
                             "createdAt" | "created_at" => Ok(GeneratedField::CreatedAt),
@@ -15054,6 +15064,7 @@ impl<'de> serde::Deserialize<'de> for Issue {
                 let mut r#type__ = None;
                 let mut state__ = None;
                 let mut description__ = None;
+                let mut project_id__ = None;
                 let mut file_ids__ = None;
                 let mut issue_comment_ids__ = None;
                 let mut created_at__ = None;
@@ -15094,6 +15105,12 @@ impl<'de> serde::Deserialize<'de> for Issue {
                                 return Err(serde::de::Error::duplicate_field("description"));
                             }
                             description__ = map_.next_value()?;
+                        }
+                        GeneratedField::ProjectId => {
+                            if project_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("projectId"));
+                            }
+                            project_id__ = map_.next_value()?;
                         }
                         GeneratedField::FileIds => {
                             if file_ids__.is_some() {
@@ -15160,6 +15177,7 @@ impl<'de> serde::Deserialize<'de> for Issue {
                     r#type: r#type__.unwrap_or_default(),
                     state: state__.unwrap_or_default(),
                     description: description__,
+                    project_id: project_id__,
                     file_ids: file_ids__.unwrap_or_default(),
                     issue_comment_ids: issue_comment_ids__.unwrap_or_default(),
                     created_at: created_at__,
@@ -15254,7 +15272,6 @@ impl serde::Serialize for issue::Type {
     {
         let variant = match self {
             Self::Bug => "Bug",
-            Self::Question => "Question",
             Self::Suggestion => "Suggestion",
             Self::FeatureRequest => "FeatureRequest",
         };
@@ -15269,7 +15286,6 @@ impl<'de> serde::Deserialize<'de> for issue::Type {
     {
         const FIELDS: &[&str] = &[
             "Bug",
-            "Question",
             "Suggestion",
             "FeatureRequest",
         ];
@@ -15313,7 +15329,6 @@ impl<'de> serde::Deserialize<'de> for issue::Type {
             {
                 match value {
                     "Bug" => Ok(issue::Type::Bug),
-                    "Question" => Ok(issue::Type::Question),
                     "Suggestion" => Ok(issue::Type::Suggestion),
                     "FeatureRequest" => Ok(issue::Type::FeatureRequest),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),

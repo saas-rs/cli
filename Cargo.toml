@@ -1,7 +1,7 @@
 [package]
 name = "saas-rs-cli"
 description = "The SaaS RS CLI"
-version = "0.1.4"
+version = "0.1.5"
 authors = ["David Rauschenbach <david@megalithic.llc>"]
 homepage = "https://saas-rs.com"
 repository = "https://github.com/saas-rs/cli.git"
