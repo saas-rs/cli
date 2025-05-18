@@ -16,6 +16,7 @@ use log::debug;
 use std::fs::File;
 use std::io::Write;
 use std::process::Command;
+use std::str::from_utf8;
 use tempdir::TempDir;
 use tempfile::tempfile;
 use tonic::codegen::tokio_stream::StreamExt;
@@ -182,11 +183,15 @@ pub(super) async fn do_generate(req: GenerateRequest) -> Result<(), Box<dyn std:
         eprintln!("Response received");
     }
 
-    // Apply a patch, if it was received
+    // Apply a patch, if it was received, and then invoke make
     let patch_path = format!("{}/my.patch", tempdir.path().display());
     if std::fs::exists(&patch_path)? {
         let _output = Command::new("git").arg("apply").arg(patch_path).output()?;
-        eprintln!("Patch applied to local workspace");
+        eprintln!("Patch applied to local workspace; invoking make...");
+
+        let output = Command::new("make").output()?;
+        eprintln!("{}", from_utf8(&output.stdout).unwrap());
+        eprintln!("{}", from_utf8(&output.stderr).unwrap());
     }
 
     Ok(())
