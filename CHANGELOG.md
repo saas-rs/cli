@@ -1,5 +1,9 @@
 # SaaS RS :: CLI Changelog
 
+## [Unreleased]
+### Added
+- [#19](https://github.com/saas-rs/cli/issues/19) Invoke make after a successful initialize or generate command
+
 ## [0.1.5] - 2025-05-17
 ### Added
 - [#15](https://github.com/saas-rs/cli/issues/15) When logging in, support requesting a specific browser
