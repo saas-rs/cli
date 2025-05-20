@@ -47,10 +47,9 @@ pub async fn find_or_create_default_project_id() -> Result<String, Box<dyn std::
     Ok(project_id)
 }
 
-pub fn require_clean_repo(repo: &Repository) -> Result<(), Box<dyn std::error::Error>> {
-    const MSG: &str = "Cannot perform work in a dirty git repo";
+pub fn is_dirty(repo: &Repository) -> Result<bool, Box<dyn std::error::Error>> {
     if repo.state() != RepositoryState::Clean {
-        return Err(MSG.into());
+        return Ok(true);
     }
     let statuses = repo.statuses(None)?;
     let is_dirty = !statuses
@@ -58,8 +57,12 @@ pub fn require_clean_repo(repo: &Repository) -> Result<(), Box<dyn std::error::E
         .filter(|entry| entry.status() != Status::CURRENT && entry.status() != Status::IGNORED)
         .collect::<Vec<_>>()
         .is_empty();
-    if is_dirty {
-        return Err(MSG.into());
+    Ok(is_dirty)
+}
+
+pub fn require_clean_repo(repo: &Repository) -> Result<(), Box<dyn std::error::Error>> {
+    if is_dirty(repo)? {
+        return Err("Cannot perform work in a dirty git repo".into());
     }
     Ok(())
 }

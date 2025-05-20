@@ -9,6 +9,7 @@ use crate::protocol::saas_rs::user::v1::generate_request::{Archive, Snapshot};
 use crate::protocol::saas_rs::user::v1::{
     upload_file_request, DownloadFileRequest, FileInfo, FindFileRequest, GenerateRequest, UploadFileRequest,
 };
+use crate::util::git::is_dirty;
 use crate::{apiclient, util};
 use clap::Parser;
 use git2::Repository;
@@ -16,7 +17,6 @@ use log::debug;
 use std::fs::File;
 use std::io::Write;
 use std::process::Command;
-use std::str::from_utf8;
 use tempdir::TempDir;
 use tempfile::tempfile;
 use tonic::codegen::tokio_stream::StreamExt;
@@ -183,15 +183,17 @@ pub(super) async fn do_generate(req: GenerateRequest) -> Result<(), Box<dyn std:
         eprintln!("Response received");
     }
 
-    // Apply a patch, if it was received, and then invoke make
+    // Apply a patch, if it was received
     let patch_path = format!("{}/my.patch", tempdir.path().display());
     if std::fs::exists(&patch_path)? {
         let _output = Command::new("git").arg("apply").arg(patch_path).output()?;
-        eprintln!("Patch applied to local workspace; invoking make...");
+        eprintln!("Patch applied to local workspace");
+    }
 
-        let output = Command::new("make").output()?;
-        eprintln!("{}", from_utf8(&output.stdout).unwrap());
-        eprintln!("{}", from_utf8(&output.stderr).unwrap());
+    // If workspace is dirty now, suggest running make
+    let repo = Repository::open(".")?;
+    if is_dirty(&repo)? {
+        eprintln!("Workspace is dirty; now would be a good time to run `make` and then commit");
     }
 
     Ok(())

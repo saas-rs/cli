@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 ### Added
-- [#19](https://github.com/saas-rs/cli/issues/19) Invoke make after a successful initialize or generate command
+- [#19](https://github.com/saas-rs/cli/issues/19) Suggest invoking make after a successful initialize or generate command leaves the workspace dirty
 
 ## [0.1.5] - 2025-05-17
 ### Added
