@@ -1,6 +1,6 @@
 # SaaS RS :: CLI Changelog
 
-## [Unreleased]
+## [0.1.6] - 2025-05-23
 ### Added
 - [#19](https://github.com/saas-rs/cli/issues/19) Suggest invoking make after a successful initialize or generate command leaves the workspace dirty
 
