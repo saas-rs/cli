@@ -4,6 +4,9 @@
 ### Added
 - [#19](https://github.com/saas-rs/cli/issues/19) Suggest invoking make after a successful initialize or generate command leaves the workspace dirty
 
+### Changed
+- [#23](https://github.com/saas-rs/cli/issues/23) Upgrade 4 crates
+
 ## [0.1.5] - 2025-05-17
 ### Added
 - [#15](https://github.com/saas-rs/cli/issues/15) When logging in, support requesting a specific browser
