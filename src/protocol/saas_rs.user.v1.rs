@@ -144,6 +144,13 @@ pub struct CreateAccountResponse {
     pub account: ::core::option::Option<Account>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeleteAccountRequest {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+}
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct DeleteAccountResponse {}
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FindAccountRequest {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
@@ -779,11 +786,9 @@ pub mod import_response {
 pub struct Invite {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
-    #[prost(enumeration = "invite::Type", tag = "2")]
-    pub r#type: i32,
-    #[prost(string, optional, tag = "3")]
+    #[prost(string, optional, tag = "2")]
     pub description: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(string, optional, tag = "4")]
+    #[prost(string, optional, tag = "3")]
     pub recipient_email: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(message, optional, tag = "100")]
     pub created_at: ::core::option::Option<::pbjson_types::Timestamp>,
@@ -797,43 +802,22 @@ pub struct Invite {
     pub updated_at: ::core::option::Option<::pbjson_types::Timestamp>,
     #[prost(string, optional, tag = "105")]
     pub updated_by_account_id: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(oneof = "invite::Type", tags = "4")]
+    pub r#type: ::core::option::Option<invite::Type>,
     #[prost(oneof = "invite::Owner", tags = "106")]
     pub owner: ::core::option::Option<invite::Owner>,
 }
 /// Nested message and enum types in `Invite`.
 pub mod invite {
-    #[derive(
-        Clone,
-        Copy,
-        Debug,
-        PartialEq,
-        Eq,
-        Hash,
-        PartialOrd,
-        Ord,
-        ::prost::Enumeration
-    )]
-    #[repr(i32)]
-    pub enum Type {
-        Unknown = 0,
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct ToProject {
+        #[prost(string, tag = "1")]
+        pub project_id: ::prost::alloc::string::String,
     }
-    impl Type {
-        /// String value of the enum field names used in the ProtoBuf definition.
-        ///
-        /// The values are not transformed in any way and thus are considered stable
-        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-        pub fn as_str_name(&self) -> &'static str {
-            match self {
-                Self::Unknown => "Unknown",
-            }
-        }
-        /// Creates an enum from field names used in the ProtoBuf definition.
-        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-            match value {
-                "Unknown" => Some(Self::Unknown),
-                _ => None,
-            }
-        }
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Type {
+        #[prost(message, tag = "4")]
+        ToProject(ToProject),
     }
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Owner {
@@ -849,8 +833,6 @@ pub struct InviteFilter {
     pub created_by_account_id: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(string, optional, tag = "3")]
     pub recipient_email: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(enumeration = "invite::Type", optional, tag = "4")]
-    pub r#type: ::core::option::Option<i32>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateInviteRequest {
@@ -1480,6 +1462,8 @@ pub struct Project {
     pub id: ::prost::alloc::string::String,
     #[prost(string, tag = "2")]
     pub name: ::prost::alloc::string::String,
+    #[prost(string, repeated, tag = "3")]
+    pub member_account_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(message, optional, tag = "1000")]
     pub created_at: ::core::option::Option<::pbjson_types::Timestamp>,
     #[prost(string, optional, tag = "1001")]
@@ -2258,6 +2242,30 @@ pub mod user_client {
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("saas_rs.user.v1.User", "CreateSshKey"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn delete_account(
+            &mut self,
+            request: impl tonic::IntoRequest<super::DeleteAccountRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::DeleteAccountResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/saas_rs.user.v1.User/DeleteAccount",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("saas_rs.user.v1.User", "DeleteAccount"));
             self.inner.unary(req, path, codec).await
         }
         pub async fn delete_api_key(
@@ -4025,6 +4033,13 @@ pub mod user_server {
             tonic::Response<super::CreateSshKeyResponse>,
             tonic::Status,
         >;
+        async fn delete_account(
+            &self,
+            request: tonic::Request<super::DeleteAccountRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::DeleteAccountResponse>,
+            tonic::Status,
+        >;
         async fn delete_api_key(
             &self,
             request: tonic::Request<super::DeleteApiKeyRequest>,
@@ -5097,6 +5112,51 @@ pub mod user_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = CreateSshKeySvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/saas_rs.user.v1.User/DeleteAccount" => {
+                    #[allow(non_camel_case_types)]
+                    struct DeleteAccountSvc<T: User>(pub Arc<T>);
+                    impl<
+                        T: User,
+                    > tonic::server::UnaryService<super::DeleteAccountRequest>
+                    for DeleteAccountSvc<T> {
+                        type Response = super::DeleteAccountResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::DeleteAccountRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as User>::delete_account(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = DeleteAccountSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

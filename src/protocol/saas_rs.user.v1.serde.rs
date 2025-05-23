@@ -3603,6 +3603,173 @@ impl<'de> serde::Deserialize<'de> for CreateSshKeyResponse {
         deserializer.deserialize_struct("saas_rs.user.v1.CreateSshKeyResponse", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for DeleteAccountRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.DeleteAccountRequest", len)?;
+        if true {
+            struct_ser.serialize_field("id", &self.id)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for DeleteAccountRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "id",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Id,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "id" => Ok(GeneratedField::Id),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = DeleteAccountRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct saas_rs.user.v1.DeleteAccountRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<DeleteAccountRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut id__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Id => {
+                            if id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("id"));
+                            }
+                            id__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(DeleteAccountRequest {
+                    id: id__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("saas_rs.user.v1.DeleteAccountRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for DeleteAccountResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let len = 0;
+        let struct_ser = serializer.serialize_struct("saas_rs.user.v1.DeleteAccountResponse", len)?;
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for DeleteAccountResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                            Ok(GeneratedField::__SkipField__)
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = DeleteAccountResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct saas_rs.user.v1.DeleteAccountResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<DeleteAccountResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                while map_.next_key::<GeneratedField>()?.is_some() {
+                    let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                }
+                Ok(DeleteAccountResponse {
+                })
+            }
+        }
+        deserializer.deserialize_struct("saas_rs.user.v1.DeleteAccountResponse", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for DeleteApiKeyRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -14380,7 +14547,7 @@ impl serde::Serialize for Invite {
         if true {
             len += 1;
         }
-        if true {
+        if self.r#type.is_some() {
             len += 1;
         }
         if self.owner.is_some() {
@@ -14389,11 +14556,6 @@ impl serde::Serialize for Invite {
         let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.Invite", len)?;
         if true {
             struct_ser.serialize_field("id", &self.id)?;
-        }
-        if true {
-            let v = invite::Type::try_from(self.r#type)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.r#type)))?;
-            struct_ser.serialize_field("type", &v)?;
         }
         if let Some(v) = self.description.as_ref() {
             struct_ser.serialize_field("description", v)?;
@@ -14419,6 +14581,13 @@ impl serde::Serialize for Invite {
         if let Some(v) = self.updated_by_account_id.as_ref() {
             struct_ser.serialize_field("updatedByAccountId", v)?;
         }
+        if let Some(v) = self.r#type.as_ref() {
+            match v {
+                invite::Type::ToProject(v) => {
+                    struct_ser.serialize_field("toProject", v)?;
+                }
+            }
+        }
         if let Some(v) = self.owner.as_ref() {
             match v {
                 invite::Owner::OwnerAccountId(v) => {
@@ -14437,7 +14606,6 @@ impl<'de> serde::Deserialize<'de> for Invite {
     {
         const FIELDS: &[&str] = &[
             "id",
-            "type",
             "description",
             "recipient_email",
             "recipientEmail",
@@ -14453,6 +14621,8 @@ impl<'de> serde::Deserialize<'de> for Invite {
             "updatedAt",
             "updated_by_account_id",
             "updatedByAccountId",
+            "to_project",
+            "toProject",
             "owner_account_id",
             "ownerAccountId",
         ];
@@ -14460,7 +14630,6 @@ impl<'de> serde::Deserialize<'de> for Invite {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Id,
-            Type,
             Description,
             RecipientEmail,
             CreatedAt,
@@ -14469,6 +14638,7 @@ impl<'de> serde::Deserialize<'de> for Invite {
             DeletedByAccountId,
             UpdatedAt,
             UpdatedByAccountId,
+            ToProject,
             OwnerAccountId,
             __SkipField__,
         }
@@ -14493,7 +14663,6 @@ impl<'de> serde::Deserialize<'de> for Invite {
                     {
                         match value {
                             "id" => Ok(GeneratedField::Id),
-                            "type" => Ok(GeneratedField::Type),
                             "description" => Ok(GeneratedField::Description),
                             "recipientEmail" | "recipient_email" => Ok(GeneratedField::RecipientEmail),
                             "createdAt" | "created_at" => Ok(GeneratedField::CreatedAt),
@@ -14502,6 +14671,7 @@ impl<'de> serde::Deserialize<'de> for Invite {
                             "deletedByAccountId" | "deleted_by_account_id" => Ok(GeneratedField::DeletedByAccountId),
                             "updatedAt" | "updated_at" => Ok(GeneratedField::UpdatedAt),
                             "updatedByAccountId" | "updated_by_account_id" => Ok(GeneratedField::UpdatedByAccountId),
+                            "toProject" | "to_project" => Ok(GeneratedField::ToProject),
                             "ownerAccountId" | "owner_account_id" => Ok(GeneratedField::OwnerAccountId),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
@@ -14523,7 +14693,6 @@ impl<'de> serde::Deserialize<'de> for Invite {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut id__ = None;
-                let mut r#type__ = None;
                 let mut description__ = None;
                 let mut recipient_email__ = None;
                 let mut created_at__ = None;
@@ -14532,6 +14701,7 @@ impl<'de> serde::Deserialize<'de> for Invite {
                 let mut deleted_by_account_id__ = None;
                 let mut updated_at__ = None;
                 let mut updated_by_account_id__ = None;
+                let mut r#type__ = None;
                 let mut owner__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
@@ -14540,12 +14710,6 @@ impl<'de> serde::Deserialize<'de> for Invite {
                                 return Err(serde::de::Error::duplicate_field("id"));
                             }
                             id__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::Type => {
-                            if r#type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("type"));
-                            }
-                            r#type__ = Some(map_.next_value::<invite::Type>()? as i32);
                         }
                         GeneratedField::Description => {
                             if description__.is_some() {
@@ -14595,6 +14759,13 @@ impl<'de> serde::Deserialize<'de> for Invite {
                             }
                             updated_by_account_id__ = map_.next_value()?;
                         }
+                        GeneratedField::ToProject => {
+                            if r#type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("toProject"));
+                            }
+                            r#type__ = map_.next_value::<::std::option::Option<_>>()?.map(invite::Type::ToProject)
+;
+                        }
                         GeneratedField::OwnerAccountId => {
                             if owner__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("ownerAccountId"));
@@ -14608,7 +14779,6 @@ impl<'de> serde::Deserialize<'de> for Invite {
                 }
                 Ok(Invite {
                     id: id__.unwrap_or_default(),
-                    r#type: r#type__.unwrap_or_default(),
                     description: description__,
                     recipient_email: recipient_email__,
                     created_at: created_at__,
@@ -14617,6 +14787,7 @@ impl<'de> serde::Deserialize<'de> for Invite {
                     deleted_by_account_id: deleted_by_account_id__,
                     updated_at: updated_at__,
                     updated_by_account_id: updated_by_account_id__,
+                    r#type: r#type__,
                     owner: owner__,
                 })
             }
@@ -14624,72 +14795,100 @@ impl<'de> serde::Deserialize<'de> for Invite {
         deserializer.deserialize_struct("saas_rs.user.v1.Invite", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for invite::Type {
+impl serde::Serialize for invite::ToProject {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
         S: serde::Serializer,
     {
-        let variant = match self {
-            Self::Unknown => "Unknown",
-        };
-        serializer.serialize_str(variant)
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.Invite.ToProject", len)?;
+        if true {
+            struct_ser.serialize_field("projectId", &self.project_id)?;
+        }
+        struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for invite::Type {
+impl<'de> serde::Deserialize<'de> for invite::ToProject {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "Unknown",
+            "project_id",
+            "projectId",
         ];
 
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = invite::Type;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            ProjectId,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
             where
-                E: serde::de::Error,
+                D: serde::Deserializer<'de>,
             {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
+                struct GeneratedVisitor;
 
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
 
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "Unknown" => Ok(invite::Type::Unknown),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "projectId" | "project_id" => Ok(GeneratedField::ProjectId),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
                 }
+                deserializer.deserialize_identifier(GeneratedVisitor)
             }
         }
-        deserializer.deserialize_any(GeneratedVisitor)
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = invite::ToProject;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct saas_rs.user.v1.Invite.ToProject")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<invite::ToProject, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut project_id__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::ProjectId => {
+                            if project_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("projectId"));
+                            }
+                            project_id__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(invite::ToProject {
+                    project_id: project_id__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("saas_rs.user.v1.Invite.ToProject", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for InviteFilter {
@@ -14709,9 +14908,6 @@ impl serde::Serialize for InviteFilter {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.InviteFilter", len)?;
         if let Some(v) = self.id.as_ref() {
             struct_ser.serialize_field("id", v)?;
@@ -14721,11 +14917,6 @@ impl serde::Serialize for InviteFilter {
         }
         if let Some(v) = self.recipient_email.as_ref() {
             struct_ser.serialize_field("recipientEmail", v)?;
-        }
-        if let Some(v) = self.r#type.as_ref() {
-            let v = invite::Type::try_from(*v)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
-            struct_ser.serialize_field("type", &v)?;
         }
         struct_ser.end()
     }
@@ -14742,7 +14933,6 @@ impl<'de> serde::Deserialize<'de> for InviteFilter {
             "createdByAccountId",
             "recipient_email",
             "recipientEmail",
-            "type",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -14750,7 +14940,6 @@ impl<'de> serde::Deserialize<'de> for InviteFilter {
             Id,
             CreatedByAccountId,
             RecipientEmail,
-            Type,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -14776,7 +14965,6 @@ impl<'de> serde::Deserialize<'de> for InviteFilter {
                             "id" => Ok(GeneratedField::Id),
                             "createdByAccountId" | "created_by_account_id" => Ok(GeneratedField::CreatedByAccountId),
                             "recipientEmail" | "recipient_email" => Ok(GeneratedField::RecipientEmail),
-                            "type" => Ok(GeneratedField::Type),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -14799,7 +14987,6 @@ impl<'de> serde::Deserialize<'de> for InviteFilter {
                 let mut id__ = None;
                 let mut created_by_account_id__ = None;
                 let mut recipient_email__ = None;
-                let mut r#type__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -14820,12 +15007,6 @@ impl<'de> serde::Deserialize<'de> for InviteFilter {
                             }
                             recipient_email__ = map_.next_value()?;
                         }
-                        GeneratedField::Type => {
-                            if r#type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("type"));
-                            }
-                            r#type__ = map_.next_value::<::std::option::Option<invite::Type>>()?.map(|x| x as i32);
-                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -14835,7 +15016,6 @@ impl<'de> serde::Deserialize<'de> for InviteFilter {
                     id: id__,
                     created_by_account_id: created_by_account_id__,
                     recipient_email: recipient_email__,
-                    r#type: r#type__,
                 })
             }
         }
@@ -17675,6 +17855,9 @@ impl serde::Serialize for Project {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         if self.owner.is_some() {
             len += 1;
         }
@@ -17684,6 +17867,9 @@ impl serde::Serialize for Project {
         }
         if true {
             struct_ser.serialize_field("name", &self.name)?;
+        }
+        if true {
+            struct_ser.serialize_field("memberAccountIds", &self.member_account_ids)?;
         }
         if let Some(v) = self.created_at.as_ref() {
             struct_ser.serialize_field("createdAt", v)?;
@@ -17722,6 +17908,8 @@ impl<'de> serde::Deserialize<'de> for Project {
         const FIELDS: &[&str] = &[
             "id",
             "name",
+            "member_account_ids",
+            "memberAccountIds",
             "created_at",
             "createdAt",
             "created_by_account_id",
@@ -17742,6 +17930,7 @@ impl<'de> serde::Deserialize<'de> for Project {
         enum GeneratedField {
             Id,
             Name,
+            MemberAccountIds,
             CreatedAt,
             CreatedByAccountId,
             DeletedAt,
@@ -17773,6 +17962,7 @@ impl<'de> serde::Deserialize<'de> for Project {
                         match value {
                             "id" => Ok(GeneratedField::Id),
                             "name" => Ok(GeneratedField::Name),
+                            "memberAccountIds" | "member_account_ids" => Ok(GeneratedField::MemberAccountIds),
                             "createdAt" | "created_at" => Ok(GeneratedField::CreatedAt),
                             "createdByAccountId" | "created_by_account_id" => Ok(GeneratedField::CreatedByAccountId),
                             "deletedAt" | "deleted_at" => Ok(GeneratedField::DeletedAt),
@@ -17801,6 +17991,7 @@ impl<'de> serde::Deserialize<'de> for Project {
             {
                 let mut id__ = None;
                 let mut name__ = None;
+                let mut member_account_ids__ = None;
                 let mut created_at__ = None;
                 let mut created_by_account_id__ = None;
                 let mut deleted_at__ = None;
@@ -17821,6 +18012,12 @@ impl<'de> serde::Deserialize<'de> for Project {
                                 return Err(serde::de::Error::duplicate_field("name"));
                             }
                             name__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::MemberAccountIds => {
+                            if member_account_ids__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("memberAccountIds"));
+                            }
+                            member_account_ids__ = Some(map_.next_value()?);
                         }
                         GeneratedField::CreatedAt => {
                             if created_at__.is_some() {
@@ -17872,6 +18069,7 @@ impl<'de> serde::Deserialize<'de> for Project {
                 Ok(Project {
                     id: id__.unwrap_or_default(),
                     name: name__.unwrap_or_default(),
+                    member_account_ids: member_account_ids__.unwrap_or_default(),
                     created_at: created_at__,
                     created_by_account_id: created_by_account_id__,
                     deleted_at: deleted_at__,

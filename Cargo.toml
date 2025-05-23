@@ -20,7 +20,7 @@ anyhow = "1.0.98"
 vergen-gitcl = "1.0.8"
 
 [dependencies]
-actix-cors = "0.7.0"
+actix-cors = "0.7.1"
 actix-web = { version = "4.11.0", features = ["rustls-0_23"] }
 anyhow = "1.0.98"
 async-stream = "0.3.6"
@@ -30,7 +30,7 @@ git2 = "0.20.2"
 log = { version = "0.4.27", features = ["kv_unstable", "kv_unstable_serde"] }
 pbjson = "0.7.0"
 pbjson-types = "0.7.0"
-polars = { version = "0.47.1", default-features = false, features = ["fmt", "ipc", "json"] }
+polars = { version = "0.48.1", default-features = false, features = ["fmt", "ipc", "json"] }
 prost = "0.13.5"
 serde = "1.0.219"
 serde_json = "1.0.140"
@@ -38,9 +38,9 @@ serde_yaml = "0.9.33"
 tempdir = "0.3.7"
 tempfile = "3.20.0"
 tmp_env = "0.1.1"
-tokio = { version = "1.44.2", features = ["macros", "rt-multi-thread"] }
+tokio = { version = "1.45.0", features = ["macros", "rt-multi-thread"] }
 tokio-rustls = { version = "0.26.2", default-features = false, features = ["logging", "ring", "tls12"] }
 tonic = { version = "0.13.1", features = ["tls-webpki-roots"] }
-uuid = { version = "1.16.0", features = ["v4"] }
+uuid = { version = "1.17.0", features = ["v4"] }
 webbrowser = "1.0.4"
 xid = "1.1.1"
