@@ -17,7 +17,12 @@ $ saas-rs login
 Logged in. Greetings David Rauschenbach!
 ```
 
-If the CLI hangs after the web login completes, try a 2nd time, or try Chrome.
+If the CLI hangs after the web login completes, try a 2nd time, or try Chrome:
+
+```shell
+$ saas-rs login --browser chrome
+Logged in. Greetings David Rauschenbach!
+```
 
 ### Create a new project
 

@@ -1,5 +1,9 @@
 # SaaS RS :: CLI Changelog
 
+## [Unreleased]
+### Changed
+- [#25](https://github.com/saas-rs/cli/issues/25) In the README, document how to retry a failed login with Chrome
+
 ## [0.1.6] - 2025-05-23
 ### Added
 - [#19](https://github.com/saas-rs/cli/issues/19) Suggest invoking make after a successful initialize or generate command leaves the workspace dirty
