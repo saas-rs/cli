@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Changed
+- [#27](https://github.com/saas-rs/cli/issues/27) Upgrade 2 crates, and protocol
 - [#25](https://github.com/saas-rs/cli/issues/25) In the README, document how to retry a failed login with Chrome
 
 ## [0.1.6] - 2025-05-23
