@@ -606,6 +606,46 @@ pub struct GenerateResponse {
     pub file_id: ::prost::alloc::string::String,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GenerationFeature {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub name: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub description: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GenerationFeatureFilter {
+    #[prost(string, optional, tag = "1")]
+    pub id: ::core::option::Option<::prost::alloc::string::String>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FindGenerationFeatureRequest {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FindGenerationFeatureResponse {
+    #[prost(message, optional, tag = "1")]
+    pub generation_feature: ::core::option::Option<GenerationFeature>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FindManyGenerationFeaturesRequest {
+    #[prost(message, optional, tag = "1")]
+    pub filter: ::core::option::Option<GenerationFeatureFilter>,
+    #[prost(message, optional, tag = "2")]
+    pub field_mask: ::core::option::Option<::pbjson_types::FieldMask>,
+    #[prost(uint32, optional, tag = "3")]
+    pub offset: ::core::option::Option<u32>,
+    #[prost(uint32, optional, tag = "4")]
+    pub limit: ::core::option::Option<u32>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FindManyGenerationFeaturesResponse {
+    #[prost(message, repeated, tag = "1")]
+    pub generation_features: ::prost::alloc::vec::Vec<GenerationFeature>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Plan {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
@@ -2656,6 +2696,32 @@ pub mod user_client {
                 .insert(GrpcMethod::new("saas_rs.user.v1.User", "FindFile"));
             self.inner.unary(req, path, codec).await
         }
+        pub async fn find_generation_feature(
+            &mut self,
+            request: impl tonic::IntoRequest<super::FindGenerationFeatureRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::FindGenerationFeatureResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/saas_rs.user.v1.User/FindGenerationFeature",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("saas_rs.user.v1.User", "FindGenerationFeature"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
         pub async fn find_invite(
             &mut self,
             request: impl tonic::IntoRequest<super::FindInviteRequest>,
@@ -2942,6 +3008,32 @@ pub mod user_client {
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("saas_rs.user.v1.User", "FindManyFiles"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn find_many_generation_features(
+            &mut self,
+            request: impl tonic::IntoRequest<super::FindManyGenerationFeaturesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::FindManyGenerationFeaturesResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/saas_rs.user.v1.User/FindManyGenerationFeatures",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("saas_rs.user.v1.User", "FindManyGenerationFeatures"),
+                );
             self.inner.unary(req, path, codec).await
         }
         pub async fn find_many_invites(
@@ -4152,6 +4244,13 @@ pub mod user_server {
             tonic::Response<super::FindFileResponse>,
             tonic::Status,
         >;
+        async fn find_generation_feature(
+            &self,
+            request: tonic::Request<super::FindGenerationFeatureRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::FindGenerationFeatureResponse>,
+            tonic::Status,
+        >;
         async fn find_invite(
             &self,
             request: tonic::Request<super::FindInviteRequest>,
@@ -4234,6 +4333,13 @@ pub mod user_server {
             request: tonic::Request<super::FindManyFilesRequest>,
         ) -> std::result::Result<
             tonic::Response<super::FindManyFilesResponse>,
+            tonic::Status,
+        >;
+        async fn find_many_generation_features(
+            &self,
+            request: tonic::Request<super::FindManyGenerationFeaturesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::FindManyGenerationFeaturesResponse>,
             tonic::Status,
         >;
         async fn find_many_invites(
@@ -5874,6 +5980,51 @@ pub mod user_server {
                     };
                     Box::pin(fut)
                 }
+                "/saas_rs.user.v1.User/FindGenerationFeature" => {
+                    #[allow(non_camel_case_types)]
+                    struct FindGenerationFeatureSvc<T: User>(pub Arc<T>);
+                    impl<
+                        T: User,
+                    > tonic::server::UnaryService<super::FindGenerationFeatureRequest>
+                    for FindGenerationFeatureSvc<T> {
+                        type Response = super::FindGenerationFeatureResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::FindGenerationFeatureRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as User>::find_generation_feature(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = FindGenerationFeatureSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
                 "/saas_rs.user.v1.User/FindInvite" => {
                     #[allow(non_camel_case_types)]
                     struct FindInviteSvc<T: User>(pub Arc<T>);
@@ -6387,6 +6538,55 @@ pub mod user_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = FindManyFilesSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/saas_rs.user.v1.User/FindManyGenerationFeatures" => {
+                    #[allow(non_camel_case_types)]
+                    struct FindManyGenerationFeaturesSvc<T: User>(pub Arc<T>);
+                    impl<
+                        T: User,
+                    > tonic::server::UnaryService<
+                        super::FindManyGenerationFeaturesRequest,
+                    > for FindManyGenerationFeaturesSvc<T> {
+                        type Response = super::FindManyGenerationFeaturesResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::FindManyGenerationFeaturesRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as User>::find_many_generation_features(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = FindManyGenerationFeaturesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
