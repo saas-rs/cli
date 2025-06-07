@@ -11,6 +11,7 @@ pub(super) mod project;
 pub(super) mod service;
 pub(super) mod service_instance;
 pub(super) mod ssh_key;
+pub(super) mod generation_feature;
 
 pub use output::output;
 
@@ -28,6 +29,9 @@ pub enum Subcommand {
 
     #[command(name = "api-key", alias = "apiKey")]
     ApiKey(api_key::Opts),
+
+    #[command(name = "generation-feature", alias = "generationFeature")]
+    GenerationFeature(generation_feature::Opts),
 
     #[command(name = "issue")]
     Issue(issue::Opts),
@@ -61,6 +65,9 @@ pub async fn run(subcommand: Subcommand) -> Result<(), Box<dyn std::error::Error
         }
         Subcommand::ApiKey(api_key::Opts { id, output }) => {
             api_key::run(id, output).await?;
+        }
+        Subcommand::GenerationFeature(generation_feature::Opts { id, output }) => {
+            generation_feature::run(id, output).await?;
         }
         Subcommand::Issue(issue::Opts { id, output }) => {
             issue::run(id, output).await?;
