@@ -2,6 +2,7 @@ use clap::Parser;
 
 pub(super) mod account;
 pub(super) mod api_key;
+pub(super) mod generation_feature;
 pub(super) mod issue;
 pub(super) mod issue_comment;
 pub(super) mod linked_account;
@@ -11,7 +12,6 @@ pub(super) mod project;
 pub(super) mod service;
 pub(super) mod service_instance;
 pub(super) mod ssh_key;
-pub(super) mod generation_feature;
 
 pub use output::output;
 

@@ -1,6 +1,6 @@
 use crate::apiclient;
-use crate::cmd::list::{generation_features};
-use crate::protocol::saas_rs::user::v1::{FindGenerationFeatureRequest};
+use crate::cmd::list::generation_features;
+use crate::protocol::saas_rs::user::v1::FindGenerationFeatureRequest;
 use clap::Parser;
 use polars::prelude::*;
 use std::io::Cursor;
