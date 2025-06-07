@@ -1,5 +1,9 @@
 # SaaS RS :: CLI Changelog
 
+## [Unreleased]
+### Added
+- [#30](https://github.com/saas-rs/cli/issues/30) Support listing all features available for generation
+
 ## [0.1.8] - 2025-06-06
 ### Changed
 - [#27](https://github.com/saas-rs/cli/issues/27) Upgrade 2 crates, and protocol
