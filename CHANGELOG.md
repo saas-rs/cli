@@ -4,6 +4,9 @@
 ### Added
 - [#30](https://github.com/saas-rs/cli/issues/30) Support listing all features available for generation
 
+### Fixed
+- [#22](https://github.com/saas-rs/cli/issues/22) version subcommand panics when installed via cargo
+
 ## [0.1.8] - 2025-06-06
 ### Changed
 - [#27](https://github.com/saas-rs/cli/issues/27) Upgrade 2 crates, and protocol

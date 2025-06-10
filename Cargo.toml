@@ -15,10 +15,6 @@ path = "src/main.rs"
 [package.metadata.cargo-machete]
 ignored = []
 
-[build-dependencies]
-anyhow = "1.0.98"
-vergen-gitcl = "1.0.8"
-
 [dependencies]
 actix-cors = "0.7.1"
 actix-web = { version = "4.11.0", features = ["rustls-0_23"] }
