@@ -15,36 +15,38 @@ pub async fn do_generate(req: GenerateRequest) -> Result<(), Box<dyn std::error:
 
     let tempdir = TempDir::new("saas-rs-cli")?;
     {
-        // Download patch file
-        let req = DownloadFileRequest {
-            id: res.file_id.clone(),
-        };
-        let mut input_stream = client.download_file(req).await?.into_inner();
-        let mut buf = vec![];
-        while let Some(res) = input_stream.next().await {
-            match res {
-                Ok(item) => {
-                    buf = [&buf[..], &item.chunk[..]].concat();
-                }
-                Err(e) => {
-                    eprintln!("{e:?}");
-                }
-            }
-        }
-
-        // Write it to fs
+        // Download FileInfo for patch file to get filename
         let file_info = client
-            .find_file(FindFileRequest { id: res.file_id })
+            .find_file(FindFileRequest {
+                id: res.file_id.clone(),
+            })
             .await?
             .into_inner()
             .file_info
             .unwrap();
+
+        // Open a local temp file for output
         let mut file = File::options().create(true).truncate(true).write(true).open(format!(
             "{}/{}",
             tempdir.path().display(),
             file_info.filename
         ))?;
-        file.write_all(&buf)?;
+
+        // Download chunks, and append them to temp file
+        let req = DownloadFileRequest { id: res.file_id };
+        let mut input_stream = client.download_file(req).await?.into_inner();
+        while let Some(res) = input_stream.next().await {
+            match res {
+                Ok(item) => {
+                    file.write_all(&item.chunk)?;
+                }
+                Err(e) => {
+                    eprintln!("Failed downloading file: {e:?}");
+                    std::process::exit(1);
+                }
+            }
+        }
+        file.flush()?;
 
         eprintln!("Response received");
     }
