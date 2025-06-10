@@ -7,7 +7,10 @@ use std::fs;
 use std::process::Command;
 use std::str::from_utf8;
 use tempfile::NamedTempFile;
+use tokio::fs::File;
 use tokio::sync::mpsc;
+use tokio_stream::StreamExt;
+use tokio_util::codec::{BytesCodec, FramedRead};
 use tonic::codegen::tokio_stream::wrappers::ReceiverStream;
 
 pub async fn do_generate_preflight() -> Result<(String, Snapshot), Box<dyn std::error::Error>> {
@@ -38,60 +41,43 @@ pub async fn do_generate_preflight() -> Result<(String, Snapshot), Box<dyn std::
     }
     debug!("Archival completed");
 
-    // Upload the archive
+    // Prepare a FileInfo descriptor for the archive
     let metadata = fs::metadata(file.path())?;
-    // let file_info = FileInfo {
-    //     length: metadata.len() as u32,
-    //     filename: "archive.zip".to_string(),
-    //     ..Default::default()
-    // };
-    // let req1 = UploadFileRequest {
-    //     r#type: Some(upload_file_request::Type::FileInfo(file_info)),
-    // };
-    // let contents = fs::read(file.path())?; // TODO(https://github.com/saas-rs/cli/issues/32)
-    // let req2 = UploadFileRequest {
-    //     r#type: Some(upload_file_request::Type::Chunk(contents)),
-    // };
-    // let outbound = async_stream::stream! {
-    //     yield req1;
-    //     yield req2;
-    // };
-    // Setup channels to communicate with a task
+    let file_info = FileInfo {
+        length: metadata.len() as u32,
+        filename: "archive.zip".to_string(),
+        ..Default::default()
+    };
+
+    // Start task to feed an output stream with the FileInfo then the chunked contents
+    let file = File::open(file.path()).await?;
+    let mut file_reader_stream = FramedRead::new(file, BytesCodec::new());
     let (tx, rx) = mpsc::channel(2);
     let outbound = ReceiverStream::new(rx);
-
-    // Start task to feed the output stream
     tokio::spawn(async move {
         // The first message is just the file info
-        let file_info = FileInfo {
-            length: metadata.len() as u32,
-            filename: "archive.zip".to_string(),
-            ..Default::default()
-        };
         let req = UploadFileRequest {
             r#type: Some(upload_file_request::Type::FileInfo(file_info)),
         };
         tx.send(req).await.unwrap();
 
         // The rest of the mssages are chunks of content
-        let contents = fs::read(file.path()).unwrap(); // TODO(https://github.com/saas-rs/cli/issues/32)
-        let req = UploadFileRequest {
-            r#type: Some(upload_file_request::Type::Chunk(contents)),
-        };
-        tx.send(req).await.unwrap();
-
-        // TODO
-        // while let Some(item) = input_stream.next().await {
-        //     match item {
-        //         Ok(item) => {
-        //             let res = StreamDownloadedFileResponse { chunk: item.chunk };
-        //             if let Err(_e) = tx.send(Ok(res)).await {
-        //                 break;
-        //             }
-        //         }
-        //         _ => break,
-        //     }
-        // }
+        while let Some(item) = file_reader_stream.next().await {
+            match item {
+                Ok(item) => {
+                    let req = UploadFileRequest {
+                        r#type: Some(upload_file_request::Type::Chunk(item.to_vec())),
+                    };
+                    if let Err(_e) = tx.send(req).await {
+                        break;
+                    }
+                }
+                Err(e) => {
+                    eprintln!("Failed uploading archive: {e:?}");
+                    std::process::exit(1);
+                }
+            }
+        }
 
         debug!("Terminating");
     });
@@ -107,41 +93,3 @@ pub async fn do_generate_preflight() -> Result<(String, Snapshot), Box<dyn std::
     });
     Ok((project_id, snapshot))
 }
-
-// pub(super) async fn download(
-//     this: &UserGrpcServerV1,
-//     req: Request<StreamDownloadedFileRequest>,
-// ) -> Result<Response<DownloadedFileResponseStream>, Status> {
-//     // Make upstream request to start stream
-//     let mut store_client = StoreClient::new(this.store_client_channel.clone());
-//     let stream_downloaded_file_req = proto::onprem::store::v1::StreamDownloadedFileRequest {
-//         id: req.into_inner().id.clone(),
-//     };
-//     let mut input_stream = store_client
-//         .stream_downloaded_file(stream_downloaded_file_req)
-//         .await?
-//         .into_inner();
-//
-//     // Setup channels to communicate with a task
-//     let (tx, rx) = mpsc::channel(128);
-//
-//     // Start task to run the message pump
-//     tokio::spawn(async move {
-//         while let Some(item) = input_stream.next().await {
-//             match item {
-//                 Ok(item) => {
-//                     let res = StreamDownloadedFileResponse { chunk: item.chunk };
-//                     if let Err(_e) = tx.send(Ok(res)).await {
-//                         break;
-//                     }
-//                 }
-//                 _ => break,
-//             }
-//         }
-//         debug!("Terminating");
-//     });
-//
-//     // Streaming response
-//     let output_stream = ReceiverStream::new(rx);
-//     Ok(Response::new(Box::pin(output_stream) as DownloadedFileResponseStream))
-// }

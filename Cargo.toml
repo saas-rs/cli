@@ -19,7 +19,6 @@ ignored = []
 actix-cors = "0.7.1"
 actix-web = { version = "4.11.0", features = ["rustls-0_23"] }
 anyhow = "1.0.98"
-async-stream = "0.3.6"
 clap = { version = "4.5.39", features = ["color", "derive"] }
 dirs = "6.0.0"
 git2 = "0.20.2"
@@ -34,8 +33,10 @@ serde_yaml = "0.9.33"
 tempdir = "0.3.7"
 tempfile = "3.20.0"
 tmp_env = "0.1.1"
-tokio = { version = "1.45.1", features = ["macros", "rt-multi-thread"] }
+tokio = { version = "1.45.1", features = ["fs", "macros", "rt-multi-thread"] }
 tokio-rustls = { version = "0.26.2", default-features = false, features = ["logging", "ring", "tls12"] }
+tokio-stream = "0.1.17"
+tokio-util = "0.7.13"
 tonic = { version = "0.13.1", features = ["tls-webpki-roots"] }
 uuid = { version = "1.17.0", features = ["v4"] }
 webbrowser = "1.0.4"
