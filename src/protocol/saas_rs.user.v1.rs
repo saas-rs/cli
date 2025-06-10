@@ -510,7 +510,7 @@ pub struct GenerateRequest {
     pub project_id: ::prost::alloc::string::String,
     #[prost(oneof = "generate_request::Snapshot", tags = "2, 3")]
     pub snapshot: ::core::option::Option<generate_request::Snapshot>,
-    #[prost(oneof = "generate_request::What", tags = "4, 5, 6, 7, 8")]
+    #[prost(oneof = "generate_request::What", tags = "4, 5, 6, 7, 8, 9")]
     pub what: ::core::option::Option<generate_request::What>,
 }
 /// Nested message and enum types in `GenerateRequest`.
@@ -528,6 +528,13 @@ pub mod generate_request {
         pub service: ::prost::alloc::string::String,
         #[prost(uint32, tag = "3")]
         pub version: u32,
+    }
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Feature {
+        #[prost(string, optional, tag = "1")]
+        pub service: ::core::option::Option<::prost::alloc::string::String>,
+        #[prost(uint32, optional, tag = "2")]
+        pub version: ::core::option::Option<u32>,
     }
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Field {
@@ -598,6 +605,8 @@ pub mod generate_request {
         Resource(Resource),
         #[prost(message, tag = "8")]
         Service(Service),
+        #[prost(message, tag = "9")]
+        Feature(Feature),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
