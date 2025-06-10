@@ -1,6 +1,7 @@
 pub(super) mod controller;
 mod do_generate;
 mod do_generate_preflight;
+pub(super) mod feature;
 pub(super) mod model;
 pub(super) mod resource;
 pub(super) mod service;
@@ -22,6 +23,9 @@ pub struct Opts {
 pub enum Subcommand {
     #[command(name = "controller")]
     Controller(controller::Opts),
+
+    #[command(name = "feature")]
+    Feature(feature::Opts),
 
     #[command(name = "model")]
     Model(model::Opts),
@@ -47,6 +51,9 @@ pub async fn run(subcommand: Subcommand) -> Result<(), Box<dyn std::error::Error
             resource,
         }) => {
             controller::run(service, version, resource).await?;
+        }
+        Subcommand::Feature(feature::Opts { service, version }) => {
+            feature::run(service, version).await?;
         }
         Subcommand::Model(model::Opts {
             service,

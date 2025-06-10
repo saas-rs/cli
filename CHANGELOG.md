@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Added
 - [#30](https://github.com/saas-rs/cli/issues/30) Support listing all features available for generation
+- [#29](https://github.com/saas-rs/cli/issues/29) Support generation of a feature
 
 ### Fixed
 - [#32](https://github.com/saas-rs/cli/issues/32) The archive uploaded in a generate request should not be buffered in memory
