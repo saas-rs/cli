@@ -1,6 +1,6 @@
 # SaaS RS :: CLI Changelog
 
-## [Unreleased]
+## [0.1.9] - 2025-06-13
 ### Added
 - [#30](https://github.com/saas-rs/cli/issues/30) Support listing all features available for generation
 - [#29](https://github.com/saas-rs/cli/issues/29) Support generation of a feature
