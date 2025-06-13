@@ -1,5 +1,9 @@
 # SaaS RS :: CLI Changelog
 
+## [Unreleased]
+### Fixed
+- [#22](https://github.com/saas-rs/cli/issues/22) version subcommand panics when installed via cargo
+
 ## [0.1.9] - 2025-06-13
 ### Added
 - [#30](https://github.com/saas-rs/cli/issues/30) Support listing all features available for generation
@@ -8,7 +12,6 @@
 ### Fixed
 - [#32](https://github.com/saas-rs/cli/issues/32) The archive uploaded in a generate request should not be buffered in memory
 - [#31](https://github.com/saas-rs/cli/issues/31) The archive downloaded from a generate response should not be buffered in memory
-- [#22](https://github.com/saas-rs/cli/issues/22) version subcommand panics when installed via cargo
 
 ## [0.1.8] - 2025-06-06
 ### Changed
