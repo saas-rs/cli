@@ -52,8 +52,13 @@ pub async fn run(subcommand: Subcommand) -> Result<(), Box<dyn std::error::Error
         }) => {
             controller::run(service, version, resource).await?;
         }
-        Subcommand::Feature(feature::Opts { service, version }) => {
-            feature::run(service, version).await?;
+        Subcommand::Feature(feature::Opts {
+            id,
+            name,
+            service,
+            version,
+        }) => {
+            feature::run(id, name, service, version).await?;
         }
         Subcommand::Model(model::Opts {
             service,

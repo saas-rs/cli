@@ -395,26 +395,26 @@ pub struct FileInfo {
     pub filename: ::prost::alloc::string::String,
     #[prost(message, optional, tag = "4")]
     pub metadata: ::core::option::Option<::pbjson_types::Struct>,
-    #[prost(message, optional, tag = "100")]
+    #[prost(message, optional, tag = "1000")]
     pub created_at: ::core::option::Option<::pbjson_types::Timestamp>,
-    #[prost(string, optional, tag = "101")]
+    #[prost(string, optional, tag = "1001")]
     pub created_by_account_id: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(message, optional, tag = "102")]
+    #[prost(message, optional, tag = "1002")]
     pub deleted_at: ::core::option::Option<::pbjson_types::Timestamp>,
-    #[prost(string, optional, tag = "103")]
+    #[prost(string, optional, tag = "1003")]
     pub deleted_by_account_id: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(message, optional, tag = "104")]
+    #[prost(message, optional, tag = "1004")]
     pub updated_at: ::core::option::Option<::pbjson_types::Timestamp>,
-    #[prost(string, optional, tag = "105")]
+    #[prost(string, optional, tag = "1005")]
     pub updated_by_account_id: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(oneof = "file_info::Owner", tags = "106")]
+    #[prost(oneof = "file_info::Owner", tags = "1006")]
     pub owner: ::core::option::Option<file_info::Owner>,
 }
 /// Nested message and enum types in `FileInfo`.
 pub mod file_info {
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Owner {
-        #[prost(string, tag = "106")]
+        #[prost(string, tag = "1006")]
         OwnerAccountId(::prost::alloc::string::String),
     }
 }
@@ -531,9 +531,11 @@ pub mod generate_request {
     }
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Feature {
-        #[prost(string, optional, tag = "1")]
+        #[prost(string, tag = "1")]
+        pub id: ::prost::alloc::string::String,
+        #[prost(string, optional, tag = "2")]
         pub service: ::core::option::Option<::prost::alloc::string::String>,
-        #[prost(uint32, optional, tag = "2")]
+        #[prost(uint32, optional, tag = "3")]
         pub version: ::core::option::Option<u32>,
     }
     #[derive(Clone, PartialEq, ::prost::Message)]
@@ -627,6 +629,8 @@ pub struct GenerationFeature {
 pub struct GenerationFeatureFilter {
     #[prost(string, optional, tag = "1")]
     pub id: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(string, optional, tag = "2")]
+    pub name: ::core::option::Option<::prost::alloc::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FindGenerationFeatureRequest {

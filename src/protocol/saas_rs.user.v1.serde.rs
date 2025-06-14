@@ -13026,7 +13026,13 @@ impl serde::Serialize for generate_request::Feature {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.GenerateRequest.Feature", len)?;
+        if true {
+            struct_ser.serialize_field("id", &self.id)?;
+        }
         if let Some(v) = self.service.as_ref() {
             struct_ser.serialize_field("service", v)?;
         }
@@ -13043,12 +13049,14 @@ impl<'de> serde::Deserialize<'de> for generate_request::Feature {
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
+            "id",
             "service",
             "version",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
+            Id,
             Service,
             Version,
             __SkipField__,
@@ -13073,6 +13081,7 @@ impl<'de> serde::Deserialize<'de> for generate_request::Feature {
                         E: serde::de::Error,
                     {
                         match value {
+                            "id" => Ok(GeneratedField::Id),
                             "service" => Ok(GeneratedField::Service),
                             "version" => Ok(GeneratedField::Version),
                             _ => Ok(GeneratedField::__SkipField__),
@@ -13094,10 +13103,17 @@ impl<'de> serde::Deserialize<'de> for generate_request::Feature {
                 where
                     V: serde::de::MapAccess<'de>,
             {
+                let mut id__ = None;
                 let mut service__ = None;
                 let mut version__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
+                        GeneratedField::Id => {
+                            if id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("id"));
+                            }
+                            id__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::Service => {
                             if service__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("service"));
@@ -13118,6 +13134,7 @@ impl<'de> serde::Deserialize<'de> for generate_request::Feature {
                     }
                 }
                 Ok(generate_request::Feature {
+                    id: id__.unwrap_or_default(),
                     service: service__,
                     version: version__,
                 })
@@ -14109,9 +14126,15 @@ impl serde::Serialize for GenerationFeatureFilter {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.GenerationFeatureFilter", len)?;
         if let Some(v) = self.id.as_ref() {
             struct_ser.serialize_field("id", v)?;
+        }
+        if let Some(v) = self.name.as_ref() {
+            struct_ser.serialize_field("name", v)?;
         }
         struct_ser.end()
     }
@@ -14124,11 +14147,13 @@ impl<'de> serde::Deserialize<'de> for GenerationFeatureFilter {
     {
         const FIELDS: &[&str] = &[
             "id",
+            "name",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Id,
+            Name,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -14152,6 +14177,7 @@ impl<'de> serde::Deserialize<'de> for GenerationFeatureFilter {
                     {
                         match value {
                             "id" => Ok(GeneratedField::Id),
+                            "name" => Ok(GeneratedField::Name),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -14172,6 +14198,7 @@ impl<'de> serde::Deserialize<'de> for GenerationFeatureFilter {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut id__ = None;
+                let mut name__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -14180,6 +14207,12 @@ impl<'de> serde::Deserialize<'de> for GenerationFeatureFilter {
                             }
                             id__ = map_.next_value()?;
                         }
+                        GeneratedField::Name => {
+                            if name__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("name"));
+                            }
+                            name__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -14187,6 +14220,7 @@ impl<'de> serde::Deserialize<'de> for GenerationFeatureFilter {
                 }
                 Ok(GenerationFeatureFilter {
                     id: id__,
+                    name: name__,
                 })
             }
         }
