@@ -1,6 +1,9 @@
 # SaaS RS :: CLI Changelog
 
 ## [Unreleased]
+### Added
+- [#40](https://github.com/saas-rs/cli/issues/40) Support looking up a generation feature by name
+
 ### Fixed
 - [#22](https://github.com/saas-rs/cli/issues/22) version subcommand panics when installed via cargo
 
