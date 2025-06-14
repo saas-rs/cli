@@ -8,11 +8,11 @@ use pbjson_types::FieldMask;
 #[derive(Debug, Parser)]
 pub struct Opts {
     /// Which feature ID
-    #[arg(long = "id")]
+    #[arg(long = "id", group = "id_or_name")]
     pub id: Option<String>,
 
     /// Which feature Name
-    #[arg(long = "name")]
+    #[arg(long = "name", group = "id_or_name")]
     pub name: Option<String>,
 
     /// Which service this feature is for
