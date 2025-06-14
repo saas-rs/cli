@@ -34,7 +34,6 @@ pub async fn run(
     let id = match id {
         Some(id) => id,
         None => {
-            //let name = name.unwrap();
             let mut client = apiclient::new_user_service_client().await?;
             let req = FindManyGenerationFeaturesRequest {
                 filter: Some(GenerationFeatureFilter {
