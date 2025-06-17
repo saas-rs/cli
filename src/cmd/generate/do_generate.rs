@@ -5,7 +5,7 @@ use git2::Repository;
 use std::fs::File;
 use std::io::Write;
 use std::process::Command;
-use tempdir::TempDir;
+use tempfile::TempDir;
 use tonic::codegen::tokio_stream::StreamExt;
 
 pub async fn do_generate(req: GenerateRequest) -> Result<(), Box<dyn std::error::Error>> {
@@ -13,7 +13,7 @@ pub async fn do_generate(req: GenerateRequest) -> Result<(), Box<dyn std::error:
     let mut client = apiclient::new_user_service_client().await?;
     let res = client.generate(req).await?.into_inner();
 
-    let tempdir = TempDir::new("saas-rs-cli")?;
+    let tempdir = TempDir::new()?;
     {
         // Download FileInfo for patch file to get filename
         let file_info = client
