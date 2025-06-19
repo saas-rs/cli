@@ -5,6 +5,9 @@
 - [#40](https://github.com/saas-rs/cli/issues/40) Support looking up a generation feature by name
 - [#39](https://github.com/saas-rs/cli/issues/39) Support creating an issue
 
+### Changed
+- [#45](https://github.com/saas-rs/cli/issues/45) Upgrade 4 crates
+
 ### Fixed
 - [#42](https://github.com/saas-rs/cli/issues/42) GitHub security alert digest says remove_dir_all has a vulnerability
 - [#22](https://github.com/saas-rs/cli/issues/22) version subcommand panics when installed via cargo
