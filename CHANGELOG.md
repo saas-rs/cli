@@ -1,6 +1,6 @@
 # SaaS RS :: CLI Changelog
 
-## [Unreleased]
+## [0.2.3] - 2025-06-19
 ### Added
 - [#40](https://github.com/saas-rs/cli/issues/40) Support looking up a generation feature by name
 - [#39](https://github.com/saas-rs/cli/issues/39) Support creating an issue
