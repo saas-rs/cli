@@ -68,7 +68,7 @@ pub async fn run(
                 }
                 Err(e) => {
                     eprintln!("An error occurred receiving callback notification from browser: {e:?}");
-                    std::process::exit(0);
+                    std::process::exit(1);
                 }
             }
         });

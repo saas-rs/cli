@@ -1,5 +1,9 @@
 # SaaS RS :: CLI Changelog
 
+## [Unreleased]
+### Added
+- [#47](https://github.com/saas-rs/cli/issues/47) Support initializing a git repo using a subdirectory for a multi-language MonoRepo
+
 ## [0.2.3] - 2025-06-19
 ### Added
 - [#40](https://github.com/saas-rs/cli/issues/40) Support looking up a generation feature by name
