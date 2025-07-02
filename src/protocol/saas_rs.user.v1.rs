@@ -202,9 +202,7 @@ pub struct ValidateAccountResponse {
 pub struct ApiKey {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
-    #[prost(string, tag = "2")]
-    pub private_key: ::prost::alloc::string::String,
-    #[prost(string, optional, tag = "3")]
+    #[prost(string, optional, tag = "2")]
     pub description: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(message, optional, tag = "1000")]
     pub created_at: ::core::option::Option<::pbjson_types::Timestamp>,
@@ -554,6 +552,8 @@ pub mod generate_request {
     pub struct Init {
         #[prost(string, tag = "1")]
         pub brand: ::prost::alloc::string::String,
+        #[prost(string, optional, tag = "2")]
+        pub path: ::core::option::Option<::prost::alloc::string::String>,
     }
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Model {
@@ -960,6 +960,8 @@ pub struct IssueComment {
     pub issue_id: ::prost::alloc::string::String,
     #[prost(string, tag = "3")]
     pub description: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "4")]
+    pub metadata: ::core::option::Option<::pbjson_types::Struct>,
     #[prost(message, optional, tag = "1000")]
     pub created_at: ::core::option::Option<::pbjson_types::Timestamp>,
     #[prost(string, optional, tag = "1001")]
@@ -1067,12 +1069,14 @@ pub struct Issue {
     pub state: i32,
     #[prost(string, optional, tag = "5")]
     pub description: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(string, optional, tag = "6")]
-    pub project_id: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "6")]
+    pub metadata: ::core::option::Option<::pbjson_types::Struct>,
     #[prost(string, repeated, tag = "7")]
     pub file_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(string, repeated, tag = "8")]
     pub issue_comment_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, optional, tag = "9")]
+    pub project_id: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(message, optional, tag = "1000")]
     pub created_at: ::core::option::Option<::pbjson_types::Timestamp>,
     #[prost(string, optional, tag = "1001")]
@@ -1632,8 +1636,6 @@ pub struct ServiceInstance {
     pub plan_id: ::prost::alloc::string::String,
     #[prost(message, optional, tag = "4")]
     pub metadata: ::core::option::Option<::pbjson_types::Struct>,
-    #[prost(string, optional, tag = "5")]
-    pub stripe_subscription_id: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(message, optional, tag = "1000")]
     pub created_at: ::core::option::Option<::pbjson_types::Timestamp>,
     #[prost(string, optional, tag = "1001")]

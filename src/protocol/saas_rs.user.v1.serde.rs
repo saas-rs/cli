@@ -692,18 +692,12 @@ impl serde::Serialize for ApiKey {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         if self.owner.is_some() {
             len += 1;
         }
         let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.ApiKey", len)?;
         if true {
             struct_ser.serialize_field("id", &self.id)?;
-        }
-        if true {
-            struct_ser.serialize_field("privateKey", &self.private_key)?;
         }
         if let Some(v) = self.description.as_ref() {
             struct_ser.serialize_field("description", v)?;
@@ -744,8 +738,6 @@ impl<'de> serde::Deserialize<'de> for ApiKey {
     {
         const FIELDS: &[&str] = &[
             "id",
-            "private_key",
-            "privateKey",
             "description",
             "created_at",
             "createdAt",
@@ -766,7 +758,6 @@ impl<'de> serde::Deserialize<'de> for ApiKey {
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Id,
-            PrivateKey,
             Description,
             CreatedAt,
             CreatedByAccountId,
@@ -798,7 +789,6 @@ impl<'de> serde::Deserialize<'de> for ApiKey {
                     {
                         match value {
                             "id" => Ok(GeneratedField::Id),
-                            "privateKey" | "private_key" => Ok(GeneratedField::PrivateKey),
                             "description" => Ok(GeneratedField::Description),
                             "createdAt" | "created_at" => Ok(GeneratedField::CreatedAt),
                             "createdByAccountId" | "created_by_account_id" => Ok(GeneratedField::CreatedByAccountId),
@@ -827,7 +817,6 @@ impl<'de> serde::Deserialize<'de> for ApiKey {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut id__ = None;
-                let mut private_key__ = None;
                 let mut description__ = None;
                 let mut created_at__ = None;
                 let mut created_by_account_id__ = None;
@@ -843,12 +832,6 @@ impl<'de> serde::Deserialize<'de> for ApiKey {
                                 return Err(serde::de::Error::duplicate_field("id"));
                             }
                             id__ = Some(map_.next_value()?);
-                        }
-                        GeneratedField::PrivateKey => {
-                            if private_key__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("privateKey"));
-                            }
-                            private_key__ = Some(map_.next_value()?);
                         }
                         GeneratedField::Description => {
                             if description__.is_some() {
@@ -905,7 +888,6 @@ impl<'de> serde::Deserialize<'de> for ApiKey {
                 }
                 Ok(ApiKey {
                     id: id__.unwrap_or_default(),
-                    private_key: private_key__.unwrap_or_default(),
                     description: description__,
                     created_at: created_at__,
                     created_by_account_id: created_by_account_id__,
@@ -13361,9 +13343,15 @@ impl serde::Serialize for generate_request::Init {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.GenerateRequest.Init", len)?;
         if true {
             struct_ser.serialize_field("brand", &self.brand)?;
+        }
+        if let Some(v) = self.path.as_ref() {
+            struct_ser.serialize_field("path", v)?;
         }
         struct_ser.end()
     }
@@ -13376,11 +13364,13 @@ impl<'de> serde::Deserialize<'de> for generate_request::Init {
     {
         const FIELDS: &[&str] = &[
             "brand",
+            "path",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Brand,
+            Path,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -13404,6 +13394,7 @@ impl<'de> serde::Deserialize<'de> for generate_request::Init {
                     {
                         match value {
                             "brand" => Ok(GeneratedField::Brand),
+                            "path" => Ok(GeneratedField::Path),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -13424,6 +13415,7 @@ impl<'de> serde::Deserialize<'de> for generate_request::Init {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut brand__ = None;
+                let mut path__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Brand => {
@@ -13432,6 +13424,12 @@ impl<'de> serde::Deserialize<'de> for generate_request::Init {
                             }
                             brand__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::Path => {
+                            if path__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("path"));
+                            }
+                            path__ = map_.next_value()?;
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -13439,6 +13437,7 @@ impl<'de> serde::Deserialize<'de> for generate_request::Init {
                 }
                 Ok(generate_request::Init {
                     brand: brand__.unwrap_or_default(),
+                    path: path__,
                 })
             }
         }
@@ -15895,6 +15894,9 @@ impl serde::Serialize for Issue {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         if self.owner.is_some() {
             len += 1;
         }
@@ -15918,14 +15920,17 @@ impl serde::Serialize for Issue {
         if let Some(v) = self.description.as_ref() {
             struct_ser.serialize_field("description", v)?;
         }
-        if let Some(v) = self.project_id.as_ref() {
-            struct_ser.serialize_field("projectId", v)?;
+        if let Some(v) = self.metadata.as_ref() {
+            struct_ser.serialize_field("metadata", v)?;
         }
         if true {
             struct_ser.serialize_field("fileIds", &self.file_ids)?;
         }
         if true {
             struct_ser.serialize_field("issueCommentIds", &self.issue_comment_ids)?;
+        }
+        if let Some(v) = self.project_id.as_ref() {
+            struct_ser.serialize_field("projectId", v)?;
         }
         if let Some(v) = self.created_at.as_ref() {
             struct_ser.serialize_field("createdAt", v)?;
@@ -15967,12 +15972,13 @@ impl<'de> serde::Deserialize<'de> for Issue {
             "type",
             "state",
             "description",
-            "project_id",
-            "projectId",
+            "metadata",
             "file_ids",
             "fileIds",
             "issue_comment_ids",
             "issueCommentIds",
+            "project_id",
+            "projectId",
             "created_at",
             "createdAt",
             "created_by_account_id",
@@ -15996,9 +16002,10 @@ impl<'de> serde::Deserialize<'de> for Issue {
             Type,
             State,
             Description,
-            ProjectId,
+            Metadata,
             FileIds,
             IssueCommentIds,
+            ProjectId,
             CreatedAt,
             CreatedByAccountId,
             DeletedAt,
@@ -16033,9 +16040,10 @@ impl<'de> serde::Deserialize<'de> for Issue {
                             "type" => Ok(GeneratedField::Type),
                             "state" => Ok(GeneratedField::State),
                             "description" => Ok(GeneratedField::Description),
-                            "projectId" | "project_id" => Ok(GeneratedField::ProjectId),
+                            "metadata" => Ok(GeneratedField::Metadata),
                             "fileIds" | "file_ids" => Ok(GeneratedField::FileIds),
                             "issueCommentIds" | "issue_comment_ids" => Ok(GeneratedField::IssueCommentIds),
+                            "projectId" | "project_id" => Ok(GeneratedField::ProjectId),
                             "createdAt" | "created_at" => Ok(GeneratedField::CreatedAt),
                             "createdByAccountId" | "created_by_account_id" => Ok(GeneratedField::CreatedByAccountId),
                             "deletedAt" | "deleted_at" => Ok(GeneratedField::DeletedAt),
@@ -16067,9 +16075,10 @@ impl<'de> serde::Deserialize<'de> for Issue {
                 let mut r#type__ = None;
                 let mut state__ = None;
                 let mut description__ = None;
-                let mut project_id__ = None;
+                let mut metadata__ = None;
                 let mut file_ids__ = None;
                 let mut issue_comment_ids__ = None;
+                let mut project_id__ = None;
                 let mut created_at__ = None;
                 let mut created_by_account_id__ = None;
                 let mut deleted_at__ = None;
@@ -16109,11 +16118,11 @@ impl<'de> serde::Deserialize<'de> for Issue {
                             }
                             description__ = map_.next_value()?;
                         }
-                        GeneratedField::ProjectId => {
-                            if project_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("projectId"));
+                        GeneratedField::Metadata => {
+                            if metadata__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("metadata"));
                             }
-                            project_id__ = map_.next_value()?;
+                            metadata__ = map_.next_value()?;
                         }
                         GeneratedField::FileIds => {
                             if file_ids__.is_some() {
@@ -16126,6 +16135,12 @@ impl<'de> serde::Deserialize<'de> for Issue {
                                 return Err(serde::de::Error::duplicate_field("issueCommentIds"));
                             }
                             issue_comment_ids__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::ProjectId => {
+                            if project_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("projectId"));
+                            }
+                            project_id__ = map_.next_value()?;
                         }
                         GeneratedField::CreatedAt => {
                             if created_at__.is_some() {
@@ -16180,9 +16195,10 @@ impl<'de> serde::Deserialize<'de> for Issue {
                     r#type: r#type__.unwrap_or_default(),
                     state: state__.unwrap_or_default(),
                     description: description__,
-                    project_id: project_id__,
+                    metadata: metadata__,
                     file_ids: file_ids__.unwrap_or_default(),
                     issue_comment_ids: issue_comment_ids__.unwrap_or_default(),
+                    project_id: project_id__,
                     created_at: created_at__,
                     created_by_account_id: created_by_account_id__,
                     deleted_at: deleted_at__,
@@ -16376,6 +16392,9 @@ impl serde::Serialize for IssueComment {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         if self.owner.is_some() {
             len += 1;
         }
@@ -16388,6 +16407,9 @@ impl serde::Serialize for IssueComment {
         }
         if true {
             struct_ser.serialize_field("description", &self.description)?;
+        }
+        if let Some(v) = self.metadata.as_ref() {
+            struct_ser.serialize_field("metadata", v)?;
         }
         if let Some(v) = self.created_at.as_ref() {
             struct_ser.serialize_field("createdAt", v)?;
@@ -16428,6 +16450,7 @@ impl<'de> serde::Deserialize<'de> for IssueComment {
             "issue_id",
             "issueId",
             "description",
+            "metadata",
             "created_at",
             "createdAt",
             "created_by_account_id",
@@ -16449,6 +16472,7 @@ impl<'de> serde::Deserialize<'de> for IssueComment {
             Id,
             IssueId,
             Description,
+            Metadata,
             CreatedAt,
             CreatedByAccountId,
             DeletedAt,
@@ -16481,6 +16505,7 @@ impl<'de> serde::Deserialize<'de> for IssueComment {
                             "id" => Ok(GeneratedField::Id),
                             "issueId" | "issue_id" => Ok(GeneratedField::IssueId),
                             "description" => Ok(GeneratedField::Description),
+                            "metadata" => Ok(GeneratedField::Metadata),
                             "createdAt" | "created_at" => Ok(GeneratedField::CreatedAt),
                             "createdByAccountId" | "created_by_account_id" => Ok(GeneratedField::CreatedByAccountId),
                             "deletedAt" | "deleted_at" => Ok(GeneratedField::DeletedAt),
@@ -16510,6 +16535,7 @@ impl<'de> serde::Deserialize<'de> for IssueComment {
                 let mut id__ = None;
                 let mut issue_id__ = None;
                 let mut description__ = None;
+                let mut metadata__ = None;
                 let mut created_at__ = None;
                 let mut created_by_account_id__ = None;
                 let mut deleted_at__ = None;
@@ -16536,6 +16562,12 @@ impl<'de> serde::Deserialize<'de> for IssueComment {
                                 return Err(serde::de::Error::duplicate_field("description"));
                             }
                             description__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Metadata => {
+                            if metadata__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("metadata"));
+                            }
+                            metadata__ = map_.next_value()?;
                         }
                         GeneratedField::CreatedAt => {
                             if created_at__.is_some() {
@@ -16588,6 +16620,7 @@ impl<'de> serde::Deserialize<'de> for IssueComment {
                     id: id__.unwrap_or_default(),
                     issue_id: issue_id__.unwrap_or_default(),
                     description: description__.unwrap_or_default(),
+                    metadata: metadata__,
                     created_at: created_at__,
                     created_by_account_id: created_by_account_id__,
                     deleted_at: deleted_at__,
@@ -19586,9 +19619,6 @@ impl serde::Serialize for ServiceInstance {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         if self.owner.is_some() {
             len += 1;
         }
@@ -19604,9 +19634,6 @@ impl serde::Serialize for ServiceInstance {
         }
         if let Some(v) = self.metadata.as_ref() {
             struct_ser.serialize_field("metadata", v)?;
-        }
-        if let Some(v) = self.stripe_subscription_id.as_ref() {
-            struct_ser.serialize_field("stripeSubscriptionId", v)?;
         }
         if let Some(v) = self.created_at.as_ref() {
             struct_ser.serialize_field("createdAt", v)?;
@@ -19649,8 +19676,6 @@ impl<'de> serde::Deserialize<'de> for ServiceInstance {
             "plan_id",
             "planId",
             "metadata",
-            "stripe_subscription_id",
-            "stripeSubscriptionId",
             "created_at",
             "createdAt",
             "created_by_account_id",
@@ -19673,7 +19698,6 @@ impl<'de> serde::Deserialize<'de> for ServiceInstance {
             ServiceId,
             PlanId,
             Metadata,
-            StripeSubscriptionId,
             CreatedAt,
             CreatedByAccountId,
             DeletedAt,
@@ -19707,7 +19731,6 @@ impl<'de> serde::Deserialize<'de> for ServiceInstance {
                             "serviceId" | "service_id" => Ok(GeneratedField::ServiceId),
                             "planId" | "plan_id" => Ok(GeneratedField::PlanId),
                             "metadata" => Ok(GeneratedField::Metadata),
-                            "stripeSubscriptionId" | "stripe_subscription_id" => Ok(GeneratedField::StripeSubscriptionId),
                             "createdAt" | "created_at" => Ok(GeneratedField::CreatedAt),
                             "createdByAccountId" | "created_by_account_id" => Ok(GeneratedField::CreatedByAccountId),
                             "deletedAt" | "deleted_at" => Ok(GeneratedField::DeletedAt),
@@ -19738,7 +19761,6 @@ impl<'de> serde::Deserialize<'de> for ServiceInstance {
                 let mut service_id__ = None;
                 let mut plan_id__ = None;
                 let mut metadata__ = None;
-                let mut stripe_subscription_id__ = None;
                 let mut created_at__ = None;
                 let mut created_by_account_id__ = None;
                 let mut deleted_at__ = None;
@@ -19771,12 +19793,6 @@ impl<'de> serde::Deserialize<'de> for ServiceInstance {
                                 return Err(serde::de::Error::duplicate_field("metadata"));
                             }
                             metadata__ = map_.next_value()?;
-                        }
-                        GeneratedField::StripeSubscriptionId => {
-                            if stripe_subscription_id__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("stripeSubscriptionId"));
-                            }
-                            stripe_subscription_id__ = map_.next_value()?;
                         }
                         GeneratedField::CreatedAt => {
                             if created_at__.is_some() {
@@ -19830,7 +19846,6 @@ impl<'de> serde::Deserialize<'de> for ServiceInstance {
                     service_id: service_id__.unwrap_or_default(),
                     plan_id: plan_id__.unwrap_or_default(),
                     metadata: metadata__,
-                    stripe_subscription_id: stripe_subscription_id__,
                     created_at: created_at__,
                     created_by_account_id: created_by_account_id__,
                     deleted_at: deleted_at__,
