@@ -9,8 +9,8 @@ pub struct Opts {
     #[arg(long = "brand")]
     pub brand: String,
 
-    /// Relative path to hold the Rust workspace; in a multi-language MonoRepo with root folders such as
-    /// ["python", "rust"], this argument would be set to "rust"
+    /// Relative path to hold the Rust workspace; in a multi-language MonoRepo with top-level
+    /// folders such as ["python", "rust"], this argument would be set to "rust"
     #[arg(long = "path")]
     pub path: Option<String>,
 }
