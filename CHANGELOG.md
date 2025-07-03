@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Added
+- [#49](https://github.com/saas-rs/cli/issues/49) Add a history subcommand to list mutate actions taken
 - [#47](https://github.com/saas-rs/cli/issues/47) Support initializing a git repo using a subdirectory for a multi-language MonoRepo
 
 ## [0.2.3] - 2025-06-19

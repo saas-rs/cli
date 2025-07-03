@@ -4,6 +4,7 @@ pub(super) mod create;
 pub(super) mod delete;
 pub(super) mod generate;
 pub(super) mod get;
+pub(super) mod history;
 pub(super) mod initialize;
 pub(super) mod list;
 pub(super) mod login;
@@ -27,6 +28,10 @@ pub enum Subcommand {
     /// Get a single manageable model
     #[command(name = "get")]
     Get(get::Opts),
+
+    /// List the history of mutate actions
+    #[command(name = "history")]
+    History(history::Opts),
 
     /// Initialize the current git workspace with a new SaaS
     #[command(name = "init")]
