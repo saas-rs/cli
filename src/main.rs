@@ -48,6 +48,9 @@ async fn main() -> anyhow::Result<(), Box<dyn std::error::Error>> {
         cmd::Subcommand::Get(cmd::get::Opts { subcommand }) => {
             cmd::get::run(subcommand).await?;
         }
+        cmd::Subcommand::History(cmd::history::Opts { offset, limit, output }) => {
+            cmd::history::run(offset, limit, output).await?;
+        }
         cmd::Subcommand::Initialize(cmd::initialize::Opts { brand, path }) => {
             cmd::initialize::run(brand, path).await?;
         }

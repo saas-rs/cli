@@ -660,6 +660,414 @@ impl<'de> serde::Deserialize<'de> for AccountFilter {
         deserializer.deserialize_struct("saas_rs.user.v1.AccountFilter", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for Action {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if self.owner.is_some() {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.Action", len)?;
+        if true {
+            struct_ser.serialize_field("id", &self.id)?;
+        }
+        if true {
+            struct_ser.serialize_field("service", &self.service)?;
+        }
+        if true {
+            struct_ser.serialize_field("version", &self.version)?;
+        }
+        if true {
+            struct_ser.serialize_field("method", &self.method)?;
+        }
+        if let Some(v) = self.data.as_ref() {
+            struct_ser.serialize_field("data", v)?;
+        }
+        if let Some(v) = self.created_at.as_ref() {
+            struct_ser.serialize_field("createdAt", v)?;
+        }
+        if let Some(v) = self.created_by_account_id.as_ref() {
+            struct_ser.serialize_field("createdByAccountId", v)?;
+        }
+        if let Some(v) = self.deleted_at.as_ref() {
+            struct_ser.serialize_field("deletedAt", v)?;
+        }
+        if let Some(v) = self.deleted_by_account_id.as_ref() {
+            struct_ser.serialize_field("deletedByAccountId", v)?;
+        }
+        if let Some(v) = self.updated_at.as_ref() {
+            struct_ser.serialize_field("updatedAt", v)?;
+        }
+        if let Some(v) = self.updated_by_account_id.as_ref() {
+            struct_ser.serialize_field("updatedByAccountId", v)?;
+        }
+        if let Some(v) = self.owner.as_ref() {
+            match v {
+                action::Owner::OwnerAccountId(v) => {
+                    struct_ser.serialize_field("ownerAccountId", v)?;
+                }
+            }
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for Action {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "id",
+            "service",
+            "version",
+            "method",
+            "data",
+            "created_at",
+            "createdAt",
+            "created_by_account_id",
+            "createdByAccountId",
+            "deleted_at",
+            "deletedAt",
+            "deleted_by_account_id",
+            "deletedByAccountId",
+            "updated_at",
+            "updatedAt",
+            "updated_by_account_id",
+            "updatedByAccountId",
+            "owner_account_id",
+            "ownerAccountId",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Id,
+            Service,
+            Version,
+            Method,
+            Data,
+            CreatedAt,
+            CreatedByAccountId,
+            DeletedAt,
+            DeletedByAccountId,
+            UpdatedAt,
+            UpdatedByAccountId,
+            OwnerAccountId,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "id" => Ok(GeneratedField::Id),
+                            "service" => Ok(GeneratedField::Service),
+                            "version" => Ok(GeneratedField::Version),
+                            "method" => Ok(GeneratedField::Method),
+                            "data" => Ok(GeneratedField::Data),
+                            "createdAt" | "created_at" => Ok(GeneratedField::CreatedAt),
+                            "createdByAccountId" | "created_by_account_id" => Ok(GeneratedField::CreatedByAccountId),
+                            "deletedAt" | "deleted_at" => Ok(GeneratedField::DeletedAt),
+                            "deletedByAccountId" | "deleted_by_account_id" => Ok(GeneratedField::DeletedByAccountId),
+                            "updatedAt" | "updated_at" => Ok(GeneratedField::UpdatedAt),
+                            "updatedByAccountId" | "updated_by_account_id" => Ok(GeneratedField::UpdatedByAccountId),
+                            "ownerAccountId" | "owner_account_id" => Ok(GeneratedField::OwnerAccountId),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = Action;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct saas_rs.user.v1.Action")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Action, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut id__ = None;
+                let mut service__ = None;
+                let mut version__ = None;
+                let mut method__ = None;
+                let mut data__ = None;
+                let mut created_at__ = None;
+                let mut created_by_account_id__ = None;
+                let mut deleted_at__ = None;
+                let mut deleted_by_account_id__ = None;
+                let mut updated_at__ = None;
+                let mut updated_by_account_id__ = None;
+                let mut owner__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Id => {
+                            if id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("id"));
+                            }
+                            id__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Service => {
+                            if service__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("service"));
+                            }
+                            service__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Version => {
+                            if version__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("version"));
+                            }
+                            version__ = 
+                                Some(map_.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
+                            ;
+                        }
+                        GeneratedField::Method => {
+                            if method__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("method"));
+                            }
+                            method__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::Data => {
+                            if data__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("data"));
+                            }
+                            data__ = map_.next_value()?;
+                        }
+                        GeneratedField::CreatedAt => {
+                            if created_at__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("createdAt"));
+                            }
+                            created_at__ = map_.next_value()?;
+                        }
+                        GeneratedField::CreatedByAccountId => {
+                            if created_by_account_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("createdByAccountId"));
+                            }
+                            created_by_account_id__ = map_.next_value()?;
+                        }
+                        GeneratedField::DeletedAt => {
+                            if deleted_at__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("deletedAt"));
+                            }
+                            deleted_at__ = map_.next_value()?;
+                        }
+                        GeneratedField::DeletedByAccountId => {
+                            if deleted_by_account_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("deletedByAccountId"));
+                            }
+                            deleted_by_account_id__ = map_.next_value()?;
+                        }
+                        GeneratedField::UpdatedAt => {
+                            if updated_at__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("updatedAt"));
+                            }
+                            updated_at__ = map_.next_value()?;
+                        }
+                        GeneratedField::UpdatedByAccountId => {
+                            if updated_by_account_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("updatedByAccountId"));
+                            }
+                            updated_by_account_id__ = map_.next_value()?;
+                        }
+                        GeneratedField::OwnerAccountId => {
+                            if owner__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("ownerAccountId"));
+                            }
+                            owner__ = map_.next_value::<::std::option::Option<_>>()?.map(action::Owner::OwnerAccountId);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(Action {
+                    id: id__.unwrap_or_default(),
+                    service: service__.unwrap_or_default(),
+                    version: version__.unwrap_or_default(),
+                    method: method__.unwrap_or_default(),
+                    data: data__,
+                    created_at: created_at__,
+                    created_by_account_id: created_by_account_id__,
+                    deleted_at: deleted_at__,
+                    deleted_by_account_id: deleted_by_account_id__,
+                    updated_at: updated_at__,
+                    updated_by_account_id: updated_by_account_id__,
+                    owner: owner__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("saas_rs.user.v1.Action", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for ActionFilter {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.ActionFilter", len)?;
+        if let Some(v) = self.id.as_ref() {
+            struct_ser.serialize_field("id", v)?;
+        }
+        if let Some(v) = self.owner_account_id.as_ref() {
+            struct_ser.serialize_field("ownerAccountId", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for ActionFilter {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "id",
+            "owner_account_id",
+            "ownerAccountId",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Id,
+            OwnerAccountId,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "id" => Ok(GeneratedField::Id),
+                            "ownerAccountId" | "owner_account_id" => Ok(GeneratedField::OwnerAccountId),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = ActionFilter;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct saas_rs.user.v1.ActionFilter")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<ActionFilter, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut id__ = None;
+                let mut owner_account_id__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Id => {
+                            if id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("id"));
+                            }
+                            id__ = map_.next_value()?;
+                        }
+                        GeneratedField::OwnerAccountId => {
+                            if owner_account_id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("ownerAccountId"));
+                            }
+                            owner_account_id__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(ActionFilter {
+                    id: id__,
+                    owner_account_id: owner_account_id__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("saas_rs.user.v1.ActionFilter", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for ApiKey {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -6865,6 +7273,196 @@ impl<'de> serde::Deserialize<'de> for FindAccountResponse {
         deserializer.deserialize_struct("saas_rs.user.v1.FindAccountResponse", FIELDS, GeneratedVisitor)
     }
 }
+impl serde::Serialize for FindActionRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.FindActionRequest", len)?;
+        if true {
+            struct_ser.serialize_field("id", &self.id)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for FindActionRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "id",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Id,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "id" => Ok(GeneratedField::Id),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = FindActionRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct saas_rs.user.v1.FindActionRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FindActionRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut id__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Id => {
+                            if id__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("id"));
+                            }
+                            id__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(FindActionRequest {
+                    id: id__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("saas_rs.user.v1.FindActionRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for FindActionResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.FindActionResponse", len)?;
+        if let Some(v) = self.action.as_ref() {
+            struct_ser.serialize_field("action", v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for FindActionResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "action",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Action,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "action" => Ok(GeneratedField::Action),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = FindActionResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct saas_rs.user.v1.FindActionResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FindActionResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut action__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Action => {
+                            if action__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("action"));
+                            }
+                            action__ = map_.next_value()?;
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(FindActionResponse {
+                    action: action__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("saas_rs.user.v1.FindActionResponse", FIELDS, GeneratedVisitor)
+    }
+}
 impl serde::Serialize for FindApiKeyRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
@@ -8635,6 +9233,342 @@ impl<'de> serde::Deserialize<'de> for FindManyAccountsResponse {
             }
         }
         deserializer.deserialize_struct("saas_rs.user.v1.FindManyAccountsResponse", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for FindManyActionsRequest {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.FindManyActionsRequest", len)?;
+        if let Some(v) = self.filter.as_ref() {
+            struct_ser.serialize_field("filter", v)?;
+        }
+        if let Some(v) = self.field_mask.as_ref() {
+            struct_ser.serialize_field("fieldMask", v)?;
+        }
+        if let Some(v) = self.offset.as_ref() {
+            struct_ser.serialize_field("offset", v)?;
+        }
+        if let Some(v) = self.limit.as_ref() {
+            struct_ser.serialize_field("limit", v)?;
+        }
+        if let Some(v) = self.sort.as_ref() {
+            let v = find_many_actions_request::Sort::try_from(*v)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", *v)))?;
+            struct_ser.serialize_field("sort", &v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for FindManyActionsRequest {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "filter",
+            "field_mask",
+            "fieldMask",
+            "offset",
+            "limit",
+            "sort",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Filter,
+            FieldMask,
+            Offset,
+            Limit,
+            Sort,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "filter" => Ok(GeneratedField::Filter),
+                            "fieldMask" | "field_mask" => Ok(GeneratedField::FieldMask),
+                            "offset" => Ok(GeneratedField::Offset),
+                            "limit" => Ok(GeneratedField::Limit),
+                            "sort" => Ok(GeneratedField::Sort),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = FindManyActionsRequest;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct saas_rs.user.v1.FindManyActionsRequest")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FindManyActionsRequest, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut filter__ = None;
+                let mut field_mask__ = None;
+                let mut offset__ = None;
+                let mut limit__ = None;
+                let mut sort__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Filter => {
+                            if filter__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("filter"));
+                            }
+                            filter__ = map_.next_value()?;
+                        }
+                        GeneratedField::FieldMask => {
+                            if field_mask__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("fieldMask"));
+                            }
+                            field_mask__ = map_.next_value()?;
+                        }
+                        GeneratedField::Offset => {
+                            if offset__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("offset"));
+                            }
+                            offset__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::Limit => {
+                            if limit__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("limit"));
+                            }
+                            limit__ = 
+                                map_.next_value::<::std::option::Option<::pbjson::private::NumberDeserialize<_>>>()?.map(|x| x.0)
+                            ;
+                        }
+                        GeneratedField::Sort => {
+                            if sort__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("sort"));
+                            }
+                            sort__ = map_.next_value::<::std::option::Option<find_many_actions_request::Sort>>()?.map(|x| x as i32);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(FindManyActionsRequest {
+                    filter: filter__,
+                    field_mask: field_mask__,
+                    offset: offset__,
+                    limit: limit__,
+                    sort: sort__,
+                })
+            }
+        }
+        deserializer.deserialize_struct("saas_rs.user.v1.FindManyActionsRequest", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for find_many_actions_request::Sort {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::NewestToOldest => "NewestToOldest",
+            Self::OldestToNewest => "OldestToNewest",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for find_many_actions_request::Sort {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "NewestToOldest",
+            "OldestToNewest",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = find_many_actions_request::Sort;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "NewestToOldest" => Ok(find_many_actions_request::Sort::NewestToOldest),
+                    "OldestToNewest" => Ok(find_many_actions_request::Sort::OldestToNewest),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for FindManyActionsResponse {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.FindManyActionsResponse", len)?;
+        if true {
+            struct_ser.serialize_field("actions", &self.actions)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for FindManyActionsResponse {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "actions",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Actions,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "actions" => Ok(GeneratedField::Actions),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = FindManyActionsResponse;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct saas_rs.user.v1.FindManyActionsResponse")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FindManyActionsResponse, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut actions__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Actions => {
+                            if actions__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("actions"));
+                            }
+                            actions__ = Some(map_.next_value()?);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(FindManyActionsResponse {
+                    actions: actions__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("saas_rs.user.v1.FindManyActionsResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for FindManyApiKeysRequest {
