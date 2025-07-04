@@ -1,6 +1,6 @@
 # SaaS RS :: CLI Changelog
 
-## [Unreleased]
+## [0.2.5] - 2025-07-04
 ### Added
 - [#49](https://github.com/saas-rs/cli/issues/49) Add a history subcommand to list mutate actions taken
 - [#47](https://github.com/saas-rs/cli/issues/47) Support initializing a git repo using a subdirectory for a multi-language MonoRepo
