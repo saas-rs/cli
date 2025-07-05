@@ -8036,7 +8036,7 @@ impl<'de> serde::Deserialize<'de> for FindFileResponse {
         deserializer.deserialize_struct("saas_rs.user.v1.FindFileResponse", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for FindGenerationFeatureRequest {
+impl serde::Serialize for FindGeneratorRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -8047,14 +8047,14 @@ impl serde::Serialize for FindGenerationFeatureRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.FindGenerationFeatureRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.FindGeneratorRequest", len)?;
         if true {
             struct_ser.serialize_field("id", &self.id)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for FindGenerationFeatureRequest {
+impl<'de> serde::Deserialize<'de> for FindGeneratorRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -8099,13 +8099,13 @@ impl<'de> serde::Deserialize<'de> for FindGenerationFeatureRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = FindGenerationFeatureRequest;
+            type Value = FindGeneratorRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct saas_rs.user.v1.FindGenerationFeatureRequest")
+                formatter.write_str("struct saas_rs.user.v1.FindGeneratorRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FindGenerationFeatureRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FindGeneratorRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -8123,15 +8123,15 @@ impl<'de> serde::Deserialize<'de> for FindGenerationFeatureRequest {
                         }
                     }
                 }
-                Ok(FindGenerationFeatureRequest {
+                Ok(FindGeneratorRequest {
                     id: id__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("saas_rs.user.v1.FindGenerationFeatureRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("saas_rs.user.v1.FindGeneratorRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for FindGenerationFeatureResponse {
+impl serde::Serialize for FindGeneratorResponse {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -8142,27 +8142,26 @@ impl serde::Serialize for FindGenerationFeatureResponse {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.FindGenerationFeatureResponse", len)?;
-        if let Some(v) = self.generation_feature.as_ref() {
-            struct_ser.serialize_field("generationFeature", v)?;
+        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.FindGeneratorResponse", len)?;
+        if let Some(v) = self.generator.as_ref() {
+            struct_ser.serialize_field("generator", v)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for FindGenerationFeatureResponse {
+impl<'de> serde::Deserialize<'de> for FindGeneratorResponse {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "generation_feature",
-            "generationFeature",
+            "generator",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            GenerationFeature,
+            Generator,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -8185,7 +8184,7 @@ impl<'de> serde::Deserialize<'de> for FindGenerationFeatureResponse {
                         E: serde::de::Error,
                     {
                         match value {
-                            "generationFeature" | "generation_feature" => Ok(GeneratedField::GenerationFeature),
+                            "generator" => Ok(GeneratedField::Generator),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -8195,36 +8194,36 @@ impl<'de> serde::Deserialize<'de> for FindGenerationFeatureResponse {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = FindGenerationFeatureResponse;
+            type Value = FindGeneratorResponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct saas_rs.user.v1.FindGenerationFeatureResponse")
+                formatter.write_str("struct saas_rs.user.v1.FindGeneratorResponse")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FindGenerationFeatureResponse, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FindGeneratorResponse, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut generation_feature__ = None;
+                let mut generator__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::GenerationFeature => {
-                            if generation_feature__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("generationFeature"));
+                        GeneratedField::Generator => {
+                            if generator__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("generator"));
                             }
-                            generation_feature__ = map_.next_value()?;
+                            generator__ = map_.next_value()?;
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
-                Ok(FindGenerationFeatureResponse {
-                    generation_feature: generation_feature__,
+                Ok(FindGeneratorResponse {
+                    generator: generator__,
                 })
             }
         }
-        deserializer.deserialize_struct("saas_rs.user.v1.FindGenerationFeatureResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("saas_rs.user.v1.FindGeneratorResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for FindInviteRequest {
@@ -10065,7 +10064,7 @@ impl<'de> serde::Deserialize<'de> for FindManyFilesResponse {
         deserializer.deserialize_struct("saas_rs.user.v1.FindManyFilesResponse", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for FindManyGenerationFeaturesRequest {
+impl serde::Serialize for FindManyGeneratorsRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -10085,7 +10084,7 @@ impl serde::Serialize for FindManyGenerationFeaturesRequest {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.FindManyGenerationFeaturesRequest", len)?;
+        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.FindManyGeneratorsRequest", len)?;
         if let Some(v) = self.filter.as_ref() {
             struct_ser.serialize_field("filter", v)?;
         }
@@ -10101,7 +10100,7 @@ impl serde::Serialize for FindManyGenerationFeaturesRequest {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for FindManyGenerationFeaturesRequest {
+impl<'de> serde::Deserialize<'de> for FindManyGeneratorsRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -10156,13 +10155,13 @@ impl<'de> serde::Deserialize<'de> for FindManyGenerationFeaturesRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = FindManyGenerationFeaturesRequest;
+            type Value = FindManyGeneratorsRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct saas_rs.user.v1.FindManyGenerationFeaturesRequest")
+                formatter.write_str("struct saas_rs.user.v1.FindManyGeneratorsRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FindManyGenerationFeaturesRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FindManyGeneratorsRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -10205,7 +10204,7 @@ impl<'de> serde::Deserialize<'de> for FindManyGenerationFeaturesRequest {
                         }
                     }
                 }
-                Ok(FindManyGenerationFeaturesRequest {
+                Ok(FindManyGeneratorsRequest {
                     filter: filter__,
                     field_mask: field_mask__,
                     offset: offset__,
@@ -10213,10 +10212,10 @@ impl<'de> serde::Deserialize<'de> for FindManyGenerationFeaturesRequest {
                 })
             }
         }
-        deserializer.deserialize_struct("saas_rs.user.v1.FindManyGenerationFeaturesRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("saas_rs.user.v1.FindManyGeneratorsRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for FindManyGenerationFeaturesResponse {
+impl serde::Serialize for FindManyGeneratorsResponse {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -10227,27 +10226,26 @@ impl serde::Serialize for FindManyGenerationFeaturesResponse {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.FindManyGenerationFeaturesResponse", len)?;
+        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.FindManyGeneratorsResponse", len)?;
         if true {
-            struct_ser.serialize_field("generationFeatures", &self.generation_features)?;
+            struct_ser.serialize_field("generators", &self.generators)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for FindManyGenerationFeaturesResponse {
+impl<'de> serde::Deserialize<'de> for FindManyGeneratorsResponse {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
         const FIELDS: &[&str] = &[
-            "generation_features",
-            "generationFeatures",
+            "generators",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
-            GenerationFeatures,
+            Generators,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -10270,7 +10268,7 @@ impl<'de> serde::Deserialize<'de> for FindManyGenerationFeaturesResponse {
                         E: serde::de::Error,
                     {
                         match value {
-                            "generationFeatures" | "generation_features" => Ok(GeneratedField::GenerationFeatures),
+                            "generators" => Ok(GeneratedField::Generators),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -10280,36 +10278,36 @@ impl<'de> serde::Deserialize<'de> for FindManyGenerationFeaturesResponse {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = FindManyGenerationFeaturesResponse;
+            type Value = FindManyGeneratorsResponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct saas_rs.user.v1.FindManyGenerationFeaturesResponse")
+                formatter.write_str("struct saas_rs.user.v1.FindManyGeneratorsResponse")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FindManyGenerationFeaturesResponse, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<FindManyGeneratorsResponse, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
-                let mut generation_features__ = None;
+                let mut generators__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
-                        GeneratedField::GenerationFeatures => {
-                            if generation_features__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("generationFeatures"));
+                        GeneratedField::Generators => {
+                            if generators__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("generators"));
                             }
-                            generation_features__ = Some(map_.next_value()?);
+                            generators__ = Some(map_.next_value()?);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
-                Ok(FindManyGenerationFeaturesResponse {
-                    generation_features: generation_features__.unwrap_or_default(),
+                Ok(FindManyGeneratorsResponse {
+                    generators: generators__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("saas_rs.user.v1.FindManyGenerationFeaturesResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("saas_rs.user.v1.FindManyGeneratorsResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for FindManyInvitesRequest {
@@ -14919,7 +14917,7 @@ impl<'de> serde::Deserialize<'de> for GenerateResponse {
         deserializer.deserialize_struct("saas_rs.user.v1.GenerateResponse", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for GenerationFeature {
+impl serde::Serialize for Generator {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -14936,7 +14934,10 @@ impl serde::Serialize for GenerationFeature {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.GenerationFeature", len)?;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.Generator", len)?;
         if true {
             struct_ser.serialize_field("id", &self.id)?;
         }
@@ -14946,10 +14947,15 @@ impl serde::Serialize for GenerationFeature {
         if true {
             struct_ser.serialize_field("description", &self.description)?;
         }
+        if true {
+            let v = generator::Type::try_from(self.r#type)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.r#type)))?;
+            struct_ser.serialize_field("type", &v)?;
+        }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for GenerationFeature {
+impl<'de> serde::Deserialize<'de> for Generator {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -14959,6 +14965,7 @@ impl<'de> serde::Deserialize<'de> for GenerationFeature {
             "id",
             "name",
             "description",
+            "type",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -14966,6 +14973,7 @@ impl<'de> serde::Deserialize<'de> for GenerationFeature {
             Id,
             Name,
             Description,
+            Type,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -14991,6 +14999,7 @@ impl<'de> serde::Deserialize<'de> for GenerationFeature {
                             "id" => Ok(GeneratedField::Id),
                             "name" => Ok(GeneratedField::Name),
                             "description" => Ok(GeneratedField::Description),
+                            "type" => Ok(GeneratedField::Type),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -15000,19 +15009,20 @@ impl<'de> serde::Deserialize<'de> for GenerationFeature {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = GenerationFeature;
+            type Value = Generator;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct saas_rs.user.v1.GenerationFeature")
+                formatter.write_str("struct saas_rs.user.v1.Generator")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GenerationFeature, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<Generator, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
                 let mut id__ = None;
                 let mut name__ = None;
                 let mut description__ = None;
+                let mut r#type__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Id => {
@@ -15033,22 +15043,97 @@ impl<'de> serde::Deserialize<'de> for GenerationFeature {
                             }
                             description__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::Type => {
+                            if r#type__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("type"));
+                            }
+                            r#type__ = Some(map_.next_value::<generator::Type>()? as i32);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
-                Ok(GenerationFeature {
+                Ok(Generator {
                     id: id__.unwrap_or_default(),
                     name: name__.unwrap_or_default(),
                     description: description__.unwrap_or_default(),
+                    r#type: r#type__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("saas_rs.user.v1.GenerationFeature", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("saas_rs.user.v1.Generator", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for GenerationFeatureFilter {
+impl serde::Serialize for generator::Type {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Feature => "Feature",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for generator::Type {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "Feature",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = generator::Type;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "Feature" => Ok(generator::Type::Feature),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for GeneratorFilter {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -15062,7 +15147,7 @@ impl serde::Serialize for GenerationFeatureFilter {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.GenerationFeatureFilter", len)?;
+        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.GeneratorFilter", len)?;
         if let Some(v) = self.id.as_ref() {
             struct_ser.serialize_field("id", v)?;
         }
@@ -15072,7 +15157,7 @@ impl serde::Serialize for GenerationFeatureFilter {
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for GenerationFeatureFilter {
+impl<'de> serde::Deserialize<'de> for GeneratorFilter {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -15120,13 +15205,13 @@ impl<'de> serde::Deserialize<'de> for GenerationFeatureFilter {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = GenerationFeatureFilter;
+            type Value = GeneratorFilter;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct saas_rs.user.v1.GenerationFeatureFilter")
+                formatter.write_str("struct saas_rs.user.v1.GeneratorFilter")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GenerationFeatureFilter, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<GeneratorFilter, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -15151,13 +15236,13 @@ impl<'de> serde::Deserialize<'de> for GenerationFeatureFilter {
                         }
                     }
                 }
-                Ok(GenerationFeatureFilter {
+                Ok(GeneratorFilter {
                     id: id__,
                     name: name__,
                 })
             }
         }
-        deserializer.deserialize_struct("saas_rs.user.v1.GenerationFeatureFilter", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("saas_rs.user.v1.GeneratorFilter", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for GetServerInfoRequest {

@@ -1,5 +1,9 @@
 # SaaS RS :: CLI Changelog
 
+## [Unreleased]
+### Changed
+- [#51](https://github.com/saas-rs/cli/issues/51) GenerationFeature has been renamed to Generator
+
 ## [0.2.5] - 2025-07-04
 ### Added
 - [#49](https://github.com/saas-rs/cli/issues/49) Add a history subcommand to list mutate actions taken

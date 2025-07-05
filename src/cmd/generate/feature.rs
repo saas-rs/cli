@@ -1,7 +1,7 @@
 use crate::apiclient;
 use crate::cmd::generate::{do_generate, do_generate_preflight};
 use crate::protocol::saas_rs::user::v1::generate_request::{self, Feature};
-use crate::protocol::saas_rs::user::v1::{FindManyGenerationFeaturesRequest, GenerateRequest, GenerationFeatureFilter};
+use crate::protocol::saas_rs::user::v1::{FindManyGeneratorsRequest, GenerateRequest, GeneratorFilter};
 use clap::Parser;
 use pbjson_types::FieldMask;
 
@@ -35,8 +35,8 @@ pub async fn run(
         Some(id) => id,
         None => {
             let mut client = apiclient::new_user_service_client().await?;
-            let req = FindManyGenerationFeaturesRequest {
-                filter: Some(GenerationFeatureFilter {
+            let req = FindManyGeneratorsRequest {
+                filter: Some(GeneratorFilter {
                     name,
                     ..Default::default()
                 }),
@@ -45,10 +45,10 @@ pub async fn run(
                 }),
                 ..Default::default()
             };
-            let res = client.find_many_generation_features(req).await?.into_inner();
-            match res.generation_features.first() {
+            let res = client.find_many_generators(req).await?.into_inner();
+            match res.generators.first() {
                 Some(generation_feature) => generation_feature.id.clone(),
-                None => return Err("No such feature".into()),
+                None => return Err("No such feature generator".into()),
             }
         }
     };
