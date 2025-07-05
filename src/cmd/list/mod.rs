@@ -2,7 +2,7 @@ use clap::Parser;
 
 pub(super) mod accounts;
 pub(super) mod api_keys;
-pub(super) mod generation_features;
+pub(super) mod generators;
 pub(super) mod issue_comments;
 pub(super) mod issues;
 pub(super) mod linked_accounts;
@@ -32,8 +32,8 @@ pub enum Subcommand {
     #[command(name = "api-keys", alias = "apiKeys")]
     ApiKeys(api_keys::Opts),
 
-    #[command(name = "generation-features", alias = "generationFeatures")]
-    GenerationFeatures(generation_features::Opts),
+    #[command(name = "generators")]
+    Generators(generators::Opts),
 
     #[command(name = "issue-comments", alias = "issueComments")]
     IssueComments(issue_comments::Opts),
@@ -68,8 +68,8 @@ pub async fn run(subcommand: Subcommand) -> Result<(), Box<dyn std::error::Error
         Subcommand::ApiKeys(api_keys::Opts { offset, limit, output }) => {
             api_keys::run(offset, limit, output).await?;
         }
-        Subcommand::GenerationFeatures(generation_features::Opts { offset, limit, output }) => {
-            generation_features::run(offset, limit, output).await?;
+        Subcommand::Generators(generators::Opts { offset, limit, output }) => {
+            generators::run(offset, limit, output).await?;
         }
         Subcommand::IssueComments(issue_comments::Opts { offset, limit, output }) => {
             issue_comments::run(offset, limit, output).await?;

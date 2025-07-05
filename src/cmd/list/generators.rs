@@ -1,10 +1,10 @@
 use crate::apiclient;
-use crate::protocol::saas_rs::user::v1::FindManyGenerationFeaturesRequest;
+use crate::protocol::saas_rs::user::v1::FindManyGeneratorsRequest;
 use clap::Parser;
 use polars::prelude::*;
 use std::io::Cursor;
 
-pub const PS_COLUMNS: &[&str] = &["id", "name", "description"];
+pub const PS_COLUMNS: &[&str] = &["id", "type", "name", "description"];
 
 #[derive(Debug, Parser)]
 pub struct Opts {
@@ -23,21 +23,21 @@ pub struct Opts {
 pub async fn run(offset: Option<u32>, limit: Option<u32>, output: String) -> Result<(), Box<dyn std::error::Error>> {
     // Request all records
     let mut client = apiclient::new_user_service_client().await?;
-    let req = FindManyGenerationFeaturesRequest {
+    let req = FindManyGeneratorsRequest {
         filter: None,
         field_mask: None,
         limit,
         offset,
     };
-    let res = client.find_many_generation_features(req).await?.into_inner();
+    let res = client.find_many_generators(req).await?.into_inner();
 
     // Without a schema, Polars chokes parsing an empty json array
-    if res.generation_features.is_empty() {
+    if res.generators.is_empty() {
         return super::output_empty_result_of_unknown_schema(&output);
     }
 
     // Convert to dataframe in preparation for output
-    let json = serde_json::to_vec(&res.generation_features)?;
+    let json = serde_json::to_vec(&res.generators)?;
     let file = Cursor::new(json);
     let df = JsonReader::new(file).finish()?;
 
