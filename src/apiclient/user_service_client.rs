@@ -34,8 +34,8 @@ pub fn get_api_key() -> Result<Option<String>, Box<dyn Error>> {
     let api_key = match opts.api_key {
         Some(api_key) => Some(api_key),
         None => match std::env::var(consts::env_vars::SAAS_RS_API_KEY) {
-            Some(api_key) => api_key,
-            None => config::load()?.api_key,
+            Ok(api_key) => Some(api_key),
+            _ => config::load()?.api_key,
         },
     };
     Ok(api_key)
