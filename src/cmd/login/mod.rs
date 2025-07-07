@@ -48,13 +48,13 @@ pub async fn run(
     let bind_addr = format!("127.0.0.1:{port}");
 
     // Launch browser to login form
-    let console_url = console_url.unwrap_or(consts::CONSOLE_URL.to_string());
+    let console_url = console_url.unwrap_or(consts::env_vars::CONSOLE_URL.to_string());
     let url = format!("{console_url}/login?callback=http://{bind_addr}/callback");
     let browser = browser.unwrap_or(Browser::Default);
     webbrowser::open_browser(browser, &url)?;
 
     // Start an embedded http server
-    let api_url = api_url.unwrap_or(consts::API_URL.to_string());
+    let api_url = api_url.unwrap_or(consts::env_vars::API_URL.to_string());
     HttpServer::new(move || {
         let (tx, rx): (Sender<String>, Receiver<String>) = mpsc::channel();
 
