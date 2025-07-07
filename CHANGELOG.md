@@ -1,6 +1,9 @@
 # SaaS RS :: CLI Changelog
 
 ## [Unreleased]
+### Added
+- [#53](https://github.com/saas-rs/cli/issues/53) Support reading an API Key from an environment variable
+
 ### Changed
 - [#51](https://github.com/saas-rs/cli/issues/51) GenerationFeature has been renamed to Generator
 

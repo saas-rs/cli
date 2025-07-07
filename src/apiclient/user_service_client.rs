@@ -31,10 +31,12 @@ pub async fn new_user_service_client_with_ignore_config(
 
 pub fn get_api_key() -> Result<Option<String>, Box<dyn Error>> {
     let opts = AppOpts::parse();
-    let cfg = config::load()?;
     let api_key = match opts.api_key {
         Some(api_key) => Some(api_key),
-        None => cfg.api_key,
+        None => match std::env::var(consts::env_vars::SAAS_RS_API_KEY) {
+            Some(api_key) => api_key,
+            None => config::load()?.api_key,
+        },
     };
     Ok(api_key)
 }
@@ -45,12 +47,12 @@ pub fn get_api_url(ignore_config: bool) -> Result<String, Box<dyn Error>> {
         Some(api_url) => api_url,
         None => {
             if ignore_config {
-                consts::API_URL.to_string()
+                consts::env_vars::API_URL.to_string()
             } else {
                 let cfg = config::load()?;
                 match cfg.api_url {
                     Some(api_url) => api_url,
-                    None => consts::API_URL.to_string(),
+                    None => consts::env_vars::API_URL.to_string(),
                 }
             }
         }
