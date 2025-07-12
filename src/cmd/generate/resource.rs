@@ -28,7 +28,7 @@ pub async fn run(
     name: String,
     fields: Vec<String>,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let (project_id, snapshot) = do_generate_preflight().await?;
+    let (project_id, snapshot) = do_generate_preflight(false).await?;
     let req = {
         let fields = fields
             .iter()

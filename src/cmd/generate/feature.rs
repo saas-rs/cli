@@ -30,7 +30,7 @@ pub async fn run(
     service: Option<String>,
     version: Option<u32>,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let (project_id, snapshot) = do_generate_preflight().await?;
+    let (project_id, snapshot) = do_generate_preflight(false).await?;
     let id = match id {
         Some(id) => id,
         None => {

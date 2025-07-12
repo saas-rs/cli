@@ -13,7 +13,9 @@ use tokio_stream::StreamExt;
 use tokio_util::codec::{BytesCodec, FramedRead};
 use tonic::codegen::tokio_stream::wrappers::ReceiverStream;
 
-pub async fn do_generate_preflight() -> Result<(String, Snapshot), Box<dyn std::error::Error>> {
+pub async fn do_generate_preflight(
+    ignore_missing_head: bool,
+) -> Result<(String, Snapshot), Box<dyn std::error::Error>> {
     // Don't run with a bare repository
     let repo = Repository::open(".")?;
     if repo.is_bare() {
@@ -36,8 +38,14 @@ pub async fn do_generate_preflight() -> Result<(String, Snapshot), Box<dyn std::
         .arg(file.path().display().to_string())
         .arg("HEAD")
         .output()?;
-    if !output.stderr.is_empty() {
-        eprintln!("{}", from_utf8(&output.stderr)?);
+    if !output.status.success() {
+        if !output.stderr.is_empty() {
+            eprintln!("{}", from_utf8(&output.stderr)?);
+        }
+        if from_utf8(&output.stderr)?.ends_with("HEAD") && ignore_missing_head {
+        } else {
+            std::process::exit(1);
+        }
     }
     debug!("Archival completed");
 

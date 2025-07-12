@@ -11,7 +11,7 @@ pub struct Opts {
 pub async fn run(n: u16) -> Result<(), Box<dyn std::error::Error>> {
     for _i in 1..=n {
         let value = Uuid::new_v4();
-        eprintln!("{}", value);
+        eprintln!("{value}");
     }
     Ok(())
 }
