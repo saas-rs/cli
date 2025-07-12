@@ -1,6 +1,6 @@
 # SaaS RS :: CLI Changelog
 
-## [Unreleased]
+## [0.2.6] - 2025-07-11
 ### Added
 - [#53](https://github.com/saas-rs/cli/issues/53) Support reading an API Key from an environment variable
 
