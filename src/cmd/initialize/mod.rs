@@ -16,7 +16,7 @@ pub struct Opts {
 }
 
 pub async fn run(brand: String, path: Option<String>) -> Result<(), Box<dyn std::error::Error>> {
-    let (project_id, snapshot) = do_generate_preflight().await?;
+    let (project_id, snapshot) = do_generate_preflight(true).await?;
     let req = GenerateRequest {
         project_id,
         snapshot: Some(snapshot),

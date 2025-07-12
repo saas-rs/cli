@@ -10,7 +10,8 @@ pub struct Opts {
     pub name: String,
 
     /// Resources to manage
-    #[arg(value_name = "models", default_values_t = ["account".to_string(), "linked-account".to_string()])]
+    #[arg(value_name = "models", default_values_t = ["account".to_string(), "linked-account".to_string()]
+    )]
     pub resources: Vec<String>,
 
     /// The protocol version
@@ -28,7 +29,7 @@ pub async fn run(
     version: u32,
     with_cli: bool,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let (project_id, snapshot) = do_generate_preflight().await?;
+    let (project_id, snapshot) = do_generate_preflight(false).await?;
     let req = {
         GenerateRequest {
             project_id,

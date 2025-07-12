@@ -7,6 +7,9 @@
 ### Changed
 - [#51](https://github.com/saas-rs/cli/issues/51) GenerationFeature has been renamed to Generator
 
+### Fixed
+- [#56](https://github.com/saas-rs/cli/issues/56) Creating a git snapshot is missing detection of non-zero exit status
+
 ## [0.2.5] - 2025-07-04
 ### Added
 - [#49](https://github.com/saas-rs/cli/issues/49) Add a history subcommand to list mutate actions taken

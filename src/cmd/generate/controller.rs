@@ -19,7 +19,7 @@ pub struct Opts {
 }
 
 pub async fn run(service: String, version: u32, resource: String) -> Result<(), Box<dyn std::error::Error>> {
-    let (project_id, snapshot) = do_generate_preflight().await?;
+    let (project_id, snapshot) = do_generate_preflight(false).await?;
     let req = {
         GenerateRequest {
             project_id,
