@@ -7,8 +7,10 @@ use crate::protocol::saas_rs::user::v1::{
     },
     GenerateRequest,
 };
-use clap::builder::PossibleValue;
-use clap::{Parser, ValueEnum};
+use clap::{
+    builder::PossibleValue,
+    {Parser, ValueEnum},
+};
 
 #[derive(Debug, Parser)]
 pub struct Opts {

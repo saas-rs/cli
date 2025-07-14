@@ -1,7 +1,9 @@
 use crate::apiclient;
 use crate::cmd::generate::{do_generate, do_generate_preflight};
-use crate::protocol::saas_rs::user::v1::generate_request::{self, Feature};
-use crate::protocol::saas_rs::user::v1::{FindManyGeneratorsRequest, GenerateRequest, GeneratorFilter};
+use crate::protocol::saas_rs::user::v1::{
+    generate_request::{self, Feature},
+    {FindManyGeneratorsRequest, GenerateRequest, GeneratorFilter},
+};
 use clap::Parser;
 use pbjson_types::FieldMask;
 
