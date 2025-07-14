@@ -617,7 +617,7 @@ pub struct GenerateRequest {
     pub project_id: ::prost::alloc::string::String,
     #[prost(oneof = "generate_request::Snapshot", tags = "2, 3")]
     pub snapshot: ::core::option::Option<generate_request::Snapshot>,
-    #[prost(oneof = "generate_request::What", tags = "4, 5, 6, 7, 8, 9")]
+    #[prost(oneof = "generate_request::What", tags = "4, 5, 6, 7, 8, 9, 10")]
     pub what: ::core::option::Option<generate_request::What>,
 }
 /// Nested message and enum types in `GenerateRequest`.
@@ -697,6 +697,94 @@ pub mod generate_request {
         #[prost(string, repeated, tag = "4")]
         pub resources: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     }
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
+    pub struct UseStorageAdapter {
+        #[prost(enumeration = "use_storage_adapter::Provider", tag = "1")]
+        pub provider: i32,
+        #[prost(enumeration = "use_storage_adapter::Type", tag = "2")]
+        pub r#type: i32,
+    }
+    /// Nested message and enum types in `UseStorageAdapter`.
+    pub mod use_storage_adapter {
+        #[derive(
+            Clone,
+            Copy,
+            Debug,
+            PartialEq,
+            Eq,
+            Hash,
+            PartialOrd,
+            Ord,
+            ::prost::Enumeration
+        )]
+        #[repr(i32)]
+        pub enum Provider {
+            Memory = 0,
+            MongoDb = 1,
+            Redis = 2,
+        }
+        impl Provider {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    Self::Memory => "Memory",
+                    Self::MongoDb => "MongoDB",
+                    Self::Redis => "Redis",
+                }
+            }
+            /// Creates an enum from field names used in the ProtoBuf definition.
+            pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+                match value {
+                    "Memory" => Some(Self::Memory),
+                    "MongoDB" => Some(Self::MongoDb),
+                    "Redis" => Some(Self::Redis),
+                    _ => None,
+                }
+            }
+        }
+        #[derive(
+            Clone,
+            Copy,
+            Debug,
+            PartialEq,
+            Eq,
+            Hash,
+            PartialOrd,
+            Ord,
+            ::prost::Enumeration
+        )]
+        #[repr(i32)]
+        pub enum Type {
+            Config = 0,
+            Object = 1,
+            Session = 2,
+        }
+        impl Type {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    Self::Config => "Config",
+                    Self::Object => "Object",
+                    Self::Session => "Session",
+                }
+            }
+            /// Creates an enum from field names used in the ProtoBuf definition.
+            pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+                match value {
+                    "Config" => Some(Self::Config),
+                    "Object" => Some(Self::Object),
+                    "Session" => Some(Self::Session),
+                    _ => None,
+                }
+            }
+        }
+    }
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Snapshot {
         #[prost(message, tag = "2")]
@@ -718,6 +806,8 @@ pub mod generate_request {
         Service(Service),
         #[prost(message, tag = "9")]
         Feature(Feature),
+        #[prost(message, tag = "10")]
+        UseStorageAdpater(UseStorageAdapter),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
