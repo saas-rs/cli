@@ -617,7 +617,7 @@ pub struct GenerateRequest {
     pub project_id: ::prost::alloc::string::String,
     #[prost(oneof = "generate_request::Snapshot", tags = "2, 3")]
     pub snapshot: ::core::option::Option<generate_request::Snapshot>,
-    #[prost(oneof = "generate_request::What", tags = "4, 5, 6, 7, 8, 9, 10")]
+    #[prost(oneof = "generate_request::What", tags = "4, 5, 6, 7, 8, 9, 10, 11")]
     pub what: ::core::option::Option<generate_request::What>,
 }
 /// Nested message and enum types in `GenerateRequest`.
@@ -696,6 +696,80 @@ pub mod generate_request {
         pub with_cli: bool,
         #[prost(string, repeated, tag = "4")]
         pub resources: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    }
+    #[derive(Clone, Copy, PartialEq, ::prost::Message)]
+    pub struct UseIdentityProvider {
+        #[prost(enumeration = "use_identity_provider::Provider", tag = "1")]
+        pub provider: i32,
+    }
+    /// Nested message and enum types in `UseIdentityProvider`.
+    pub mod use_identity_provider {
+        #[derive(
+            Clone,
+            Copy,
+            Debug,
+            PartialEq,
+            Eq,
+            Hash,
+            PartialOrd,
+            Ord,
+            ::prost::Enumeration
+        )]
+        #[repr(i32)]
+        pub enum Provider {
+            Amazon = 0,
+            Apple = 1,
+            DigitalOcean = 2,
+            Facebook = 3,
+            GitHub = 4,
+            GitLab = 5,
+            Google = 6,
+            Instagram = 7,
+            Linode = 8,
+            Microsoft = 9,
+            Okta = 10,
+            Twitter = 11,
+        }
+        impl Provider {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    Self::Amazon => "Amazon",
+                    Self::Apple => "Apple",
+                    Self::DigitalOcean => "DigitalOcean",
+                    Self::Facebook => "Facebook",
+                    Self::GitHub => "GitHub",
+                    Self::GitLab => "GitLab",
+                    Self::Google => "Google",
+                    Self::Instagram => "Instagram",
+                    Self::Linode => "Linode",
+                    Self::Microsoft => "Microsoft",
+                    Self::Okta => "Okta",
+                    Self::Twitter => "Twitter",
+                }
+            }
+            /// Creates an enum from field names used in the ProtoBuf definition.
+            pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+                match value {
+                    "Amazon" => Some(Self::Amazon),
+                    "Apple" => Some(Self::Apple),
+                    "DigitalOcean" => Some(Self::DigitalOcean),
+                    "Facebook" => Some(Self::Facebook),
+                    "GitHub" => Some(Self::GitHub),
+                    "GitLab" => Some(Self::GitLab),
+                    "Google" => Some(Self::Google),
+                    "Instagram" => Some(Self::Instagram),
+                    "Linode" => Some(Self::Linode),
+                    "Microsoft" => Some(Self::Microsoft),
+                    "Okta" => Some(Self::Okta),
+                    "Twitter" => Some(Self::Twitter),
+                    _ => None,
+                }
+            }
+        }
     }
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct UseStorageAdapter {
@@ -807,7 +881,9 @@ pub mod generate_request {
         #[prost(message, tag = "9")]
         Feature(Feature),
         #[prost(message, tag = "10")]
-        UseStorageAdpater(UseStorageAdapter),
+        UseStorageAdapter(UseStorageAdapter),
+        #[prost(message, tag = "11")]
+        UseIdentityProvider(UseIdentityProvider),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]

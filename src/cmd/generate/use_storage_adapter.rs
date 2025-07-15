@@ -29,7 +29,7 @@ pub async fn run(provider: Provider, r#type: Type) -> Result<(), Box<dyn std::er
         GenerateRequest {
             project_id,
             snapshot: Some(snapshot),
-            what: Some(generate_request::What::UseStorageAdpater(UseStorageAdapter {
+            what: Some(generate_request::What::UseStorageAdapter(UseStorageAdapter {
                 provider: provider as i32,
                 r#type: r#type as i32,
             })),

@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Added
+- [#60](https://github.com/saas-rs/cli/issues/60) Add a generator to add use of one of the supported identity providers
 - [#58](https://github.com/saas-rs/cli/issues/58) Add a generator to add use of one of the supported storage adapters
 
 ## [0.2.6] - 2025-07-11
