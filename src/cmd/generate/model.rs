@@ -1,6 +1,8 @@
 use crate::cmd::generate::{do_generate, do_generate_preflight};
-use crate::protocol::saas_rs::user::v1::generate_request::{self, Field, Model};
-use crate::protocol::saas_rs::user::v1::GenerateRequest;
+use crate::protocol::saas_rs::user::v1::{
+    generate_request::{self, Field, Model},
+    GenerateRequest,
+};
 use clap::Parser;
 
 #[derive(Debug, Parser)]

@@ -2,9 +2,7 @@ use crate::apiclient;
 use crate::protocol::saas_rs::user::v1::{DownloadFileRequest, FindFileRequest, GenerateRequest};
 use crate::util::git::is_dirty;
 use git2::Repository;
-use std::fs::File;
-use std::io::Write;
-use std::process::Command;
+use std::{fs::File, io::Write, process::Command};
 use tempfile::TempDir;
 use tonic::codegen::tokio_stream::StreamExt;
 

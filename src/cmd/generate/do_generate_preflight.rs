@@ -1,14 +1,13 @@
-use crate::protocol::saas_rs::user::v1::generate_request::{Archive, Snapshot};
-use crate::protocol::saas_rs::user::v1::{upload_file_request, FileInfo, UploadFileRequest};
+use crate::protocol::saas_rs::user::v1::{
+    generate_request::{Archive, Snapshot},
+    {upload_file_request, FileInfo, UploadFileRequest},
+};
 use crate::{apiclient, util};
 use git2::Repository;
 use log::debug;
-use std::fs;
-use std::process::Command;
-use std::str::from_utf8;
+use std::{fs, process::Command, str::from_utf8};
 use tempfile::NamedTempFile;
-use tokio::fs::File;
-use tokio::sync::mpsc;
+use tokio::{fs::File, sync::mpsc};
 use tokio_stream::StreamExt;
 use tokio_util::codec::{BytesCodec, FramedRead};
 use tonic::codegen::tokio_stream::wrappers::ReceiverStream;
