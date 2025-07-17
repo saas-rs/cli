@@ -775,8 +775,6 @@ pub mod generate_request {
     pub struct UseStorageAdapter {
         #[prost(enumeration = "use_storage_adapter::Provider", tag = "1")]
         pub provider: i32,
-        #[prost(enumeration = "use_storage_adapter::Type", tag = "2")]
-        pub r#type: i32,
     }
     /// Nested message and enum types in `UseStorageAdapter`.
     pub mod use_storage_adapter {
@@ -815,45 +813,6 @@ pub mod generate_request {
                     "Memory" => Some(Self::Memory),
                     "MongoDB" => Some(Self::MongoDb),
                     "Redis" => Some(Self::Redis),
-                    _ => None,
-                }
-            }
-        }
-        #[derive(
-            Clone,
-            Copy,
-            Debug,
-            PartialEq,
-            Eq,
-            Hash,
-            PartialOrd,
-            Ord,
-            ::prost::Enumeration
-        )]
-        #[repr(i32)]
-        pub enum Type {
-            Config = 0,
-            Object = 1,
-            Session = 2,
-        }
-        impl Type {
-            /// String value of the enum field names used in the ProtoBuf definition.
-            ///
-            /// The values are not transformed in any way and thus are considered stable
-            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-            pub fn as_str_name(&self) -> &'static str {
-                match self {
-                    Self::Config => "Config",
-                    Self::Object => "Object",
-                    Self::Session => "Session",
-                }
-            }
-            /// Creates an enum from field names used in the ProtoBuf definition.
-            pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-                match value {
-                    "Config" => Some(Self::Config),
-                    "Object" => Some(Self::Object),
-                    "Session" => Some(Self::Session),
                     _ => None,
                 }
             }
@@ -2226,9 +2185,9 @@ pub struct ValidateSshKeyResponse {
     pub errors: ::prost::alloc::vec::Vec<ErrorObject>,
 }
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct NoopRequest {}
+pub struct PingRequest {}
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct NoopResponse {}
+pub struct PingResponse {}
 /// Generated client implementations.
 pub mod user_client {
     #![allow(
@@ -3720,10 +3679,10 @@ pub mod user_client {
                 .insert(GrpcMethod::new("saas_rs.user.v1.User", "Login"));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn noop(
+        pub async fn ping(
             &mut self,
-            request: impl tonic::IntoRequest<super::NoopRequest>,
-        ) -> std::result::Result<tonic::Response<super::NoopResponse>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::PingRequest>,
+        ) -> std::result::Result<tonic::Response<super::PingResponse>, tonic::Status> {
             self.inner
                 .ready()
                 .await
@@ -3734,10 +3693,10 @@ pub mod user_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/saas_rs.user.v1.User/Noop",
+                "/saas_rs.user.v1.User/Ping",
             );
             let mut req = request.into_request();
-            req.extensions_mut().insert(GrpcMethod::new("saas_rs.user.v1.User", "Noop"));
+            req.extensions_mut().insert(GrpcMethod::new("saas_rs.user.v1.User", "Ping"));
             self.inner.unary(req, path, codec).await
         }
         pub async fn update_account(
@@ -4813,10 +4772,10 @@ pub mod user_server {
             &self,
             request: tonic::Request<super::LoginRequest>,
         ) -> std::result::Result<tonic::Response<super::LoginResponse>, tonic::Status>;
-        async fn noop(
+        async fn ping(
             &self,
-            request: tonic::Request<super::NoopRequest>,
-        ) -> std::result::Result<tonic::Response<super::NoopResponse>, tonic::Status>;
+            request: tonic::Request<super::PingRequest>,
+        ) -> std::result::Result<tonic::Response<super::PingResponse>, tonic::Status>;
         async fn update_account(
             &self,
             request: tonic::Request<super::UpdateAccountRequest>,
@@ -7655,23 +7614,23 @@ pub mod user_server {
                     };
                     Box::pin(fut)
                 }
-                "/saas_rs.user.v1.User/Noop" => {
+                "/saas_rs.user.v1.User/Ping" => {
                     #[allow(non_camel_case_types)]
-                    struct NoopSvc<T: User>(pub Arc<T>);
-                    impl<T: User> tonic::server::UnaryService<super::NoopRequest>
-                    for NoopSvc<T> {
-                        type Response = super::NoopResponse;
+                    struct PingSvc<T: User>(pub Arc<T>);
+                    impl<T: User> tonic::server::UnaryService<super::PingRequest>
+                    for PingSvc<T> {
+                        type Response = super::PingResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::NoopRequest>,
+                            request: tonic::Request<super::PingRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as User>::noop(&inner, request).await
+                                <T as User>::ping(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -7682,7 +7641,7 @@ pub mod user_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = NoopSvc(inner);
+                        let method = PingSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

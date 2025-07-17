@@ -15058,19 +15058,11 @@ impl serde::Serialize for generate_request::UseStorageAdapter {
         if true {
             len += 1;
         }
-        if true {
-            len += 1;
-        }
         let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.GenerateRequest.UseStorageAdapter", len)?;
         if true {
             let v = generate_request::use_storage_adapter::Provider::try_from(self.provider)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.provider)))?;
             struct_ser.serialize_field("provider", &v)?;
-        }
-        if true {
-            let v = generate_request::use_storage_adapter::Type::try_from(self.r#type)
-                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.r#type)))?;
-            struct_ser.serialize_field("type", &v)?;
         }
         struct_ser.end()
     }
@@ -15083,13 +15075,11 @@ impl<'de> serde::Deserialize<'de> for generate_request::UseStorageAdapter {
     {
         const FIELDS: &[&str] = &[
             "provider",
-            "type",
         ];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
             Provider,
-            Type,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -15113,7 +15103,6 @@ impl<'de> serde::Deserialize<'de> for generate_request::UseStorageAdapter {
                     {
                         match value {
                             "provider" => Ok(GeneratedField::Provider),
-                            "type" => Ok(GeneratedField::Type),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -15134,7 +15123,6 @@ impl<'de> serde::Deserialize<'de> for generate_request::UseStorageAdapter {
                     V: serde::de::MapAccess<'de>,
             {
                 let mut provider__ = None;
-                let mut r#type__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Provider => {
@@ -15143,12 +15131,6 @@ impl<'de> serde::Deserialize<'de> for generate_request::UseStorageAdapter {
                             }
                             provider__ = Some(map_.next_value::<generate_request::use_storage_adapter::Provider>()? as i32);
                         }
-                        GeneratedField::Type => {
-                            if r#type__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("type"));
-                            }
-                            r#type__ = Some(map_.next_value::<generate_request::use_storage_adapter::Type>()? as i32);
-                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -15156,7 +15138,6 @@ impl<'de> serde::Deserialize<'de> for generate_request::UseStorageAdapter {
                 }
                 Ok(generate_request::UseStorageAdapter {
                     provider: provider__.unwrap_or_default(),
-                    r#type: r#type__.unwrap_or_default(),
                 })
             }
         }
@@ -15230,80 +15211,6 @@ impl<'de> serde::Deserialize<'de> for generate_request::use_storage_adapter::Pro
                     "Memory" => Ok(generate_request::use_storage_adapter::Provider::Memory),
                     "MongoDB" => Ok(generate_request::use_storage_adapter::Provider::MongoDb),
                     "Redis" => Ok(generate_request::use_storage_adapter::Provider::Redis),
-                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
-                }
-            }
-        }
-        deserializer.deserialize_any(GeneratedVisitor)
-    }
-}
-impl serde::Serialize for generate_request::use_storage_adapter::Type {
-    #[allow(deprecated)]
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        let variant = match self {
-            Self::Config => "Config",
-            Self::Object => "Object",
-            Self::Session => "Session",
-        };
-        serializer.serialize_str(variant)
-    }
-}
-impl<'de> serde::Deserialize<'de> for generate_request::use_storage_adapter::Type {
-    #[allow(deprecated)]
-    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        const FIELDS: &[&str] = &[
-            "Config",
-            "Object",
-            "Session",
-        ];
-
-        struct GeneratedVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = generate_request::use_storage_adapter::Type;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                write!(formatter, "expected one of: {:?}", &FIELDS)
-            }
-
-            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
-                    })
-            }
-
-            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                i32::try_from(v)
-                    .ok()
-                    .and_then(|x| x.try_into().ok())
-                    .ok_or_else(|| {
-                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
-                    })
-            }
-
-            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
-            where
-                E: serde::de::Error,
-            {
-                match value {
-                    "Config" => Ok(generate_request::use_storage_adapter::Type::Config),
-                    "Object" => Ok(generate_request::use_storage_adapter::Type::Object),
-                    "Session" => Ok(generate_request::use_storage_adapter::Type::Session),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
@@ -19567,7 +19474,7 @@ impl<'de> serde::Deserialize<'de> for LoginResponse {
         deserializer.deserialize_struct("saas_rs.user.v1.LoginResponse", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for NoopRequest {
+impl serde::Serialize for PingRequest {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -19575,11 +19482,11 @@ impl serde::Serialize for NoopRequest {
     {
         use serde::ser::SerializeStruct;
         let len = 0;
-        let struct_ser = serializer.serialize_struct("saas_rs.user.v1.NoopRequest", len)?;
+        let struct_ser = serializer.serialize_struct("saas_rs.user.v1.PingRequest", len)?;
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for NoopRequest {
+impl<'de> serde::Deserialize<'de> for PingRequest {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -19619,27 +19526,27 @@ impl<'de> serde::Deserialize<'de> for NoopRequest {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = NoopRequest;
+            type Value = PingRequest;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct saas_rs.user.v1.NoopRequest")
+                formatter.write_str("struct saas_rs.user.v1.PingRequest")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<NoopRequest, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PingRequest, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
                 while map_.next_key::<GeneratedField>()?.is_some() {
                     let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                 }
-                Ok(NoopRequest {
+                Ok(PingRequest {
                 })
             }
         }
-        deserializer.deserialize_struct("saas_rs.user.v1.NoopRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("saas_rs.user.v1.PingRequest", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for NoopResponse {
+impl serde::Serialize for PingResponse {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -19647,11 +19554,11 @@ impl serde::Serialize for NoopResponse {
     {
         use serde::ser::SerializeStruct;
         let len = 0;
-        let struct_ser = serializer.serialize_struct("saas_rs.user.v1.NoopResponse", len)?;
+        let struct_ser = serializer.serialize_struct("saas_rs.user.v1.PingResponse", len)?;
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for NoopResponse {
+impl<'de> serde::Deserialize<'de> for PingResponse {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -19691,24 +19598,24 @@ impl<'de> serde::Deserialize<'de> for NoopResponse {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = NoopResponse;
+            type Value = PingResponse;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct saas_rs.user.v1.NoopResponse")
+                formatter.write_str("struct saas_rs.user.v1.PingResponse")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<NoopResponse, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<PingResponse, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
                 while map_.next_key::<GeneratedField>()?.is_some() {
                     let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                 }
-                Ok(NoopResponse {
+                Ok(PingResponse {
                 })
             }
         }
-        deserializer.deserialize_struct("saas_rs.user.v1.NoopResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("saas_rs.user.v1.PingResponse", FIELDS, GeneratedVisitor)
     }
 }
 impl serde::Serialize for Plan {

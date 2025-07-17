@@ -95,8 +95,8 @@ pub async fn run(subcommand: Subcommand) -> Result<(), Box<dyn std::error::Error
         Subcommand::UseIdentityProvider(use_identity_provider::Opts { provider }) => {
             use_identity_provider::run(provider).await?;
         }
-        Subcommand::UseStorageAdapter(use_storage_adapter::Opts { provider, r#type }) => {
-            use_storage_adapter::run(provider, r#type).await?;
+        Subcommand::UseStorageAdapter(use_storage_adapter::Opts { provider }) => {
+            use_storage_adapter::run(provider).await?;
         }
         Subcommand::Xid(xid::Opts { n }) => {
             xid::run(n).await?;
