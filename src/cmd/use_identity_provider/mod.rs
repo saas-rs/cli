@@ -11,7 +11,7 @@ use clap::{
 #[derive(Debug, Parser)]
 pub struct Opts {
     /// The identity provider
-    #[arg(long = "provider", value_enum)]
+    #[arg(value_name = "provider", value_enum)]
     pub provider: Provider,
 }
 
