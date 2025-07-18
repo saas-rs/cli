@@ -5,8 +5,6 @@ pub(super) mod feature;
 pub(super) mod model;
 pub(super) mod resource;
 pub(super) mod service;
-pub(super) mod use_identity_provider;
-pub(super) mod use_storage_adapter;
 pub(super) mod uuid_v4;
 pub(super) mod xid;
 
@@ -37,12 +35,6 @@ pub enum Subcommand {
 
     #[command(name = "service")]
     Service(service::Opts),
-
-    #[command(name = "use-identity-provider", alias = "useIdentityProvider")]
-    UseIdentityProvider(use_identity_provider::Opts),
-
-    #[command(name = "use-storage-adapter", alias = "useStorageAdapter")]
-    UseStorageAdapter(use_storage_adapter::Opts),
 
     #[command(name = "xid")]
     Xid(xid::Opts),
@@ -91,12 +83,6 @@ pub async fn run(subcommand: Subcommand) -> Result<(), Box<dyn std::error::Error
             with_cli,
         }) => {
             service::run(name, resources, version, with_cli).await?;
-        }
-        Subcommand::UseIdentityProvider(use_identity_provider::Opts { provider }) => {
-            use_identity_provider::run(provider).await?;
-        }
-        Subcommand::UseStorageAdapter(use_storage_adapter::Opts { provider }) => {
-            use_storage_adapter::run(provider).await?;
         }
         Subcommand::Xid(xid::Opts { n }) => {
             xid::run(n).await?;
