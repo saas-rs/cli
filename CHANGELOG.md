@@ -1,11 +1,12 @@
 # SaaS RS :: CLI Changelog
 
-## [Unreleased]
+## [0.2.7] - 2025-07-18
 ### Added
 - [#60](https://github.com/saas-rs/cli/issues/60) Add a generator to add use of one of the supported identity providers
 - [#58](https://github.com/saas-rs/cli/issues/58) Add a generator to add use of one of the supported storage adapters
 
 ### Changed
+- [#67](https://github.com/saas-rs/cli/issues/67) Update crate homepage to point to new documentation site docs.saas-rs.com
 - [#65](https://github.com/saas-rs/cli/issues/65) Upgrade 3 crates
 
 ## [0.2.6] - 2025-07-11
