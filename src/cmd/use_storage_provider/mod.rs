@@ -10,7 +10,7 @@ use clap::{
 
 #[derive(Debug, Parser)]
 pub struct Opts {
-    /// The storage provider (eg Memory, MongoDB, Redis)
+    /// The storage provider
     #[arg(value_name = "provider", value_enum)]
     pub provider: Provider,
 }
