@@ -9,6 +9,8 @@ pub(super) mod initialize;
 pub(super) mod list;
 pub(super) mod login;
 pub(super) mod logout;
+pub(super) mod use_identity_provider;
+pub(super) mod use_storage_provider;
 pub(super) mod version;
 
 #[derive(Debug, Parser)]
@@ -48,6 +50,12 @@ pub enum Subcommand {
     /// Remove your access token (session) from the config file in your home dir
     #[command(name = "logout")]
     Logout(logout::Opts),
+
+    #[command(name = "use-identity-provider", alias = "useIdentityProvider")]
+    UseIdentityProvider(use_identity_provider::Opts),
+
+    #[command(name = "use-storage-provider", alias = "useStorageProvider")]
+    UseStorageAdapter(use_storage_provider::Opts),
 
     /// Display the build version
     #[command(name = "version")]
