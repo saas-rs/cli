@@ -1,6 +1,9 @@
 # SaaS RS :: CLI Changelog
 
 ## [Unreleased]
+### Changed
+- [#70](https://github.com/saas-rs/cli/issues/70) Introduce an "enable" command to de-hyphenate some existing long commands
+
 ### Fixed
 - [#68](https://github.com/saas-rs/cli/issues/68) The generate feature subcommand fails to require an id or name arg
 
