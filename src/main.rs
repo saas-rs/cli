@@ -42,6 +42,9 @@ async fn main() -> anyhow::Result<(), Box<dyn std::error::Error>> {
         cmd::Subcommand::Delete(cmd::delete::Opts { subcommand }) => {
             cmd::delete::run(subcommand).await?;
         }
+        cmd::Subcommand::Enable(cmd::enable::Opts { subcommand }) => {
+            cmd::enable::run(subcommand).await?;
+        }
         cmd::Subcommand::Generate(cmd::generate::Opts { subcommand }) => {
             cmd::generate::run(subcommand).await?;
         }
@@ -66,12 +69,6 @@ async fn main() -> anyhow::Result<(), Box<dyn std::error::Error>> {
         }
         cmd::Subcommand::Logout(cmd::logout::Opts {}) => {
             cmd::logout::run().await?;
-        }
-        cmd::Subcommand::UseIdentityProvider(cmd::use_identity_provider::Opts { provider }) => {
-            cmd::use_identity_provider::run(provider).await?;
-        }
-        cmd::Subcommand::UseStorageAdapter(cmd::use_storage_provider::Opts { provider }) => {
-            cmd::use_storage_provider::run(provider).await?;
         }
         cmd::Subcommand::Version(cmd::version::Opts {}) => {
             cmd::version::run().await?;
