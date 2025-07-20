@@ -1,5 +1,9 @@
 # SaaS RS :: CLI Changelog
 
+## [Unreleased]
+### Fixed
+- [#68](https://github.com/saas-rs/cli/issues/68) The generate feature subcommand fails to require an id or name arg
+
 ## [0.2.7] - 2025-07-18
 ### Added
 - [#60](https://github.com/saas-rs/cli/issues/60) Add a generator to add use of one of the supported identity providers
