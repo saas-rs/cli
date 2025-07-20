@@ -4,10 +4,11 @@ use crate::protocol::saas_rs::user::v1::{
     generate_request::{self, Feature},
     {FindManyGeneratorsRequest, GenerateRequest, GeneratorFilter},
 };
-use clap::Parser;
+use clap::{ArgGroup, Parser};
 use pbjson_types::FieldMask;
 
 #[derive(Debug, Parser)]
+#[clap(group(ArgGroup::new("id_or_name").required(true)))]
 pub struct Opts {
     /// Which feature ID
     #[arg(long = "id", group = "id_or_name")]
