@@ -772,12 +772,12 @@ pub mod generate_request {
         }
     }
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
-    pub struct UseStorageAdapter {
-        #[prost(enumeration = "use_storage_adapter::Provider", tag = "1")]
+    pub struct UseStorageProvider {
+        #[prost(enumeration = "use_storage_provider::Provider", tag = "1")]
         pub provider: i32,
     }
-    /// Nested message and enum types in `UseStorageAdapter`.
-    pub mod use_storage_adapter {
+    /// Nested message and enum types in `UseStorageProvider`.
+    pub mod use_storage_provider {
         #[derive(
             Clone,
             Copy,
@@ -794,6 +794,8 @@ pub mod generate_request {
             Memory = 0,
             MongoDb = 1,
             Redis = 2,
+            LocalFileSystem = 3,
+            S3 = 4,
         }
         impl Provider {
             /// String value of the enum field names used in the ProtoBuf definition.
@@ -805,6 +807,8 @@ pub mod generate_request {
                     Self::Memory => "Memory",
                     Self::MongoDb => "MongoDB",
                     Self::Redis => "Redis",
+                    Self::LocalFileSystem => "LocalFileSystem",
+                    Self::S3 => "S3",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -813,6 +817,8 @@ pub mod generate_request {
                     "Memory" => Some(Self::Memory),
                     "MongoDB" => Some(Self::MongoDb),
                     "Redis" => Some(Self::Redis),
+                    "LocalFileSystem" => Some(Self::LocalFileSystem),
+                    "S3" => Some(Self::S3),
                     _ => None,
                 }
             }
@@ -840,7 +846,7 @@ pub mod generate_request {
         #[prost(message, tag = "9")]
         Feature(Feature),
         #[prost(message, tag = "10")]
-        UseStorageAdapter(UseStorageAdapter),
+        UseStorageProvider(UseStorageProvider),
         #[prost(message, tag = "11")]
         UseIdentityProvider(UseIdentityProvider),
     }

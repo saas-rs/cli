@@ -13531,8 +13531,8 @@ impl serde::Serialize for GenerateRequest {
                 generate_request::What::Feature(v) => {
                     struct_ser.serialize_field("feature", v)?;
                 }
-                generate_request::What::UseStorageAdapter(v) => {
-                    struct_ser.serialize_field("useStorageAdapter", v)?;
+                generate_request::What::UseStorageProvider(v) => {
+                    struct_ser.serialize_field("useStorageProvider", v)?;
                 }
                 generate_request::What::UseIdentityProvider(v) => {
                     struct_ser.serialize_field("useIdentityProvider", v)?;
@@ -13560,8 +13560,8 @@ impl<'de> serde::Deserialize<'de> for GenerateRequest {
             "resource",
             "service",
             "feature",
-            "use_storage_adapter",
-            "useStorageAdapter",
+            "use_storage_provider",
+            "useStorageProvider",
             "use_identity_provider",
             "useIdentityProvider",
         ];
@@ -13577,7 +13577,7 @@ impl<'de> serde::Deserialize<'de> for GenerateRequest {
             Resource,
             Service,
             Feature,
-            UseStorageAdapter,
+            UseStorageProvider,
             UseIdentityProvider,
             __SkipField__,
         }
@@ -13610,7 +13610,7 @@ impl<'de> serde::Deserialize<'de> for GenerateRequest {
                             "resource" => Ok(GeneratedField::Resource),
                             "service" => Ok(GeneratedField::Service),
                             "feature" => Ok(GeneratedField::Feature),
-                            "useStorageAdapter" | "use_storage_adapter" => Ok(GeneratedField::UseStorageAdapter),
+                            "useStorageProvider" | "use_storage_provider" => Ok(GeneratedField::UseStorageProvider),
                             "useIdentityProvider" | "use_identity_provider" => Ok(GeneratedField::UseIdentityProvider),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
@@ -13698,11 +13698,11 @@ impl<'de> serde::Deserialize<'de> for GenerateRequest {
                             what__ = map_.next_value::<::std::option::Option<_>>()?.map(generate_request::What::Feature)
 ;
                         }
-                        GeneratedField::UseStorageAdapter => {
+                        GeneratedField::UseStorageProvider => {
                             if what__.is_some() {
-                                return Err(serde::de::Error::duplicate_field("useStorageAdapter"));
+                                return Err(serde::de::Error::duplicate_field("useStorageProvider"));
                             }
-                            what__ = map_.next_value::<::std::option::Option<_>>()?.map(generate_request::What::UseStorageAdapter)
+                            what__ = map_.next_value::<::std::option::Option<_>>()?.map(generate_request::What::UseStorageProvider)
 ;
                         }
                         GeneratedField::UseIdentityProvider => {
@@ -15047,7 +15047,7 @@ impl<'de> serde::Deserialize<'de> for generate_request::use_identity_provider::P
         deserializer.deserialize_any(GeneratedVisitor)
     }
 }
-impl serde::Serialize for generate_request::UseStorageAdapter {
+impl serde::Serialize for generate_request::UseStorageProvider {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -15058,16 +15058,16 @@ impl serde::Serialize for generate_request::UseStorageAdapter {
         if true {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.GenerateRequest.UseStorageAdapter", len)?;
+        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.GenerateRequest.UseStorageProvider", len)?;
         if true {
-            let v = generate_request::use_storage_adapter::Provider::try_from(self.provider)
+            let v = generate_request::use_storage_provider::Provider::try_from(self.provider)
                 .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.provider)))?;
             struct_ser.serialize_field("provider", &v)?;
         }
         struct_ser.end()
     }
 }
-impl<'de> serde::Deserialize<'de> for generate_request::UseStorageAdapter {
+impl<'de> serde::Deserialize<'de> for generate_request::UseStorageProvider {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -15112,13 +15112,13 @@ impl<'de> serde::Deserialize<'de> for generate_request::UseStorageAdapter {
         }
         struct GeneratedVisitor;
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = generate_request::UseStorageAdapter;
+            type Value = generate_request::UseStorageProvider;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                formatter.write_str("struct saas_rs.user.v1.GenerateRequest.UseStorageAdapter")
+                formatter.write_str("struct saas_rs.user.v1.GenerateRequest.UseStorageProvider")
             }
 
-            fn visit_map<V>(self, mut map_: V) -> std::result::Result<generate_request::UseStorageAdapter, V::Error>
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<generate_request::UseStorageProvider, V::Error>
                 where
                     V: serde::de::MapAccess<'de>,
             {
@@ -15129,22 +15129,22 @@ impl<'de> serde::Deserialize<'de> for generate_request::UseStorageAdapter {
                             if provider__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("provider"));
                             }
-                            provider__ = Some(map_.next_value::<generate_request::use_storage_adapter::Provider>()? as i32);
+                            provider__ = Some(map_.next_value::<generate_request::use_storage_provider::Provider>()? as i32);
                         }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
                     }
                 }
-                Ok(generate_request::UseStorageAdapter {
+                Ok(generate_request::UseStorageProvider {
                     provider: provider__.unwrap_or_default(),
                 })
             }
         }
-        deserializer.deserialize_struct("saas_rs.user.v1.GenerateRequest.UseStorageAdapter", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct("saas_rs.user.v1.GenerateRequest.UseStorageProvider", FIELDS, GeneratedVisitor)
     }
 }
-impl serde::Serialize for generate_request::use_storage_adapter::Provider {
+impl serde::Serialize for generate_request::use_storage_provider::Provider {
     #[allow(deprecated)]
     fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
     where
@@ -15154,11 +15154,13 @@ impl serde::Serialize for generate_request::use_storage_adapter::Provider {
             Self::Memory => "Memory",
             Self::MongoDb => "MongoDB",
             Self::Redis => "Redis",
+            Self::LocalFileSystem => "LocalFileSystem",
+            Self::S3 => "S3",
         };
         serializer.serialize_str(variant)
     }
 }
-impl<'de> serde::Deserialize<'de> for generate_request::use_storage_adapter::Provider {
+impl<'de> serde::Deserialize<'de> for generate_request::use_storage_provider::Provider {
     #[allow(deprecated)]
     fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
     where
@@ -15168,12 +15170,14 @@ impl<'de> serde::Deserialize<'de> for generate_request::use_storage_adapter::Pro
             "Memory",
             "MongoDB",
             "Redis",
+            "LocalFileSystem",
+            "S3",
         ];
 
         struct GeneratedVisitor;
 
         impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
-            type Value = generate_request::use_storage_adapter::Provider;
+            type Value = generate_request::use_storage_provider::Provider;
 
             fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
                 write!(formatter, "expected one of: {:?}", &FIELDS)
@@ -15208,9 +15212,11 @@ impl<'de> serde::Deserialize<'de> for generate_request::use_storage_adapter::Pro
                 E: serde::de::Error,
             {
                 match value {
-                    "Memory" => Ok(generate_request::use_storage_adapter::Provider::Memory),
-                    "MongoDB" => Ok(generate_request::use_storage_adapter::Provider::MongoDb),
-                    "Redis" => Ok(generate_request::use_storage_adapter::Provider::Redis),
+                    "Memory" => Ok(generate_request::use_storage_provider::Provider::Memory),
+                    "MongoDB" => Ok(generate_request::use_storage_provider::Provider::MongoDb),
+                    "Redis" => Ok(generate_request::use_storage_provider::Provider::Redis),
+                    "LocalFileSystem" => Ok(generate_request::use_storage_provider::Provider::LocalFileSystem),
+                    "S3" => Ok(generate_request::use_storage_provider::Provider::S3),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }

@@ -1,6 +1,9 @@
 # SaaS RS :: CLI Changelog
 
 ## [Unreleased]
+### Added
+- [#72](https://github.com/saas-rs/cli/issues/72) Support enabling LocalFileSystem and S3 storage providers
+
 ### Changed
 - [#70](https://github.com/saas-rs/cli/issues/70) Introduce an "enable" command to de-hyphenate some existing long commands
 
