@@ -1,6 +1,6 @@
 use crate::cmd::generate::{do_generate, do_generate_preflight};
 use crate::protocol::saas_rs::user::v1::{
-    generate_request::{self, use_storage_adapter::Provider, UseStorageAdapter},
+    generate_request::{self, use_storage_provider::Provider, UseStorageProvider},
     GenerateRequest,
 };
 use clap::{
@@ -21,7 +21,7 @@ pub async fn run(provider: Provider) -> Result<(), Box<dyn std::error::Error>> {
         GenerateRequest {
             project_id,
             snapshot: Some(snapshot),
-            what: Some(generate_request::What::UseStorageAdapter(UseStorageAdapter {
+            what: Some(generate_request::What::UseStorageProvider(UseStorageProvider {
                 provider: provider as i32,
             })),
         }
@@ -31,7 +31,13 @@ pub async fn run(provider: Provider) -> Result<(), Box<dyn std::error::Error>> {
 
 impl ValueEnum for Provider {
     fn value_variants<'a>() -> &'a [Self] {
-        &[Self::Memory, Self::MongoDb, Self::Redis]
+        &[
+            Self::LocalFileSystem,
+            Self::Memory,
+            Self::MongoDb,
+            Self::Redis,
+            Self::S3,
+        ]
     }
 
     fn to_possible_value(&self) -> Option<PossibleValue> {
