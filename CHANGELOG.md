@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Added
+- [#74](https://github.com/saas-rs/cli/issues/74) When generating a service, support a "without authentication" flag
 - [#72](https://github.com/saas-rs/cli/issues/72) Support enabling LocalFileSystem and S3 storage providers
 
 ### Changed

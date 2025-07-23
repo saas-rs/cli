@@ -14720,6 +14720,9 @@ impl serde::Serialize for generate_request::Service {
         if true {
             len += 1;
         }
+        if true {
+            len += 1;
+        }
         let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.GenerateRequest.Service", len)?;
         if true {
             struct_ser.serialize_field("name", &self.name)?;
@@ -14732,6 +14735,9 @@ impl serde::Serialize for generate_request::Service {
         }
         if true {
             struct_ser.serialize_field("resources", &self.resources)?;
+        }
+        if true {
+            struct_ser.serialize_field("withoutAuthentication", &self.without_authentication)?;
         }
         struct_ser.end()
     }
@@ -14748,6 +14754,8 @@ impl<'de> serde::Deserialize<'de> for generate_request::Service {
             "with_cli",
             "withCli",
             "resources",
+            "without_authentication",
+            "withoutAuthentication",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -14756,6 +14764,7 @@ impl<'de> serde::Deserialize<'de> for generate_request::Service {
             Version,
             WithCli,
             Resources,
+            WithoutAuthentication,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -14782,6 +14791,7 @@ impl<'de> serde::Deserialize<'de> for generate_request::Service {
                             "version" => Ok(GeneratedField::Version),
                             "withCli" | "with_cli" => Ok(GeneratedField::WithCli),
                             "resources" => Ok(GeneratedField::Resources),
+                            "withoutAuthentication" | "without_authentication" => Ok(GeneratedField::WithoutAuthentication),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -14805,6 +14815,7 @@ impl<'de> serde::Deserialize<'de> for generate_request::Service {
                 let mut version__ = None;
                 let mut with_cli__ = None;
                 let mut resources__ = None;
+                let mut without_authentication__ = None;
                 while let Some(k) = map_.next_key()? {
                     match k {
                         GeneratedField::Name => {
@@ -14833,6 +14844,12 @@ impl<'de> serde::Deserialize<'de> for generate_request::Service {
                             }
                             resources__ = Some(map_.next_value()?);
                         }
+                        GeneratedField::WithoutAuthentication => {
+                            if without_authentication__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("withoutAuthentication"));
+                            }
+                            without_authentication__ = Some(map_.next_value()?);
+                        }
                         GeneratedField::__SkipField__ => {
                             let _ = map_.next_value::<serde::de::IgnoredAny>()?;
                         }
@@ -14843,6 +14860,7 @@ impl<'de> serde::Deserialize<'de> for generate_request::Service {
                     version: version__.unwrap_or_default(),
                     with_cli: with_cli__.unwrap_or_default(),
                     resources: resources__.unwrap_or_default(),
+                    without_authentication: without_authentication__.unwrap_or_default(),
                 })
             }
         }

@@ -21,8 +21,16 @@ pub struct Opts {
     pub version: u32,
 
     /// Whether to generate an associated CLI
-    #[arg(long = "with-cli", default_value_t = false)]
+    #[arg(long = "with-cli", alias = "withCli", default_value_t = false)]
     pub with_cli: bool,
+
+    /// Whether to skip generation of authentication support
+    #[arg(
+        long = "without-authentication",
+        alias = "withoutAuthentication",
+        default_value_t = false
+    )]
+    pub without_authentication: bool,
 }
 
 pub async fn run(
@@ -30,6 +38,7 @@ pub async fn run(
     resources: Vec<String>,
     version: u32,
     with_cli: bool,
+    without_authentication: bool,
 ) -> Result<(), Box<dyn std::error::Error>> {
     let (project_id, snapshot) = do_generate_preflight(false).await?;
     let req = {
@@ -41,6 +50,7 @@ pub async fn run(
                 resources,
                 version,
                 with_cli,
+                without_authentication,
             })),
         }
     };
