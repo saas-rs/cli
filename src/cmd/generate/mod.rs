@@ -81,8 +81,9 @@ pub async fn run(subcommand: Subcommand) -> Result<(), Box<dyn std::error::Error
             resources,
             version,
             with_cli,
+            without_authentication,
         }) => {
-            service::run(name, resources, version, with_cli).await?;
+            service::run(name, resources, version, with_cli, without_authentication).await?;
         }
         Subcommand::Xid(xid::Opts { n }) => {
             xid::run(n).await?;

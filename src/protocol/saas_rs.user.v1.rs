@@ -696,6 +696,8 @@ pub mod generate_request {
         pub with_cli: bool,
         #[prost(string, repeated, tag = "4")]
         pub resources: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+        #[prost(bool, tag = "5")]
+        pub without_authentication: bool,
     }
     #[derive(Clone, Copy, PartialEq, ::prost::Message)]
     pub struct UseIdentityProvider {
