@@ -15174,6 +15174,7 @@ impl serde::Serialize for generate_request::use_storage_provider::Provider {
             Self::Redis => "Redis",
             Self::LocalFileSystem => "LocalFileSystem",
             Self::S3 => "S3",
+            Self::Postgres => "Postgres",
         };
         serializer.serialize_str(variant)
     }
@@ -15190,6 +15191,7 @@ impl<'de> serde::Deserialize<'de> for generate_request::use_storage_provider::Pr
             "Redis",
             "LocalFileSystem",
             "S3",
+            "Postgres",
         ];
 
         struct GeneratedVisitor;
@@ -15235,6 +15237,7 @@ impl<'de> serde::Deserialize<'de> for generate_request::use_storage_provider::Pr
                     "Redis" => Ok(generate_request::use_storage_provider::Provider::Redis),
                     "LocalFileSystem" => Ok(generate_request::use_storage_provider::Provider::LocalFileSystem),
                     "S3" => Ok(generate_request::use_storage_provider::Provider::S3),
+                    "Postgres" => Ok(generate_request::use_storage_provider::Provider::Postgres),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
