@@ -798,6 +798,7 @@ pub mod generate_request {
             Redis = 2,
             LocalFileSystem = 3,
             S3 = 4,
+            Postgres = 5,
         }
         impl Provider {
             /// String value of the enum field names used in the ProtoBuf definition.
@@ -811,6 +812,7 @@ pub mod generate_request {
                     Self::Redis => "Redis",
                     Self::LocalFileSystem => "LocalFileSystem",
                     Self::S3 => "S3",
+                    Self::Postgres => "Postgres",
                 }
             }
             /// Creates an enum from field names used in the ProtoBuf definition.
@@ -821,6 +823,7 @@ pub mod generate_request {
                     "Redis" => Some(Self::Redis),
                     "LocalFileSystem" => Some(Self::LocalFileSystem),
                     "S3" => Some(Self::S3),
+                    "Postgres" => Some(Self::Postgres),
                     _ => None,
                 }
             }

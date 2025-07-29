@@ -1,5 +1,9 @@
 # SaaS RS :: CLI Changelog
 
+## [Unreleased]
+### Added
+- [#76](https://github.com/saas-rs/cli/issues/76) Support enabling new Postgres storage provider
+
 ## [0.2.8] - 2025-07-25
 ### Added
 - [#74](https://github.com/saas-rs/cli/issues/74) When generating a service, support a "without authentication" flag

@@ -35,6 +35,7 @@ impl ValueEnum for Provider {
             Self::LocalFileSystem,
             Self::Memory,
             Self::MongoDb,
+            Self::Postgres,
             Self::Redis,
             Self::S3,
         ]
