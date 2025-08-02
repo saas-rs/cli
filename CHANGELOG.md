@@ -1,6 +1,6 @@
 # SaaS RS :: CLI Changelog
 
-## [Unreleased]
+## [0.2.9] - 2025-08-01
 ### Added
 - [#76](https://github.com/saas-rs/cli/issues/76) Support enabling new Postgres storage provider
 
