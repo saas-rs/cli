@@ -1,5 +1,9 @@
 # SaaS RS :: CLI Changelog
 
+## [Unreleased]
+### Changed
+- [#78](https://github.com/saas-rs/cli/issues/78) Upgrade Rust from 1.86.0 → 1.88.0
+
 ## [0.2.9] - 2025-08-01
 ### Added
 - [#76](https://github.com/saas-rs/cli/issues/76) Support enabling new Postgres storage provider
