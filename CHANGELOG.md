@@ -1,6 +1,6 @@
 # SaaS RS :: CLI Changelog
 
-## [Unreleased]
+## [0.3.5] - 2025-09-19
 ### Changed
 - [#78](https://github.com/saas-rs/cli/issues/78) Upgrade Rust from 1.86.0 → 1.88.0
 
