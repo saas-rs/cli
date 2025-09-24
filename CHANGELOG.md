@@ -1,6 +1,9 @@
 # SaaS RS :: CLI Changelog
 
 ## [Unreleased]
+### Changed
+- [#82](https://github.com/saas-rs/cli/issues/82) Upgrade Rust from 1.88.0 → 1.89.0
+
 ### Fixed
 - [#80](https://github.com/saas-rs/cli/issues/80) After receiving a generate response patch, don't try to apply the patch if there were no changes and the file is empty
 
