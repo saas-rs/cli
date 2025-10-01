@@ -1,5 +1,9 @@
 # SaaS RS :: CLI Changelog
 
+## [Unreleased]
+### Added
+- [#84](https://github.com/saas-rs/cli/issues/84) Support enabling new Stripe payment provider
+
 ## [0.3.6] - 2025-09-27
 ### Changed
 - [#82](https://github.com/saas-rs/cli/issues/82) Upgrade Rust from 1.88.0 → 1.89.0

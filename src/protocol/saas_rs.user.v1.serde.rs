@@ -13537,6 +13537,9 @@ impl serde::Serialize for GenerateRequest {
                 generate_request::What::UseIdentityProvider(v) => {
                     struct_ser.serialize_field("useIdentityProvider", v)?;
                 }
+                generate_request::What::UsePaymentProvider(v) => {
+                    struct_ser.serialize_field("usePaymentProvider", v)?;
+                }
             }
         }
         struct_ser.end()
@@ -13564,6 +13567,8 @@ impl<'de> serde::Deserialize<'de> for GenerateRequest {
             "useStorageProvider",
             "use_identity_provider",
             "useIdentityProvider",
+            "use_payment_provider",
+            "usePaymentProvider",
         ];
 
         #[allow(clippy::enum_variant_names)]
@@ -13579,6 +13584,7 @@ impl<'de> serde::Deserialize<'de> for GenerateRequest {
             Feature,
             UseStorageProvider,
             UseIdentityProvider,
+            UsePaymentProvider,
             __SkipField__,
         }
         impl<'de> serde::Deserialize<'de> for GeneratedField {
@@ -13612,6 +13618,7 @@ impl<'de> serde::Deserialize<'de> for GenerateRequest {
                             "feature" => Ok(GeneratedField::Feature),
                             "useStorageProvider" | "use_storage_provider" => Ok(GeneratedField::UseStorageProvider),
                             "useIdentityProvider" | "use_identity_provider" => Ok(GeneratedField::UseIdentityProvider),
+                            "usePaymentProvider" | "use_payment_provider" => Ok(GeneratedField::UsePaymentProvider),
                             _ => Ok(GeneratedField::__SkipField__),
                         }
                     }
@@ -13710,6 +13717,13 @@ impl<'de> serde::Deserialize<'de> for GenerateRequest {
                                 return Err(serde::de::Error::duplicate_field("useIdentityProvider"));
                             }
                             what__ = map_.next_value::<::std::option::Option<_>>()?.map(generate_request::What::UseIdentityProvider)
+;
+                        }
+                        GeneratedField::UsePaymentProvider => {
+                            if what__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("usePaymentProvider"));
+                            }
+                            what__ = map_.next_value::<::std::option::Option<_>>()?.map(generate_request::What::UsePaymentProvider)
 ;
                         }
                         GeneratedField::__SkipField__ => {
@@ -15058,6 +15072,171 @@ impl<'de> serde::Deserialize<'de> for generate_request::use_identity_provider::P
                     "Microsoft" => Ok(generate_request::use_identity_provider::Provider::Microsoft),
                     "Okta" => Ok(generate_request::use_identity_provider::Provider::Okta),
                     "Twitter" => Ok(generate_request::use_identity_provider::Provider::Twitter),
+                    _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
+                }
+            }
+        }
+        deserializer.deserialize_any(GeneratedVisitor)
+    }
+}
+impl serde::Serialize for generate_request::UsePaymentProvider {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut len = 0;
+        if true {
+            len += 1;
+        }
+        let mut struct_ser = serializer.serialize_struct("saas_rs.user.v1.GenerateRequest.UsePaymentProvider", len)?;
+        if true {
+            let v = generate_request::use_payment_provider::Provider::try_from(self.provider)
+                .map_err(|_| serde::ser::Error::custom(format!("Invalid variant {}", self.provider)))?;
+            struct_ser.serialize_field("provider", &v)?;
+        }
+        struct_ser.end()
+    }
+}
+impl<'de> serde::Deserialize<'de> for generate_request::UsePaymentProvider {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "provider",
+        ];
+
+        #[allow(clippy::enum_variant_names)]
+        enum GeneratedField {
+            Provider,
+            __SkipField__,
+        }
+        impl<'de> serde::Deserialize<'de> for GeneratedField {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<GeneratedField, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct GeneratedVisitor;
+
+                impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+                    type Value = GeneratedField;
+
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(formatter, "expected one of: {:?}", &FIELDS)
+                    }
+
+                    #[allow(unused_variables)]
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<GeneratedField, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        match value {
+                            "provider" => Ok(GeneratedField::Provider),
+                            _ => Ok(GeneratedField::__SkipField__),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(GeneratedVisitor)
+            }
+        }
+        struct GeneratedVisitor;
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = generate_request::UsePaymentProvider;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("struct saas_rs.user.v1.GenerateRequest.UsePaymentProvider")
+            }
+
+            fn visit_map<V>(self, mut map_: V) -> std::result::Result<generate_request::UsePaymentProvider, V::Error>
+                where
+                    V: serde::de::MapAccess<'de>,
+            {
+                let mut provider__ = None;
+                while let Some(k) = map_.next_key()? {
+                    match k {
+                        GeneratedField::Provider => {
+                            if provider__.is_some() {
+                                return Err(serde::de::Error::duplicate_field("provider"));
+                            }
+                            provider__ = Some(map_.next_value::<generate_request::use_payment_provider::Provider>()? as i32);
+                        }
+                        GeneratedField::__SkipField__ => {
+                            let _ = map_.next_value::<serde::de::IgnoredAny>()?;
+                        }
+                    }
+                }
+                Ok(generate_request::UsePaymentProvider {
+                    provider: provider__.unwrap_or_default(),
+                })
+            }
+        }
+        deserializer.deserialize_struct("saas_rs.user.v1.GenerateRequest.UsePaymentProvider", FIELDS, GeneratedVisitor)
+    }
+}
+impl serde::Serialize for generate_request::use_payment_provider::Provider {
+    #[allow(deprecated)]
+    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let variant = match self {
+            Self::Stripe => "Stripe",
+        };
+        serializer.serialize_str(variant)
+    }
+}
+impl<'de> serde::Deserialize<'de> for generate_request::use_payment_provider::Provider {
+    #[allow(deprecated)]
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        const FIELDS: &[&str] = &[
+            "Stripe",
+        ];
+
+        struct GeneratedVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
+            type Value = generate_request::use_payment_provider::Provider;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(formatter, "expected one of: {:?}", &FIELDS)
+            }
+
+            fn visit_i64<E>(self, v: i64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Signed(v), &self)
+                    })
+            }
+
+            fn visit_u64<E>(self, v: u64) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                i32::try_from(v)
+                    .ok()
+                    .and_then(|x| x.try_into().ok())
+                    .ok_or_else(|| {
+                        serde::de::Error::invalid_value(serde::de::Unexpected::Unsigned(v), &self)
+                    })
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+            where
+                E: serde::de::Error,
+            {
+                match value {
+                    "Stripe" => Ok(generate_request::use_payment_provider::Provider::Stripe),
                     _ => Err(serde::de::Error::unknown_variant(value, FIELDS)),
                 }
             }
