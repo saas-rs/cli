@@ -1,4 +1,5 @@
 pub(super) mod identity_provider;
+pub(super) mod payment_provider;
 pub(super) mod storage_provider;
 
 use clap::Parser;
@@ -15,6 +16,9 @@ pub enum Subcommand {
     #[command(name = "identity-provider", alias = "identityProvider")]
     IdentityProvider(identity_provider::Opts),
 
+    #[command(name = "payment-provider", alias = "paymentProvider")]
+    PaymentProvider(payment_provider::Opts),
+
     #[command(name = "storage-provider", alias = "storageProvider")]
     StorageProvider(storage_provider::Opts),
 }
@@ -23,6 +27,9 @@ pub async fn run(subcommand: Subcommand) -> Result<(), Box<dyn std::error::Error
     match subcommand {
         Subcommand::IdentityProvider(identity_provider::Opts { provider }) => {
             identity_provider::run(provider).await?;
+        }
+        Subcommand::PaymentProvider(payment_provider::Opts { provider }) => {
+            payment_provider::run(provider).await?;
         }
         Subcommand::StorageProvider(storage_provider::Opts { provider }) => {
             storage_provider::run(provider).await?;

@@ -617,7 +617,7 @@ pub struct GenerateRequest {
     pub project_id: ::prost::alloc::string::String,
     #[prost(oneof = "generate_request::Snapshot", tags = "2, 3")]
     pub snapshot: ::core::option::Option<generate_request::Snapshot>,
-    #[prost(oneof = "generate_request::What", tags = "4, 5, 6, 7, 8, 9, 10, 11")]
+    #[prost(oneof = "generate_request::What", tags = "4, 5, 6, 7, 8, 9, 10, 11, 12")]
     pub what: ::core::option::Option<generate_request::What>,
 }
 /// Nested message and enum types in `GenerateRequest`.
@@ -774,6 +774,47 @@ pub mod generate_request {
         }
     }
     #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
+    pub struct UsePaymentProvider {
+        #[prost(enumeration = "use_payment_provider::Provider", tag = "1")]
+        pub provider: i32,
+    }
+    /// Nested message and enum types in `UsePaymentProvider`.
+    pub mod use_payment_provider {
+        #[derive(
+            Clone,
+            Copy,
+            Debug,
+            PartialEq,
+            Eq,
+            Hash,
+            PartialOrd,
+            Ord,
+            ::prost::Enumeration
+        )]
+        #[repr(i32)]
+        pub enum Provider {
+            Stripe = 0,
+        }
+        impl Provider {
+            /// String value of the enum field names used in the ProtoBuf definition.
+            ///
+            /// The values are not transformed in any way and thus are considered stable
+            /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+            pub fn as_str_name(&self) -> &'static str {
+                match self {
+                    Self::Stripe => "Stripe",
+                }
+            }
+            /// Creates an enum from field names used in the ProtoBuf definition.
+            pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+                match value {
+                    "Stripe" => Some(Self::Stripe),
+                    _ => None,
+                }
+            }
+        }
+    }
+    #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
     pub struct UseStorageProvider {
         #[prost(enumeration = "use_storage_provider::Provider", tag = "1")]
         pub provider: i32,
@@ -854,6 +895,8 @@ pub mod generate_request {
         UseStorageProvider(UseStorageProvider),
         #[prost(message, tag = "11")]
         UseIdentityProvider(UseIdentityProvider),
+        #[prost(message, tag = "12")]
+        UsePaymentProvider(UsePaymentProvider),
     }
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
