@@ -208,8 +208,6 @@ pub struct Account {
     pub project_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(string, optional, tag = "8")]
     pub default_project_id: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(string, repeated, tag = "9")]
-    pub ssh_key_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(message, optional, tag = "1000")]
     pub created_at: ::core::option::Option<::pbjson_types::Timestamp>,
     #[prost(string, optional, tag = "1001")]
@@ -2135,109 +2133,6 @@ pub struct ValidateServiceResponse {
     #[prost(message, repeated, tag = "1")]
     pub errors: ::prost::alloc::vec::Vec<ErrorObject>,
 }
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SshKey {
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    #[prost(string, tag = "2")]
-    pub name: ::prost::alloc::string::String,
-    #[prost(string, tag = "3")]
-    pub fingerprint: ::prost::alloc::string::String,
-    #[prost(string, tag = "4")]
-    pub public_key: ::prost::alloc::string::String,
-    #[prost(message, optional, tag = "1000")]
-    pub created_at: ::core::option::Option<::pbjson_types::Timestamp>,
-    #[prost(string, optional, tag = "1001")]
-    pub created_by_account_id: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(message, optional, tag = "1002")]
-    pub deleted_at: ::core::option::Option<::pbjson_types::Timestamp>,
-    #[prost(string, optional, tag = "1003")]
-    pub deleted_by_account_id: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(message, optional, tag = "1004")]
-    pub updated_at: ::core::option::Option<::pbjson_types::Timestamp>,
-    #[prost(string, optional, tag = "1005")]
-    pub updated_by_account_id: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(oneof = "ssh_key::Owner", tags = "1006")]
-    pub owner: ::core::option::Option<ssh_key::Owner>,
-}
-/// Nested message and enum types in `SshKey`.
-pub mod ssh_key {
-    #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof)]
-    pub enum Owner {
-        #[prost(string, tag = "1006")]
-        OwnerAccountId(::prost::alloc::string::String),
-    }
-}
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct SshKeyFilter {
-    #[prost(string, optional, tag = "1")]
-    pub id: ::core::option::Option<::prost::alloc::string::String>,
-}
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct CreateSshKeyRequest {
-    #[prost(message, optional, tag = "1")]
-    pub ssh_key: ::core::option::Option<SshKey>,
-}
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct CreateSshKeyResponse {
-    #[prost(message, optional, tag = "1")]
-    pub ssh_key: ::core::option::Option<SshKey>,
-}
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DeleteSshKeyRequest {
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-}
-#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct DeleteSshKeyResponse {}
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FindSshKeyRequest {
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-}
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FindSshKeyResponse {
-    #[prost(message, optional, tag = "1")]
-    pub ssh_key: ::core::option::Option<SshKey>,
-}
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FindManySshKeysRequest {
-    #[prost(message, optional, tag = "1")]
-    pub filter: ::core::option::Option<SshKeyFilter>,
-    #[prost(message, optional, tag = "2")]
-    pub field_mask: ::core::option::Option<::pbjson_types::FieldMask>,
-    #[prost(uint32, optional, tag = "3")]
-    pub offset: ::core::option::Option<u32>,
-    #[prost(uint32, optional, tag = "4")]
-    pub limit: ::core::option::Option<u32>,
-}
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct FindManySshKeysResponse {
-    #[prost(message, repeated, tag = "1")]
-    pub ssh_keys: ::prost::alloc::vec::Vec<SshKey>,
-}
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct UpdateSshKeyRequest {
-    #[prost(message, optional, tag = "1")]
-    pub ssh_key: ::core::option::Option<SshKey>,
-}
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct UpdateSshKeyResponse {
-    #[prost(message, optional, tag = "1")]
-    pub ssh_key: ::core::option::Option<SshKey>,
-}
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct ValidateSshKeyRequest {
-    #[prost(message, optional, tag = "1")]
-    pub ssh_key: ::core::option::Option<SshKey>,
-    #[prost(bool, tag = "2")]
-    pub existing: bool,
-}
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ValidateSshKeyResponse {
-    #[prost(message, repeated, tag = "1")]
-    pub errors: ::prost::alloc::vec::Vec<ErrorObject>,
-}
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct PingRequest {}
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
@@ -2601,30 +2496,6 @@ pub mod user_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn create_ssh_key(
-            &mut self,
-            request: impl tonic::IntoRequest<super::CreateSshKeyRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::CreateSshKeyResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/saas_rs.user.v1.User/CreateSshKey",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("saas_rs.user.v1.User", "CreateSshKey"));
-            self.inner.unary(req, path, codec).await
-        }
         pub async fn delete_account(
             &mut self,
             request: impl tonic::IntoRequest<super::DeleteAccountRequest>,
@@ -2915,30 +2786,6 @@ pub mod user_client {
                 .insert(
                     GrpcMethod::new("saas_rs.user.v1.User", "DeleteServiceInstance"),
                 );
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn delete_ssh_key(
-            &mut self,
-            request: impl tonic::IntoRequest<super::DeleteSshKeyRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::DeleteSshKeyResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/saas_rs.user.v1.User/DeleteSshKey",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("saas_rs.user.v1.User", "DeleteSshKey"));
             self.inner.unary(req, path, codec).await
         }
         pub async fn find_account(
@@ -3277,30 +3124,6 @@ pub mod user_client {
                 .insert(GrpcMethod::new("saas_rs.user.v1.User", "FindServiceInstance"));
             self.inner.unary(req, path, codec).await
         }
-        pub async fn find_ssh_key(
-            &mut self,
-            request: impl tonic::IntoRequest<super::FindSshKeyRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::FindSshKeyResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/saas_rs.user.v1.User/FindSshKey",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("saas_rs.user.v1.User", "FindSshKey"));
-            self.inner.unary(req, path, codec).await
-        }
         pub async fn find_many_accounts(
             &mut self,
             request: impl tonic::IntoRequest<super::FindManyAccountsRequest>,
@@ -3617,30 +3440,6 @@ pub mod user_client {
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("saas_rs.user.v1.User", "FindManyServices"));
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn find_many_ssh_keys(
-            &mut self,
-            request: impl tonic::IntoRequest<super::FindManySshKeysRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::FindManySshKeysResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/saas_rs.user.v1.User/FindManySshKeys",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("saas_rs.user.v1.User", "FindManySshKeys"));
             self.inner.unary(req, path, codec).await
         }
         pub async fn generate(
@@ -4045,30 +3844,6 @@ pub mod user_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn update_ssh_key(
-            &mut self,
-            request: impl tonic::IntoRequest<super::UpdateSshKeyRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::UpdateSshKeyResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/saas_rs.user.v1.User/UpdateSshKey",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("saas_rs.user.v1.User", "UpdateSshKey"));
-            self.inner.unary(req, path, codec).await
-        }
         pub async fn validate_account(
             &mut self,
             request: impl tonic::IntoRequest<super::ValidateAccountRequest>,
@@ -4339,30 +4114,6 @@ pub mod user_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn validate_ssh_key(
-            &mut self,
-            request: impl tonic::IntoRequest<super::ValidateSshKeyRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ValidateSshKeyResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::unknown(
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic_prost::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/saas_rs.user.v1.User/ValidateSshKey",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("saas_rs.user.v1.User", "ValidateSshKey"));
-            self.inner.unary(req, path, codec).await
-        }
         pub async fn download_file(
             &mut self,
             request: impl tonic::IntoRequest<super::DownloadFileRequest>,
@@ -4503,13 +4254,6 @@ pub mod user_server {
             tonic::Response<super::CreateServiceInstanceResponse>,
             tonic::Status,
         >;
-        async fn create_ssh_key(
-            &self,
-            request: tonic::Request<super::CreateSshKeyRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::CreateSshKeyResponse>,
-            tonic::Status,
-        >;
         async fn delete_account(
             &self,
             request: tonic::Request<super::DeleteAccountRequest>,
@@ -4592,13 +4336,6 @@ pub mod user_server {
             request: tonic::Request<super::DeleteServiceInstanceRequest>,
         ) -> std::result::Result<
             tonic::Response<super::DeleteServiceInstanceResponse>,
-            tonic::Status,
-        >;
-        async fn delete_ssh_key(
-            &self,
-            request: tonic::Request<super::DeleteSshKeyRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::DeleteSshKeyResponse>,
             tonic::Status,
         >;
         async fn find_account(
@@ -4699,13 +4436,6 @@ pub mod user_server {
             tonic::Response<super::FindServiceInstanceResponse>,
             tonic::Status,
         >;
-        async fn find_ssh_key(
-            &self,
-            request: tonic::Request<super::FindSshKeyRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::FindSshKeyResponse>,
-            tonic::Status,
-        >;
         async fn find_many_accounts(
             &self,
             request: tonic::Request<super::FindManyAccountsRequest>,
@@ -4795,13 +4525,6 @@ pub mod user_server {
             request: tonic::Request<super::FindManyServicesRequest>,
         ) -> std::result::Result<
             tonic::Response<super::FindManyServicesResponse>,
-            tonic::Status,
-        >;
-        async fn find_many_ssh_keys(
-            &self,
-            request: tonic::Request<super::FindManySshKeysRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::FindManySshKeysResponse>,
             tonic::Status,
         >;
         async fn generate(
@@ -4914,13 +4637,6 @@ pub mod user_server {
             tonic::Response<super::UpdateServiceInstanceResponse>,
             tonic::Status,
         >;
-        async fn update_ssh_key(
-            &self,
-            request: tonic::Request<super::UpdateSshKeyRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::UpdateSshKeyResponse>,
-            tonic::Status,
-        >;
         async fn validate_account(
             &self,
             request: tonic::Request<super::ValidateAccountRequest>,
@@ -4996,13 +4712,6 @@ pub mod user_server {
             request: tonic::Request<super::ValidateServiceInstanceRequest>,
         ) -> std::result::Result<
             tonic::Response<super::ValidateServiceInstanceResponse>,
-            tonic::Status,
-        >;
-        async fn validate_ssh_key(
-            &self,
-            request: tonic::Request<super::ValidateSshKeyRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ValidateSshKeyResponse>,
             tonic::Status,
         >;
         /// Server streaming response type for the DownloadFile method.
@@ -5589,49 +5298,6 @@ pub mod user_server {
                     };
                     Box::pin(fut)
                 }
-                "/saas_rs.user.v1.User/CreateSshKey" => {
-                    #[allow(non_camel_case_types)]
-                    struct CreateSshKeySvc<T: User>(pub Arc<T>);
-                    impl<T: User> tonic::server::UnaryService<super::CreateSshKeyRequest>
-                    for CreateSshKeySvc<T> {
-                        type Response = super::CreateSshKeyResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::CreateSshKeyRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as User>::create_ssh_key(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = CreateSshKeySvc(inner);
-                        let codec = tonic_prost::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
                 "/saas_rs.user.v1.User/DeleteAccount" => {
                     #[allow(non_camel_case_types)]
                     struct DeleteAccountSvc<T: User>(pub Arc<T>);
@@ -6147,49 +5813,6 @@ pub mod user_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = DeleteServiceInstanceSvc(inner);
-                        let codec = tonic_prost::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/saas_rs.user.v1.User/DeleteSshKey" => {
-                    #[allow(non_camel_case_types)]
-                    struct DeleteSshKeySvc<T: User>(pub Arc<T>);
-                    impl<T: User> tonic::server::UnaryService<super::DeleteSshKeyRequest>
-                    for DeleteSshKeySvc<T> {
-                        type Response = super::DeleteSshKeyResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::DeleteSshKeyRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as User>::delete_ssh_key(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = DeleteSshKeySvc(inner);
                         let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -6817,49 +6440,6 @@ pub mod user_server {
                     };
                     Box::pin(fut)
                 }
-                "/saas_rs.user.v1.User/FindSshKey" => {
-                    #[allow(non_camel_case_types)]
-                    struct FindSshKeySvc<T: User>(pub Arc<T>);
-                    impl<T: User> tonic::server::UnaryService<super::FindSshKeyRequest>
-                    for FindSshKeySvc<T> {
-                        type Response = super::FindSshKeyResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::FindSshKeyRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as User>::find_ssh_key(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = FindSshKeySvc(inner);
-                        let codec = tonic_prost::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
                 "/saas_rs.user.v1.User/FindManyAccounts" => {
                     #[allow(non_camel_case_types)]
                     struct FindManyAccountsSvc<T: User>(pub Arc<T>);
@@ -7434,51 +7014,6 @@ pub mod user_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = FindManyServicesSvc(inner);
-                        let codec = tonic_prost::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/saas_rs.user.v1.User/FindManySshKeys" => {
-                    #[allow(non_camel_case_types)]
-                    struct FindManySshKeysSvc<T: User>(pub Arc<T>);
-                    impl<
-                        T: User,
-                    > tonic::server::UnaryService<super::FindManySshKeysRequest>
-                    for FindManySshKeysSvc<T> {
-                        type Response = super::FindManySshKeysResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::FindManySshKeysRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as User>::find_many_ssh_keys(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = FindManySshKeysSvc(inner);
                         let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -8241,49 +7776,6 @@ pub mod user_server {
                     };
                     Box::pin(fut)
                 }
-                "/saas_rs.user.v1.User/UpdateSshKey" => {
-                    #[allow(non_camel_case_types)]
-                    struct UpdateSshKeySvc<T: User>(pub Arc<T>);
-                    impl<T: User> tonic::server::UnaryService<super::UpdateSshKeyRequest>
-                    for UpdateSshKeySvc<T> {
-                        type Response = super::UpdateSshKeyResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::UpdateSshKeyRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as User>::update_ssh_key(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = UpdateSshKeySvc(inner);
-                        let codec = tonic_prost::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
                 "/saas_rs.user.v1.User/ValidateAccount" => {
                     #[allow(non_camel_case_types)]
                     struct ValidateAccountSvc<T: User>(pub Arc<T>);
@@ -8768,51 +8260,6 @@ pub mod user_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = ValidateServiceInstanceSvc(inner);
-                        let codec = tonic_prost::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/saas_rs.user.v1.User/ValidateSshKey" => {
-                    #[allow(non_camel_case_types)]
-                    struct ValidateSshKeySvc<T: User>(pub Arc<T>);
-                    impl<
-                        T: User,
-                    > tonic::server::UnaryService<super::ValidateSshKeyRequest>
-                    for ValidateSshKeySvc<T> {
-                        type Response = super::ValidateSshKeyResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::ValidateSshKeyRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                <T as User>::validate_ssh_key(&inner, request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let method = ValidateSshKeySvc(inner);
                         let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

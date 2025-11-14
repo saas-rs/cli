@@ -11,7 +11,6 @@ pub(super) mod plan;
 pub(super) mod project;
 pub(super) mod service;
 pub(super) mod service_instance;
-pub(super) mod ssh_key;
 
 pub use output::output;
 
@@ -53,9 +52,6 @@ pub enum Subcommand {
 
     #[command(name = "service-instance", alias = "serviceInstance")]
     ServiceInstance(service_instance::Opts),
-
-    #[command(name = "ssh-key", alias = "sshKey")]
-    SshKey(ssh_key::Opts),
 }
 
 pub async fn run(subcommand: Subcommand) -> Result<(), Box<dyn std::error::Error>> {
@@ -89,9 +85,6 @@ pub async fn run(subcommand: Subcommand) -> Result<(), Box<dyn std::error::Error
         }
         Subcommand::ServiceInstance(service_instance::Opts { id, output }) => {
             service_instance::run(id, output).await?;
-        }
-        Subcommand::SshKey(ssh_key::Opts { id, output }) => {
-            ssh_key::run(id, output).await?;
         }
     }
     Ok(())
