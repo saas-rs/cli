@@ -1,6 +1,6 @@
 # SaaS RS :: CLI Changelog
 
-## [Unreleased]
+## [0.4.1] - 2025-11-14
 ### Changed
 - [#88](https://github.com/saas-rs/cli/issues/88) Retire management of SSH Keys
 - [#86](https://github.com/saas-rs/cli/issues/86) Upgrade 3 crates
