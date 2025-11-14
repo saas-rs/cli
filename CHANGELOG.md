@@ -1,5 +1,9 @@
 # SaaS RS :: CLI Changelog
 
+## [Unreleased]
+### Changed
+- [#86](https://github.com/saas-rs/cli/issues/86) Upgrade 3 crates
+
 ## [0.3.7] - 2025-10-03
 ### Added
 - [#84](https://github.com/saas-rs/cli/issues/84) Support enabling new Stripe payment provider
