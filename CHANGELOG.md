@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Changed
+- [#88](https://github.com/saas-rs/cli/issues/88) Retire management of SSH Keys
 - [#86](https://github.com/saas-rs/cli/issues/86) Upgrade 3 crates
 
 ## [0.3.7] - 2025-10-03

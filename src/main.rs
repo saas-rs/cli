@@ -2,7 +2,6 @@ mod apiclient;
 mod cmd;
 mod config;
 mod consts;
-mod kind;
 pub(crate) mod protocol;
 pub(crate) mod util;
 

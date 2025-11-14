@@ -11,7 +11,6 @@ pub(super) mod plans;
 pub(super) mod projects;
 pub(super) mod service_instances;
 pub(super) mod services;
-pub(super) mod ssh_keys;
 pub(super) mod transforms;
 
 pub use output::{output, output_empty_result_of_unknown_schema};
@@ -55,9 +54,6 @@ pub enum Subcommand {
 
     #[command(name = "service-instances", alias = "serviceInstances")]
     ServiceInstances(service_instances::Opts),
-
-    #[command(name = "ssh-keys", alias = "sshKeys")]
-    SshKeys(ssh_keys::Opts),
 }
 
 pub async fn run(subcommand: Subcommand) -> Result<(), Box<dyn std::error::Error>> {
@@ -91,9 +87,6 @@ pub async fn run(subcommand: Subcommand) -> Result<(), Box<dyn std::error::Error
         }
         Subcommand::ServiceInstances(service_instances::Opts { offset, limit, output }) => {
             service_instances::run(offset, limit, output).await?;
-        }
-        Subcommand::SshKeys(ssh_keys::Opts { offset, limit, output }) => {
-            ssh_keys::run(offset, limit, output).await?;
         }
     }
     Ok(())
