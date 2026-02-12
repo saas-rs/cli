@@ -1,5 +1,9 @@
 # SaaS RS :: CLI Changelog
 
+## [Unreleased]
+### Changed
+- [#90](https://github.com/saas-rs/cli/issues/90) Add default LinkedAccount fields to CLI display: providerUid, ownerAccountId
+
 ## [0.4.1] - 2025-11-14
 ### Changed
 - [#88](https://github.com/saas-rs/cli/issues/88) Retire management of SSH Keys
