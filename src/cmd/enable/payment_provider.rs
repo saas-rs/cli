@@ -1,8 +1,8 @@
 use crate::cmd::generate::{do_generate, do_generate_preflight};
 use crate::protocol::saas_rs::user::v1::generate_request::UsePaymentProvider;
 use crate::protocol::saas_rs::user::v1::{
-    generate_request::{self, use_payment_provider::Provider},
     GenerateRequest,
+    generate_request::{self, use_payment_provider::Provider},
 };
 use clap::{
     builder::PossibleValue,

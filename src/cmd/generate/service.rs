@@ -1,7 +1,7 @@
 use crate::cmd::generate::{do_generate, do_generate_preflight};
 use crate::protocol::saas_rs::user::v1::{
-    generate_request::{self, Service},
     GenerateRequest,
+    generate_request::{self, Service},
 };
 use clap::Parser;
 

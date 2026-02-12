@@ -1,6 +1,6 @@
 use crate::protocol::saas_rs::user::v1::{
     generate_request::{Archive, Snapshot},
-    {upload_file_request, FileInfo, UploadFileRequest},
+    {FileInfo, UploadFileRequest, upload_file_request},
 };
 use crate::{apiclient, util};
 use git2::Repository;
