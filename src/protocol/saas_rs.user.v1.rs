@@ -134,7 +134,7 @@ pub struct FindManyActionsResponse {
     #[prost(message, repeated, tag = "1")]
     pub actions: ::prost::alloc::vec::Vec<Action>,
 }
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AccessToken {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
@@ -146,6 +146,8 @@ pub struct AccessToken {
     pub owner_account_id: ::prost::alloc::string::String,
     #[prost(string, optional, tag = "5")]
     pub linked_account_id: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "6")]
+    pub metadata: ::core::option::Option<::pbjson_types::Struct>,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct LoginRequest {
@@ -183,7 +185,7 @@ pub mod login_request {
         RefreshTokenGrant(RefreshTokenGrant),
     }
 }
-#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoginResponse {
     #[prost(message, optional, tag = "1")]
     pub access_token: ::core::option::Option<AccessToken>,
@@ -491,7 +493,7 @@ pub struct ValidateCheckoutSessionResponse {
     pub errors: ::prost::alloc::vec::Vec<ErrorObject>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct FileInfo {
+pub struct File {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
     #[prost(uint32, tag = "2")]
@@ -512,11 +514,11 @@ pub struct FileInfo {
     pub updated_at: ::core::option::Option<::pbjson_types::Timestamp>,
     #[prost(string, optional, tag = "1005")]
     pub updated_by_account_id: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(oneof = "file_info::Owner", tags = "1006")]
-    pub owner: ::core::option::Option<file_info::Owner>,
+    #[prost(oneof = "file::Owner", tags = "1006")]
+    pub owner: ::core::option::Option<file::Owner>,
 }
-/// Nested message and enum types in `FileInfo`.
-pub mod file_info {
+/// Nested message and enum types in `File`.
+pub mod file {
     #[derive(Clone, PartialEq, Eq, Hash, ::prost::Oneof)]
     pub enum Owner {
         #[prost(string, tag = "1006")]
@@ -524,7 +526,7 @@ pub mod file_info {
     }
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
-pub struct FileInfoFilter {
+pub struct FileFilter {
     #[prost(string, optional, tag = "1")]
     pub id: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(string, optional, tag = "2")]
@@ -561,12 +563,12 @@ pub struct FindFileRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FindFileResponse {
     #[prost(message, optional, tag = "1")]
-    pub file_info: ::core::option::Option<FileInfo>,
+    pub file: ::core::option::Option<File>,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct FindManyFilesRequest {
     #[prost(message, optional, tag = "1")]
-    pub filter: ::core::option::Option<FileInfoFilter>,
+    pub filter: ::core::option::Option<FileFilter>,
     #[prost(message, optional, tag = "2")]
     pub field_mask: ::core::option::Option<::pbjson_types::FieldMask>,
     #[prost(uint32, optional, tag = "3")]
@@ -577,17 +579,17 @@ pub struct FindManyFilesRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FindManyFilesResponse {
     #[prost(message, repeated, tag = "1")]
-    pub file_infos: ::prost::alloc::vec::Vec<FileInfo>,
+    pub files: ::prost::alloc::vec::Vec<File>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateFileRequest {
     #[prost(message, optional, tag = "1")]
-    pub file_info: ::core::option::Option<FileInfo>,
+    pub file: ::core::option::Option<File>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateFileResponse {
     #[prost(message, optional, tag = "1")]
-    pub file_info: ::core::option::Option<FileInfo>,
+    pub file: ::core::option::Option<File>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UploadFileRequest {
@@ -599,7 +601,7 @@ pub mod upload_file_request {
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Type {
         #[prost(message, tag = "1")]
-        FileInfo(super::FileInfo),
+        File(super::File),
         #[prost(bytes, tag = "2")]
         Chunk(::prost::alloc::vec::Vec<u8>),
     }
@@ -607,7 +609,7 @@ pub mod upload_file_request {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UploadFileResponse {
     #[prost(message, optional, tag = "1")]
-    pub file_info: ::core::option::Option<FileInfo>,
+    pub file: ::core::option::Option<File>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateRequest {

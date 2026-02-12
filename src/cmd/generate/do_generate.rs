@@ -14,21 +14,17 @@ pub async fn do_generate(req: GenerateRequest) -> Result<(), Box<dyn std::error:
     let tempdir = TempDir::new()?;
     {
         // Download FileInfo for patch file to get filename
-        let file_info = client
-            .find_file(FindFileRequest {
+        let file = {
+            let req = FindFileRequest {
                 id: res.file_id.clone(),
-            })
-            .await?
-            .into_inner()
-            .file_info
-            .unwrap();
+            };
+            let res = client.find_file(req).await?;
+            res.into_inner().file.unwrap()
+        };
 
         // Open a local temp file for output
-        let mut file = File::options().create(true).truncate(true).write(true).open(format!(
-            "{}/{}",
-            tempdir.path().display(),
-            file_info.filename
-        ))?;
+        let path = format!("{}/{}", tempdir.path().display(), file.filename);
+        let mut fs_file = File::options().create(true).truncate(true).write(true).open(path)?;
 
         // Download chunks, and append them to temp file
         let req = DownloadFileRequest { id: res.file_id };
@@ -36,7 +32,7 @@ pub async fn do_generate(req: GenerateRequest) -> Result<(), Box<dyn std::error:
         while let Some(res) = input_stream.next().await {
             match res {
                 Ok(item) => {
-                    file.write_all(&item.chunk)?;
+                    fs_file.write_all(&item.chunk)?;
                 }
                 Err(e) => {
                     eprintln!("Failed downloading file: {e:?}");
@@ -44,7 +40,7 @@ pub async fn do_generate(req: GenerateRequest) -> Result<(), Box<dyn std::error:
                 }
             }
         }
-        file.flush()?;
+        fs_file.flush()?;
 
         eprintln!("Response received");
     }

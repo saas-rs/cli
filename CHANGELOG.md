@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Changed
+- [#98](https://github.com/saas-rs/cli/issues/98) Upgrade protocol from 0.2.7 → 0.5.5
 - [#96](https://github.com/saas-rs/cli/issues/96) Upgrade 14 crates
 - [#94](https://github.com/saas-rs/cli/issues/94) Upgrade Rust edition from 2021 → 2024
 - [#92](https://github.com/saas-rs/cli/issues/92) Upgrade Rust from 1.89.0 → 1.93.0
