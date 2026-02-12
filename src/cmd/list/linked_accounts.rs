@@ -4,7 +4,7 @@ use clap::Parser;
 use polars::prelude::*;
 use std::io::Cursor;
 
-pub const PS_COLUMNS: &[&str] = &["id", "type", "provider"];
+pub const PS_COLUMNS: &[&str] = &["id", "type", "provider", "providerUid", "ownerAccountId"];
 
 #[derive(Debug, Parser)]
 pub struct Opts {
