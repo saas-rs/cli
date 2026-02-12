@@ -1,13 +1,13 @@
 use crate::protocol::saas_rs::user::v1::{
     generate_request::{Archive, Snapshot},
-    {FileInfo, UploadFileRequest, upload_file_request},
+    {File, UploadFileRequest, upload_file_request},
 };
 use crate::{apiclient, util};
 use git2::Repository;
 use log::debug;
 use std::{fs, process::Command, str::from_utf8};
 use tempfile::NamedTempFile;
-use tokio::{fs::File, sync::mpsc};
+use tokio::sync::mpsc;
 use tokio_stream::StreamExt;
 use tokio_util::codec::{BytesCodec, FramedRead};
 use tonic::codegen::tokio_stream::wrappers::ReceiverStream;
@@ -28,13 +28,13 @@ pub async fn do_generate_preflight(
     let project_id = util::git::find_or_create_default_project_id().await?;
 
     // Archive the workspace
-    let file = NamedTempFile::new()?;
+    let archive = NamedTempFile::new()?;
     let output = Command::new("git")
         .arg("archive")
         .arg("--format")
         .arg("zip")
         .arg("--output")
-        .arg(file.path().display().to_string())
+        .arg(archive.path().display().to_string())
         .arg("HEAD")
         .output()?;
     if !output.status.success() {
@@ -49,22 +49,22 @@ pub async fn do_generate_preflight(
     debug!("Archival completed");
 
     // Prepare a FileInfo descriptor for the archive
-    let metadata = fs::metadata(file.path())?;
-    let file_info = FileInfo {
+    let metadata = fs::metadata(archive.path())?;
+    let file = File {
         length: metadata.len() as u32,
         filename: "archive.zip".to_string(),
         ..Default::default()
     };
 
     // Start task to feed an output stream with the FileInfo then the chunked contents
-    let file = File::open(file.path()).await?;
-    let mut file_reader_stream = FramedRead::new(file, BytesCodec::new());
+    let fs_file = tokio::fs::File::open(archive.path()).await?;
+    let mut file_reader_stream = FramedRead::new(fs_file, BytesCodec::new());
     let (tx, rx) = mpsc::channel(2);
     let outbound = ReceiverStream::new(rx);
     tokio::spawn(async move {
         // The first message is just the file info
         let req = UploadFileRequest {
-            r#type: Some(upload_file_request::Type::FileInfo(file_info)),
+            r#type: Some(upload_file_request::Type::File(file)),
         };
         tx.send(req).await.unwrap();
 
@@ -91,12 +91,12 @@ pub async fn do_generate_preflight(
 
     // Upload the workspace archive
     let mut client = apiclient::new_user_service_client().await?;
-    let file_info = client.upload_file(outbound).await?.into_inner().file_info.unwrap();
-    debug!("Uploaded {file_info:?}");
+    let file = client.upload_file(outbound).await?.into_inner().file.unwrap();
+    debug!("Uploaded {file:?}");
 
     // Respond
     let snapshot = Snapshot::Archive(Archive {
-        file_ids: vec![file_info.id],
+        file_ids: vec![file.id],
     });
     Ok((project_id, snapshot))
 }
