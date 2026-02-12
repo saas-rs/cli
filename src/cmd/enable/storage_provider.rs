@@ -1,7 +1,7 @@
 use crate::cmd::generate::{do_generate, do_generate_preflight};
 use crate::protocol::saas_rs::user::v1::{
-    generate_request::{self, use_storage_provider::Provider, UseStorageProvider},
     GenerateRequest,
+    generate_request::{self, UseStorageProvider, use_storage_provider::Provider},
 };
 use clap::{
     builder::PossibleValue,

@@ -1,16 +1,16 @@
 use super::channel::new_channel;
-use crate::protocol::saas_rs::user::v1::user_client::UserClient;
 use crate::AppOpts;
+use crate::protocol::saas_rs::user::v1::user_client::UserClient;
 use crate::{config, consts};
 use clap::Parser;
 use log::trace;
 use std::error::Error;
 use tonic::codegen::InterceptedService;
 use tonic::transport::Channel;
-use tonic::{metadata::MetadataValue, Request, Status};
+use tonic::{Request, Status, metadata::MetadataValue};
 
-pub async fn new_user_service_client(
-) -> Result<UserClient<InterceptedService<Channel, fn(Request<()>) -> Result<Request<()>, Status>>>, Box<dyn Error>> {
+pub async fn new_user_service_client()
+-> Result<UserClient<InterceptedService<Channel, fn(Request<()>) -> Result<Request<()>, Status>>>, Box<dyn Error>> {
     new_user_service_client_with_ignore_config(false).await
 }
 

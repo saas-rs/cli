@@ -52,11 +52,11 @@ pub async fn do_generate(req: GenerateRequest) -> Result<(), Box<dyn std::error:
     // Apply a patch, if it was received
     let patch_path = format!("{}/my.patch", tempdir.path().display());
     if std::fs::exists(&patch_path)? {
-        if let Ok(metadata) = std::fs::metadata(&patch_path) {
-            if metadata.len() == 0 {
-                eprintln!("No changes to the workspace were necessary");
-                return Ok(());
-            }
+        if let Ok(metadata) = std::fs::metadata(&patch_path)
+            && metadata.len() == 0
+        {
+            eprintln!("No changes to the workspace were necessary");
+            return Ok(());
         }
         let _output = Command::new("git").arg("apply").arg(patch_path).output()?;
         eprintln!("Patch applied to local workspace");

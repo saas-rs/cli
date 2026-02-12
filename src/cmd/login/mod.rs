@@ -2,7 +2,7 @@ use crate::protocol::saas_rs::user::v1::FindAccountRequest;
 use crate::{apiclient, config, consts};
 use actix_cors::Cors;
 use actix_web::web::Data;
-use actix_web::{post, web, App, HttpServer, Responder};
+use actix_web::{App, HttpServer, Responder, post, web};
 use clap::Parser;
 use log::trace;
 use serde::Deserialize;
