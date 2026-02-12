@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Changed
+- [#92](https://github.com/saas-rs/cli/issues/92) Upgrade Rust from 1.89.0 → 1.93.0
 - [#90](https://github.com/saas-rs/cli/issues/90) Add default LinkedAccount fields to CLI display: providerUid, ownerAccountId
 
 ## [0.4.1] - 2025-11-14
