@@ -1,6 +1,6 @@
 # SaaS RS :: CLI Changelog
 
-## [Unreleased]
+## [0.5.5] - 2026-02-12
 ### Changed
 - [#98](https://github.com/saas-rs/cli/issues/98) Upgrade protocol from 0.2.7 → 0.5.5
 - [#96](https://github.com/saas-rs/cli/issues/96) Upgrade 14 crates

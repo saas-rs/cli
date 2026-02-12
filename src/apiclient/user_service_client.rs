@@ -3,7 +3,6 @@ use crate::AppOpts;
 use crate::protocol::saas_rs::user::v1::user_client::UserClient;
 use crate::{config, consts};
 use clap::Parser;
-use log::trace;
 use std::error::Error;
 use tonic::codegen::InterceptedService;
 use tonic::transport::Channel;
@@ -17,8 +16,6 @@ pub async fn new_user_service_client()
 pub async fn new_user_service_client_with_ignore_config(
     ignore_config: bool,
 ) -> Result<UserClient<InterceptedService<Channel, fn(Request<()>) -> Result<Request<()>, Status>>>, Box<dyn Error>> {
-    trace!("new_user_service_client()");
-
     // Connect
     let api_url = get_api_url(ignore_config)?;
     let channel = new_channel(false, api_url.clone()).await?;

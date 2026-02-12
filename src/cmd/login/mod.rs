@@ -4,7 +4,6 @@ use actix_cors::Cors;
 use actix_web::web::Data;
 use actix_web::{App, HttpServer, Responder, post, web};
 use clap::Parser;
-use log::trace;
 use serde::Deserialize;
 use std::error::Error;
 use std::net::TcpListener;
@@ -94,7 +93,7 @@ pub async fn run(
 
 #[post("/callback")]
 async fn callback_handler(app_state: Data<AppState>, data: web::Json<JsonContents>) -> impl Responder {
-    trace!("callback_handler({data:?})");
+    log::trace!("callback_handler({data:?})");
 
     // Save the new token as an api key
     let mut conf = config::load().unwrap();

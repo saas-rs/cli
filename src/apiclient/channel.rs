@@ -1,10 +1,7 @@
-use log::{info, trace};
 use std::error::Error;
 use tonic::transport::{Channel, ClientTlsConfig};
 
 pub async fn new_channel(lazy: bool, api_url: String) -> Result<Channel, Box<dyn Error>> {
-    trace!("new_channel()");
-
     let mut endpoint = Channel::from_shared(api_url.clone())?;
 
     // Configure TLS
@@ -18,7 +15,7 @@ pub async fn new_channel(lazy: bool, api_url: String) -> Result<Channel, Box<dyn
         true => endpoint.connect_lazy(),
         false => {
             let channel = endpoint.connect().await?;
-            info!("Connected to {}", &api_url);
+            log::info!("Connected to {api_url}");
             channel
         }
     };

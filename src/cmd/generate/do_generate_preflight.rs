@@ -4,7 +4,6 @@ use crate::protocol::saas_rs::user::v1::{
 };
 use crate::{apiclient, util};
 use git2::Repository;
-use log::debug;
 use std::{fs, process::Command, str::from_utf8};
 use tempfile::NamedTempFile;
 use tokio::sync::mpsc;
@@ -46,7 +45,7 @@ pub async fn do_generate_preflight(
             std::process::exit(1);
         }
     }
-    debug!("Archival completed");
+    log::debug!("Archival completed");
 
     // Prepare a FileInfo descriptor for the archive
     let metadata = fs::metadata(archive.path())?;
@@ -86,13 +85,13 @@ pub async fn do_generate_preflight(
             }
         }
 
-        debug!("Terminating");
+        log::debug!("Terminating");
     });
 
     // Upload the workspace archive
     let mut client = apiclient::new_user_service_client().await?;
     let file = client.upload_file(outbound).await?.into_inner().file.unwrap();
-    debug!("Uploaded {file:?}");
+    log::debug!("Uploaded {file:?}");
 
     // Respond
     let snapshot = Snapshot::Archive(Archive {
